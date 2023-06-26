@@ -1,0 +1,320 @@
+/* Start of Global CSS */
+:root {
+    --main-color: #0086B0;
+    --red: #E65555;
+    --white: white;
+    --background: #FDFBEE;
+    --green: #4EC361;
+    --orange: #F99D5A;
+    --bittersweet: #FF7C60;
+    --yellow: #F6E194;
+    --blue: #AFE2E9;
+    --blue2: rgba(115, 194, 219, 63%);
+    --grey: #a4bac0a1;
+}
+
+body {
+    font-family: 'Merriweather', serif !important;
+    overflow: hidden;
+}
+
+h1 {
+    font-size: 25px;
+    font-weight: 600;
+    color: var(--red);
+    margin-bottom: 20px;
+}
+
+h1 span {
+    position: relative;
+}
+
+h1 span::after {
+    content: "";
+    width: 60px;
+    height: 3px;
+    background-color: var(--red);
+    position: absolute;
+    left: 50%;
+    top: 35px;
+    transform: translateX(-50%);
+}
+
+h2 {
+    font-size: 18px;
+    font-weight: 400;
+    color: var(--red);
+    margin-bottom: 20px;
+}
+
+.main-page .frame-box {
+    border: 7px solid var(--main-color);
+    border-radius: 10px;
+}
+
+/* Start of tables */
+table thead tr th  {
+    position: sticky;
+    top: 0;
+}
+
+.table-hover tbody tr:hover td, .table-hover tbody tr:hover th {
+    background-color: var(--main-color);
+    color: white;
+}
+
+.search {
+    margin-bottom: 20px;
+    width: 70%;
+}
+.form-control:focus {
+    box-shadow: 0 0 0 0.15rem var(--main-color) !important;
+    border-color: var(--main-color) !important;
+}
+
+.table-title .add-new {
+    float: right;
+    height: 30px;
+    font-weight: bold;
+    font-size: 12px;
+    text-shadow: none;
+    min-width: 100px;
+    border-radius: 50px;
+    line-height: 13px;
+}
+.table-title .add-new i {
+    margin-right: 4px;
+}
+
+table.table td a {
+    cursor: pointer;
+    display: inline-block;
+    margin: 0 5px;
+    min-width: 24px;
+}    
+
+table.table td a.add {
+    color: #27C46B;
+}
+
+table.table td a.edit {
+    color: #FFC107;
+}
+
+table.table td a.delete {
+    color: #E34724;
+}
+
+table.table td i {
+    font-size: 19px;
+}
+
+table.table td a.add i {
+    font-size: 24px;
+    margin-right: -1px;
+    position: relative;
+    top: 3px;
+}    
+
+table.table td .add {
+    display: none;
+}
+
+.add-btn {
+    color: white;
+    background-color: var(--main-color);
+    border-color: var(--main-color);
+}
+
+.add-btn:hover, .add-btn:focus {
+    /* background-color: var(--main-color); */
+    background-color: rgb(49, 155, 187);
+    color: white;
+    /* border-color: green; */
+}
+
+.add-btn:active, .btn-check:checked+.add-btn, .add-btn:disabled   { 
+    background-color: var(--blue2) !important;
+    border-color: var(--blue2) !important;
+    color: white !important;
+}
+/* End of tables */
+/* End of Global CSS */
+
+/* Start of navbar */
+.navbar {
+    background-color: var(--main-color) !important;
+    color: var(--white);
+}
+
+/* First Logo */
+.pharmacy-brand h1 {
+    position: relative;
+    font-family: "Raleway", sans-serif;
+    font-size:26px; 
+    font-weight:700;  
+    letter-spacing:1px; 
+    text-transform:uppercase; 
+    text-align:center; 
+    margin:auto; 
+    /* white-space:nowrap;  */
+    padding: 5px 0 13px 16px;
+    /* padding-bottom:13px;
+    padding-left:16px; */
+    color: white;
+}
+  
+.pharmacy-brand h1:before {
+    background-color: white;
+    content: '';
+    display: block;
+    height: 3px;
+    width: 75px;
+    margin-bottom: 5px;
+}
+
+.pharmacy-brand h1:after {
+    background-color: white;
+    content: '';
+    display: block;
+    position:absolute; right:0; bottom:0;
+    height: 3px;
+    width: 75px;
+    margin-bottom: 0.25em;
+}
+
+/* Second logo */
+.pharmacy-brand {
+    color:rgb(255, 255, 255) ;
+    font-size: 30px;
+    text-decoration: none;
+    font-weight: 900;
+    /* -webkit-text-stroke-width: 0.2px; */
+    /* -webkit-text-stroke-color: var(--white); */
+}
+
+.pharmacy-brand span {
+    color: blue;
+}
+
+/* End of navbar */
+
+/* Start of sidebar */
+.sidebar {
+    background-color: var(--main-color) !important;
+    color: var(--white) !important;
+    height: calc(100vh - 54px);
+    display: block;
+    /* overflow: hidden; */
+    position: absolute;
+}
+
+.sidebar .btn {
+    text-decoration: none;
+    color: var(--white) !important;
+    border-color: transparent;
+}
+
+.sidebar ul li {
+    list-style-type: none;
+}
+
+.sidebar a {
+    text-decoration: none;
+    color: var(--white) !important;
+}
+/* End of sidebar */
+
+/* Start of main-page */
+.main-page {
+    margin-left: 220px;
+    padding: 10px;
+    width: calc(100vw - 220px);
+    height: 100vh;
+    background-color: var(--background);
+}
+/* End of main-page */
+
+.card-body {
+    height: 500px;
+    background-color: white;
+}
+
+/* Start of dashboard */
+
+.main-page .dasbhoard .statistics {
+    padding: 10px 30px 20px;
+    gap: 40px;
+}
+
+.main-page .dasbhoard .statistics .col {
+    border-radius: 20px;
+    color: var(--background);
+    position: relative;
+}
+
+.main-page .dasbhoard .statistics .col.sales {
+    background-color: var(--green);
+}
+
+.main-page .dasbhoard .statistics .col.returns {
+    background-color: var(--bittersweet);
+}
+
+.main-page .dasbhoard .statistics .col.expenses {
+    background-color: var(--orange);
+}
+.main-page .dasbhoard .statistics .col.expiry {
+    background-color: var(--red);
+}
+
+.main-page .dasbhoard .statistics .number {
+    padding-top: 10px;
+    font-size: 30px;
+    font-weight: 700;
+}
+
+.main-page .dasbhoard .statistics .description {
+    font-size: 15px;
+    font-weight: 400;
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+.main-page .dasbhoard .statistics .more-info {
+    font-size: 12px;
+    font-weight: 600;
+    padding-bottom: 5px;
+}
+
+.main-page .dasbhoard .statistics a {
+    text-decoration: none;
+    color: inherit;
+}
+
+.main-page .dasbhoard .statistics span::before {
+    content: "";
+    position: absolute;
+    background-color: rgba(0, 0, 0, 0.25);
+    width: 100%;
+    height: 25px;
+    left: 0;
+    bottom: 0;
+    border-bottom-left-radius: 20px;
+    border-bottom-right-radius: 20px;
+}
+
+.main-page .dasbhoard .shortcuts {
+    padding: 10px 50px;
+    align-content: space-between;
+    /* padding-right:100px; */
+    /* text-align: center; */
+    /* align-items: center; */
+}
+.main-page .dasbhoard .shortcuts > div {
+    background-color: white;
+    border-radius: 20px;
+    padding: 20px;
+    margin-bottom: 30px;
+    border: 2px solid var(--grey) ;
+}
+/* End of dashboard */
