@@ -1,6 +1,5 @@
 <?php
 $lang = array(
-    
     // sidebar
     'Dashboard' => "Dashboard",
     'Invoices' => "Invoices",
@@ -36,7 +35,6 @@ $lang = array(
     'Profile' => "Profile",
     'Profile informations' => "Profile informations",
     'Logout' => "Logout",
-    
     // Dashboard 
     'Today total sales' => "Today's total sales",
     'More info' => "More info",
@@ -50,14 +48,15 @@ $lang = array(
     'Make invoice' => "Make invoice",
     'Update the stock' => "Update the stock",
     'Add a new medicine' => "Add a new medicine",
-
-    // Customers
+    // Customers (add - view - edit)
     'ID' => "ID",
     'Customer name' => "Customer name",
     'Gender' => "Gender",
     'Address' => "Address",
+    'Customer phone' => "Customer phone",
+    'Name' => "Name",
     'Phone' => "Phone",
-    
+    'Edit customer' => "Edit customer",
     // tables 
     'Actions' => "Actions",
     'Add' => "Add",

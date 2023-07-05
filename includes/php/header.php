@@ -5,87 +5,31 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-
+    <title>Pharmacy System</title>
     <!-- Adding CSS Files -->
     <link rel="stylesheet" href="../includes/css/all.min.css">
     <link rel="stylesheet" href="../includes/css/bootstrap.min.css">
-    <link rel="stylesheet" href="../includes/css/bootstrap.min.css.map">
+    <link rel="stylesheet" href="../includes/css/bootstrap.css.map">
     <link rel="stylesheet" href="../includes/css/main.css">
-    
     <!-- For sorting table -->
     <link rel="stylesheet" href="../includes/css/cdn.datatables.net_1.10.22_css_dataTables.bootstrap4.min.css">
-
-    
     <!-- Adding Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-    
-
-    
-    
 </head>
 <!-- <body> -->
 <body>
-<!-- <body onload="pageContent()"> -->
   <nav class="navbar">
     <div class="container-fluid">
-      
     <div class="pharmacy-brand">
       <h1>Pharmacy</h1>
     </div>
-
-      <!-- <a class="pharmacy-brand"><span>P</span>harmacy <span>S</span>ystem</a> -->
       <div>
         <div>Testing</div>
       </div>
     </div>
   </nav>
-  
   <?php include "../includes/php/sidebar.php"; ?>
-  
   <?php include "../includes/php/dbconnection.php"; ?>
-
-
-
-
-
-
-
-
-
-
-<?php 
-  // // echo pageContent("");
-  // echo abdallah("");
-  // // pageContent('');
-  // function pageContent($page) {
-      
-  //     $contentToReturn;
-
-  //     switch($page){
-          
-  //         case 'dashboard':
-  //             $contentToReturn = "views/dashboard.php";
-  //             break;
-  //         case 'viewCustomer':
-  //             $contentToReturn = "views/view_customers.php";
-  //             break;
-              
-  //         default:
-  //             $contentToReturn = "Nothing to show";
-  //             break;				
-  //     }
-  //     return $contentToReturn;
-  //     // abdallah($contentToReturn);
-  // }
-
-  // function abdallah($c){
-  //     $testing = file_get_contents("index.php");
-  //     // echo $testing;
-  //     $testing = str_replace("{{TEXT_TO_REPLACE}}", pageContent($c), $testing);
-  //     echo $testing;
-  // }
-?>

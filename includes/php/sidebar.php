@@ -1,6 +1,5 @@
 <div class="sidebar flex-shrink-3 p-3 " style="width: 220px;">
     <ul class="list-unstyled ps-0">
-
       <li>
         <button class="btn btn-toggle align-items-center rounded collapsed" >
         <a href="dashboard.php" class="link-light rounded"> 
@@ -10,7 +9,6 @@
         <div class="collapse" id="home-collapse" style="">
         </div>
       </li>
-
       <li>
         <button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse" data-bs-target="#Invoices-collapse" aria-expanded="false">
             <?php echo $lang["Invoices"];?>  
@@ -40,7 +38,6 @@
           </ul>
         </div>
       </li>
-
       <li>
         <button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse" data-bs-target="#Medicines-collapse" aria-expanded="false">
           <?php echo $lang["Medicines"];?>
@@ -60,13 +57,11 @@
           </ul>
         </div>
       </li>
-
       <li>
         <button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse" data-bs-target="#Inventory-collapse" aria-expanded="false">
         <?php echo $lang["Inventory"];?>  
         </button>
       </li>
-
       <li>
         <button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse" data-bs-target="#Purchases-collapse" aria-expanded="false">
           <?php echo $lang["Purchases"];?>
@@ -86,7 +81,6 @@
           </ul>
         </div>
       </li>
-
       <li>
         <button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse" data-bs-target="#Expenses-collapse" aria-expanded="false">
           <?php echo $lang["Expenses"];?>
@@ -106,7 +100,6 @@
           </ul>
         </div>
       </li>
-
       <li>
         <button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse" data-bs-target="#Customers-collapse" aria-expanded="false">
           <?php echo $lang["Customers"];?>
@@ -126,7 +119,6 @@
           </ul>
         </div>
       </li>
-
       <li>
         <button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse" data-bs-target="#Employees-collapse" aria-expanded="false">
           <?php echo $lang["Employees"];?>
@@ -146,7 +138,6 @@
           </ul>
         </div>
       </li>
-
       <li>
         <button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse" data-bs-target="#Suppliers-collapse" aria-expanded="false">
           <?php echo $lang["Suppliers"];?>
@@ -166,7 +157,6 @@
           </ul>
         </div>
       </li>
-      
       <li>
         <button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse" data-bs-target="#Manufactures-collapse" aria-expanded="false">
           <?php echo $lang["Manufactures"];?>
@@ -186,7 +176,6 @@
           </ul>
         </div>
       </li>
-
       <li>
         <button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse" data-bs-target="#Settings-collapse" aria-expanded="false">
           <?php echo $lang["Settings"];?>
@@ -206,7 +195,6 @@
           </ul>
         </div>
       </li>
-
       <li>
         <button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse" data-bs-target="#Profile-collapse" aria-expanded="false">
           <?php echo $lang["Profile"];?>
@@ -226,7 +214,6 @@
           </ul>
         </div>
       </li>
-
     </ul>
   </div>
 </div>

@@ -1,27 +1,18 @@
     <?php include "../includes/php/header.php";?>
     <div class="main-page" id="mainPage">
-        
         <!-- Start of view-customers -->
         <div class="view-customers">
             <h1>
                 <span><?php echo $lang["View customers"];?></span>
             </h1>
-
-
             <div class="d-flex justify-content-between align-items-start">
-
                 <input type="text" class="search form-control" id="searchCustomers" placeholder="What you looking for? (search by name or phone)">
-            
                 <button type="button" class="add-btn btn btn-info add-new "><i class="fa fa-plus"></i> Add New</button>
-
             </div>
-
             <div class="frame-box card-body table-responsive">
-
                 <table class="table table-bordered table-striped table-hover" id="tableCustomers">
                     <thead>
                         <tr>
-                            <!-- onclick="sortTable(0)" You can remove it because it calls old sorting function -->
                             <th><?php echo $lang["ID"];?></th>
                             <th><?php echo $lang["Customer name"];?></th>
                             <th><?php echo $lang["Gender"];?></th>
@@ -35,38 +26,40 @@
                             $query = "SELECT * FROM customers";
                             $statement = $conn->prepare($query);
                             $statement->execute();
-
                             $statement->setFetchMode(PDO::FETCH_OBJ); //PDO::FETCH_ASSOC
                             $result = $statement->fetchAll();
-                            if($result)
-                            {
-                                foreach($result as $row)
-                                {
-                                    ?>
+                            if ($result) {
+                                foreach($result as $row) {
+                        ?>
                                     <tr>
                                         <td><?= $row->id; ?></td>
                                         <td><?= $row->name; ?></td>
                                         <td><?= $row->gender; ?></td>
                                         <td><?= $row->address; ?></td>
                                         <td><?= $row->phone; ?></td>
-
                                         <td>
                                             <a class="add" title="<?php echo $lang["Add"];?>" data-toggle="tooltip"><i class="material-icons">&#xE03B;</i></a>
-                                            <a class="edit" title="<?php echo $lang["Edit"];?>" data-toggle="tooltip"><i class="material-icons">&#xE254;</i></a>
-                                            <a class="delete" title="<?php echo $lang["Delete"];?>" data-toggle="tooltip"><i class="material-icons">&#xE872;</i></a>
+                                            <a href="edit_customers.php?edit=<?php echo $row->id;?>" class="edit" title="<?php echo $lang["Edit"];?>" data-toggle="tooltip"><i class="material-icons">&#xE254;</i></a>
+                                            <a href="view_customers.php?delete=<?php echo $row->id;?>" class="delete" title="<?php echo $lang["Delete"];?>" data-toggle="tooltip"><i class="material-icons">&#xE872;</i></a>
                                         </td>
-
                                     </tr>
-                                    <?php
+                        <?php
                                 }
                             }
-                            else
-                            {
-                                ?>
+                            else {
+                        ?>
                                 <tr>
-                                    <td colspan="5">No Records Found</td>
+                                    <td colspan="6">No Records Found</td>
                                 </tr>
-                                <?php
+                        <?php
+                            }
+                            // To delete from the Database
+                            if (isset($_GET['delete'])) {
+                                include_once "../includes/php/header.php";
+                                $delete = "DELETE FROM customers WHERE id =" . $_GET['delete'];
+                                $conn->exec($delete);
+                                // header('Location: dashboard.php');
+                                // exit();
                             }
                         ?>
                     </tbody>
@@ -74,14 +67,8 @@
             </div>
         </div>
 </div>
-
-
-
 <script src="https://code.jquery.com/jquery-3.5.1.min.js" ></script>
-
-
 <!-- Start of Script to edit, add and delete in the front end -->
-
 <script>
 $(document).ready(function(){
 	$('[data-toggle="tooltip"]').tooltip();
@@ -139,39 +126,30 @@ $(document).ready(function(){
 });
 </script>
 <!-- End of Script to edit, add and delete in the front end -->
-
-
 <!-- Start of Script to retreive the rows from the db -->
 <script>
     var searchCustomers = document.getElementById("searchCustomers");
-
-    searchCustomers.addEventListener("keyup",function()
-    {
+    searchCustomers.addEventListener("keyup",function() {
         var keyword = this.value.toUpperCase();
         var customers = document.getElementById("tableCustomers");
         var all_tr = customers.getElementsByTagName("tr");
-        for(var i=0; i<all_tr.length; i++)
-        {
-                var name_column = all_tr[i].getElementsByTagName("td")[1];
-                var phone_column = all_tr[i].getElementsByTagName("td")[4];
-                if(name_column && phone_column)
-                {
-                    var name_value = name_column.textContent.toUpperCase() || name_column.innerText.toUpperCase();
-                    var email_value = phone_column.textContent.toUpperCase() || phone_column.innerText.toUpperCase();
-                    if((name_value.indexOf(keyword) > -1) || (email_value.indexOf(keyword) > -1))
-                    {
-                        all_tr[i].style.display = ""; // show
-                    }
-                    else
-                    {
-                        all_tr[i].style.display = "none"; // hide
-                    }
+        for(var i=0; i<all_tr.length; i++) {
+            var name_column = all_tr[i].getElementsByTagName("td")[1];
+            var phone_column = all_tr[i].getElementsByTagName("td")[4];
+            if(name_column && phone_column) {
+                var name_value = name_column.textContent.toUpperCase() || name_column.innerText.toUpperCase();
+                var email_value = phone_column.textContent.toUpperCase() || phone_column.innerText.toUpperCase();
+                if((name_value.indexOf(keyword) > -1) || (email_value.indexOf(keyword) > -1)) {
+                    all_tr[i].style.display = ""; // show
                 }
+                else {
+                    all_tr[i].style.display = "none"; // hide
+                }
+            }
         }
     })
 </script>
 <!-- End of Script to retreive the rows from the db -->
-
 <script>
 $(document ).ready(function() {
     $('#tableCustomers').DataTable({
@@ -182,8 +160,5 @@ $(document ).ready(function() {
 });
 </script>
 <!-- End of sorting in Jquery -->
-
-
 <!-- End of view-customers -->
-
 <?php include "../includes/php/footer.php";?>
