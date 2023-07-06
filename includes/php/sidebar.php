@@ -21,17 +21,17 @@
               </a>
             </li>
             <li>
-              <a href="#" class="link-light rounded">
+              <a href="all_invoices.php" class="link-light rounded">
                 <?php echo $lang["All Invoices"];?>
               </a>
             </li>
             <li>
-              <a href="#" class="link-light rounded">
+              <a href="selling_invoices.php" class="link-light rounded">
                 <?php echo $lang["Selling"];?>
               </a>
             </li>
             <li>
-              <a href="#" class="link-light rounded">
+              <a href="return_invoices.php" class="link-light rounded">
                 <?php echo $lang["Return"];?>
               </a>
             </li>

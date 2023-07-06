@@ -4,9 +4,9 @@ $lang = array(
     'Dashboard' => "Dashboard",
     'Invoices' => "Invoices",
     'Create invoice' => "Create invoice",
-    'All Invoices' => "All Invoices",
-    'Selling' => "Selling",
-    'Return' => "Return",
+    'All Invoices' => "All invoices",
+    'Selling' => "Selling invoices",
+    'Return' => "Return invoices",
     'Inventory' => "Inventory",
     'Medicines' => "Medicines",
     'Add medicine' => "Add medicine",
@@ -62,4 +62,10 @@ $lang = array(
     'Add' => "Add",
     'Edit' => "Edit",
     'Delete' => "Delete",
+    // All invoices 
+    'Type' => "Type",
+    'Date' => "Date",
+    'Items' => "Items",
+    'Total' => "Total",
+
 );

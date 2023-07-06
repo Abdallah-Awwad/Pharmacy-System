@@ -1,7 +1,7 @@
     <?php include "../includes/php/header.php";?>
     <div class="main-page" id="mainPage">
         <!-- Start of edit-customers -->
-        <div class="add-customers">
+        <div class="edit-customers">
             <h1>
                 <span><?php echo $lang["Edit customer"];?></span>
             </h1>

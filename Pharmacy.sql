@@ -134,6 +134,19 @@ WHERE bill_type = 'Sale'
 GROUP BY id;
 
 -- Invoices_total View Creation 
+CREATE OR REPLACE VIEW all_invoices_total AS
+SELECT 
+    all_invoices.id, 
+    invoice.issued_date AS date, 
+    all_invoices.bill_type as type,
+    SUM(all_invoices.quantity) AS Items, 
+    SUM(all_invoices.total) AS total 
+FROM all_invoices
+LEFT JOIN invoice ON  all_invoices.id = invoice.id
+GROUP BY id;
+
+
+-- Invoices_total View Creation 
 CREATE OR REPLACE VIEW return_invoices_total AS
 SELECT 
     id, 
