@@ -18,8 +18,9 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <!-- Adding Jquery -->
+    <script src="../includes/js/jquery-3.5.1.min.js"></script>
 </head>
-<!-- <body> -->
 <body>
   <nav class="navbar">
     <div class="container-fluid">
@@ -31,5 +32,5 @@
       </div>
     </div>
   </nav>
-  <?php include "../includes/php/sidebar.php"; ?>
-  <?php include "../includes/php/dbconnection.php"; ?>
+  <?php include "../includes/php/sidebar.php";?>
+  <?php include "../includes/php/dbconnection.php";?>

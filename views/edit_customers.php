@@ -71,24 +71,24 @@
                 </form>
             </div>
         </div>
-</div>
-<!-- End of add-customers -->
-<!-- Retrieving the data from database -->
-<?php
-    function readCustomerData($column) {
-        // if (isset($_GET['edit'])) {
-        include "../includes/php/dbconnection.php";
-        $query = "SELECT * FROM customers WHERE id = :id LIMIT 1";
-        $stmt = $conn->prepare($query);
-        $stmt->bindValue(':id', $_GET['edit']); // Replace 1 with the desired ID
-        $stmt->execute();
-        $result = $stmt->fetch(PDO::FETCH_ASSOC);
-        if ($result) {
-            $name = $result[$column];
-            return $name;
-        } else {
-            echo "No record found";
+    </div>
+    <!-- End of add-customers -->
+    <!-- Retrieving the data from database -->
+    <?php
+        function readCustomerData($column) {
+            // if (isset($_GET['edit'])) {
+            include "../includes/php/dbconnection.php";
+            $query = "SELECT * FROM customers WHERE id = :id LIMIT 1";
+            $stmt = $conn->prepare($query);
+            $stmt->bindValue(':id', $_GET['edit']); // Replace 1 with the desired ID
+            $stmt->execute();
+            $result = $stmt->fetch(PDO::FETCH_ASSOC);
+            if ($result) {
+                $name = $result[$column];
+                return $name;
+            } else {
+                echo "No record found";
+            }
         }
-    }
     ?>
     <?php include "../includes/php/footer.php";?>

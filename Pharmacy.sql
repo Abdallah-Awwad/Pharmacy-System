@@ -91,7 +91,7 @@ SELECT
     invoice.bill_type,
     invoice_details.inventory_id,
     invoice_details.quantity,
-    inventory.selling_price AS Price,
+    inventory.selling_price AS price,
     inventory.selling_price * invoice_details.quantity AS total
 
 FROM
@@ -127,7 +127,7 @@ CREATE OR REPLACE VIEW sales_invoices_total AS
 SELECT 
     id, 
     bill_type,
-    SUM(quantity) AS Items, 
+    SUM(quantity) AS items, 
     SUM(total) AS total 
 FROM all_invoices
 WHERE bill_type = 'Sale'
@@ -139,7 +139,7 @@ SELECT
     all_invoices.id, 
     invoice.issued_date AS date, 
     all_invoices.bill_type as type,
-    SUM(all_invoices.quantity) AS Items, 
+    SUM(all_invoices.quantity) AS items, 
     SUM(all_invoices.total) AS total 
 FROM all_invoices
 LEFT JOIN invoice ON  all_invoices.id = invoice.id
@@ -151,7 +151,7 @@ CREATE OR REPLACE VIEW return_invoices_total AS
 SELECT 
     id, 
     bill_type,
-    SUM(quantity) AS Items, 
+    SUM(quantity) AS items, 
     SUM(total) AS total 
 FROM all_invoices
 WHERE bill_type = 'Return'
@@ -161,7 +161,7 @@ GROUP BY id;
 CREATE OR REPLACE VIEW purchases AS 
 Select 
     i.med_id AS id, 
-    i.id AS Inv_id, 
+    i.id AS inv_id, 
     medicines.name,
     i.purchase_price,
     i.selling_price, 
@@ -182,10 +182,10 @@ CREATE OR REPLACE VIEW stock AS
 SELECT 
 
     purchases.* , 
-    -- SUM(sale_invoices.quantity)  AS Sold
-    IFNULL(sale_invoices.quantity, 0)  AS Sold, 
-    IFNULL(return_invoices.quantity, 0) AS Returned,
-    purchases.quantity - IFNULL(sale_invoices.quantity, 0) + IFNULL(return_invoices.quantity, 0) AS Stock
+    -- SUM(sale_invoices.quantity)  AS sold
+    IFNULL(sale_invoices.quantity, 0)  AS sold, 
+    IFNULL(return_invoices.quantity, 0) AS returned,
+    purchases.quantity - IFNULL(sale_invoices.quantity, 0) + IFNULL(return_invoices.quantity, 0) AS stock
 
 FROM purchases 
 
@@ -206,15 +206,15 @@ Earning profit:
 
 CREATE OR REPLACE VIEW earning AS 
 select 
-	(SELECT SUM(stock.Sold * stock.selling_price) FROM stock) AS Sales, 
-	(SELECT SUM(stock.Returned * stock.selling_price) FROM stock) AS Returned, 
+	(SELECT SUM(stock.Sold * stock.selling_price) FROM stock) AS sales, 
+	(SELECT SUM(stock.Returned * stock.selling_price) FROM stock) AS returned, 
     (SELECT SUM(amount) FROM expenses) AS expenses, 
-    (SELECT SUM(salary) FROM employees) AS Salaries, 
+    (SELECT SUM(salary) FROM employees) AS salaries, 
     
     (SELECT SUM(stock.Sold * stock.selling_price) FROM stock) - 
     (SELECT SUM(stock.Returned * stock.selling_price) FROM stock) - 
     (SELECT SUM(amount) FROM expenses) - 
-    (SELECT SUM(salary) FROM employees) AS Net_earning;
+    (SELECT SUM(salary) FROM employees) AS net_earning;
 
 
 -- =========================================================================================================== -- 
