@@ -3,32 +3,32 @@
         <!-- Start of edit-customers -->
         <div class="edit-customers">
             <h1>
-                <span><?php echo $lang["Edit customer"];?></span>
+                <span><?= $lang["Edit customer"];?></span>
             </h1>
             <div class="frame-box card-body p-3 ">
                 <form action="" method="post">
                     <div class="form-group mb-3">
-                        <label for="customerName"><?php echo $lang["Name"];?></label>
-                        <input type="text" class="form-control mt-2" name="customerName" value="<?php echo readCustomerData("name");?>" required>
+                        <label for="customerName"><?= $lang["Name"];?></label>
+                        <input type="text" class="form-control mt-2" name="customerName" value="<?= readCustomerData("name");?>" required>
                     </div>
                     <div class="form-group mb-3">
-                        <label for="customerGender"> <?php echo $lang["Gender"];?> </label>
+                        <label for="customerGender"> <?= $lang["Gender"];?> </label>
                         <select class="form-control mt-2" name="customerGender">
                             <option 
-                                <?php echo readCustomerData("gender") == "Male" ? "Selected" : "";?>>Male
+                                <?= readCustomerData("gender") == "Male" ? "Selected" : "";?>>Male
                             </option>
                             <option
-                                <?php echo readCustomerData("gender") == "Female" ? "Selected" : "";?>>Female
+                                <?= readCustomerData("gender") == "Female" ? "Selected" : "";?>>Female
                             </option>
                         </select>
                     </div>
                     <div class="form-group mb-3">
-                        <label for="customerPhone"><?php echo $lang["Phone"];?></label>
-                        <input type="text" class="form-control mt-2" name="customerPhone" value="<?php echo readCustomerData("phone");?>" required>
+                        <label for="customerPhone"><?= $lang["Phone"];?></label>
+                        <input type="text" class="form-control mt-2" name="customerPhone" value="<?= readCustomerData("phone");?>" required>
                     </div>
                     <div class="form-group mb-3">
-                        <label for="customerAddress"><?php echo $lang["Address"];?></label>
-                        <textarea class="form-control mt-2" name="customerAddress" rows="4"><?php echo readCustomerData("address");?></textarea>
+                        <label for="customerAddress"><?= $lang["Address"];?></label>
+                        <textarea class="form-control mt-2" name="customerAddress" rows="4"><?= readCustomerData("address");?></textarea>
                     </div>
                     <div class="form-group">
                     <?php 
@@ -72,7 +72,7 @@
             </div>
         </div>
     </div>
-    <!-- End of add-customers -->
+    <!-- End of edit-customers -->
     <!-- Retrieving the data from database -->
     <?php
         function readCustomerData($column) {
@@ -80,7 +80,7 @@
             include "../includes/php/dbconnection.php";
             $query = "SELECT * FROM customers WHERE id = :id LIMIT 1";
             $stmt = $conn->prepare($query);
-            $stmt->bindValue(':id', $_GET['edit']); // Replace 1 with the desired ID
+            $stmt->bindValue(':id', $_GET['edit']); 
             $stmt->execute();
             $result = $stmt->fetch(PDO::FETCH_ASSOC);
             if ($result) {

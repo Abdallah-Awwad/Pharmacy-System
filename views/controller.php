@@ -1,6 +1,6 @@
 <?php
     include "../includes/php/dbconnection.php";
-    if(!isset($_POST["process"])) header("Location: dashboard.php"); ;
+    if(!isset($_POST["process"])) header("Location: dashboard.php");
     if($_POST["process"] == "addProduct") {
         $productQuery = "SELECT 
                             stock.inv_id, stock.id AS med_id, medicines.name, stock.expiration_date, stock.selling_price
@@ -26,7 +26,6 @@
             echo "Please choose Cashier";
             return;
         }
-        // echo "$employee";
         // Checking if the items quantities available
         if ($bill_type == "Sale") {
             foreach ($products as $inv_id => $quantity) {
@@ -73,3 +72,79 @@
         }
         echo "Success!";
     }
+    // Start of Medicine control 
+    if($_POST["process"] == "readMedicine"){
+        $query = "SELECT medicines.*, manufacturers.name AS manufacture_name 
+                    FROM `medicines` 
+                    JOIN `manufacturers` ON medicines.manufacture_id = manufacturers.id
+                    WHERE medicines.id = :id
+                    LIMIT 1";
+        $stmt = $conn->prepare($query);
+        $stmt->bindValue(':id', $_POST['medicineID']); 
+        $stmt->execute();
+        $result = $stmt->fetch(PDO::FETCH_ASSOC);
+        if ($result) {
+            echo json_encode($result, 1);
+        } else {
+            echo "No record found";
+        }
+    }
+    if($_POST["process"] == "readManufactures"){
+        $query2 = "SELECT `id`, `name` FROM `manufacturers`";
+        $stmt2 = $conn->prepare($query2);
+        $stmt2->execute();
+        $result2 = $stmt2->fetchAll(PDO::FETCH_ASSOC);
+        if ($result2) {
+            echo json_encode($result2, 1);
+        } else {
+            echo "No record found";
+        }
+    }
+    if($_POST["process"] == "editMedicine"){
+        $medID =  $_POST['medID'];
+        $medName =  $_POST['medName'];
+        $manuID =  $_POST['manuID'];
+
+        $editMedicSql="UPDATE `medicines` 
+                        SET `name`= :medName , 
+                            `manufacture_id` = :manuID 
+                        WHERE `id` = :medID;";
+        $editMedicStmt = $conn->prepare($editMedicSql);
+        $editMedicStmt->bindValue(':medID', $medID);
+        $editMedicStmt->bindValue(':medName', $medName);
+        $editMedicStmt->bindValue(':manuID', $manuID);
+        $editMedicStmt->execute();
+        if ($editMedicStmt){
+            echo "Success";
+        }
+        else {
+            echo 'Something wrong happend.';
+        }
+    }
+    if($_POST["process"] == "deleteMedicine"){
+        $query = "DELETE FROM medicines WHERE id = :id";
+        $stmt = $conn->prepare($query);
+        $stmt->bindValue(':id', $_POST['medicineID']); 
+        $stmt->execute();
+        if ($stmt) {
+            echo "success";
+            // echo json_encode($result, 1);
+        } else {
+            echo "Something Went wrong";
+        }
+    }
+    if($_POST["process"] == "addMedicine"){
+        $query = "INSERT INTO medicines (`name`, `manufacture_id`) VALUES (:name, :manuID)";
+        $stmt = $conn->prepare($query);
+        $stmt->bindValue(':name', $_POST['medName']); 
+        $stmt->bindValue(':manuID', $_POST['manuID']); 
+        $stmt->execute();
+        if ($stmt) {
+            echo "success";
+            // echo json_encode($result, 1);
+        } else {
+            echo "Something Went wrong";
+        }
+    }
+
+    // End of Medicine control 

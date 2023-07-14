@@ -3,21 +3,23 @@
         <!-- Start of view-customers -->
         <div class="selling-invoices">
             <h1>
-                <span><?php echo $lang["Selling"];?></span>
+                <span><?= $lang["Selling"];?></span>
             </h1>
             <div class="d-flex justify-content-between align-items-start">
                 <input type="text" class="search form-control" id="searchInvoice" placeholder="What you looking for? (search by ID or Date)">
-                <button type="button" class="add-btn btn btn-info add-new "><i class="fa fa-plus"></i> Add New</button>
+                <a href="invoice_create.php">
+                    <button type="button" class="add-btn btn btn-info add-new "><i class="fa fa-plus"></i> Add New</button>
+                </a>
             </div>
             <div class="frame-box card-body table-responsive">
                 <table class="table table-bordered table-striped table-hover sort" id="tableInvoices">
                     <thead>
                         <tr>
-                            <th><?php echo $lang["ID"];?></th>
-                            <th><?php echo $lang["Type"];?></th>
-                            <th><?php echo $lang["Date"];?></th>
-                            <th><?php echo $lang["Items"];?></th>
-                            <th><?php echo $lang["Total"];?></th>
+                            <th><?= $lang["ID"];?></th>
+                            <th><?= $lang["Type"];?></th>
+                            <th><?= $lang["Date"];?></th>
+                            <th><?= $lang["Items"];?></th>
+                            <th><?= $lang["Total"];?></th>
                         </tr>
                     </thead>
                     <tbody>

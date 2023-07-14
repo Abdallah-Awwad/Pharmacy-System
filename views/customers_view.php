@@ -3,33 +3,35 @@
         <!-- Start of view-customers -->
         <div class="view-customers">
             <h1>
-                <span><?php echo $lang["View customers"];?></span>
+                <span><?= $lang["View customers"];?></span>
             </h1>
             <div class="d-flex justify-content-between align-items-start">
                 <input type="text" class="search form-control" id="searchCustomers" placeholder="What you looking for? (search by name or phone)">
-                <button type="button" class="add-btn btn btn-info add-new "><i class="fa fa-plus"></i> Add New</button>
+                <a href="customers_add.php">
+                    <button type="button" class="add-btn btn btn-info add-new "><i class="fa fa-plus"></i> <?= $lang["Add New"];?></button>
+                </a>
             </div>
             <div class="frame-box card-body table-responsive">
                 <table class="table table-bordered table-striped table-hover sort" id="tableCustomers">
                     <thead>
                         <tr>
-                            <th><?php echo $lang["ID"];?></th>
-                            <th><?php echo $lang["Customer name"];?></th>
-                            <th><?php echo $lang["Gender"];?></th>
-                            <th><?php echo $lang["Address"];?></th>
-                            <th><?php echo $lang["Phone"];?></th>
-                            <th><?php echo $lang["Actions"];?></th>
+                            <th><?= $lang["ID"];?></th>
+                            <th><?= $lang["Customer name"];?></th>
+                            <th><?= $lang["Gender"];?></th>
+                            <th><?= $lang["Address"];?></th>
+                            <th><?= $lang["Phone"];?></th>
+                            <th><?= $lang["Actions"];?></th>
                         </tr>
                     </thead>
                     <tbody>
                         <?php
-                            $query = "SELECT * FROM customers";
+                            $query = "SELECT * FROM `customers`";
                             $statement = $conn->prepare($query);
                             $statement->execute();
-                            $statement->setFetchMode(PDO::FETCH_OBJ); //PDO::FETCH_ASSOC
+                            $statement->setFetchMode(PDO::FETCH_OBJ); 
                             $result = $statement->fetchAll();
-                            if ($result) {
-                                foreach($result as $row) {
+                            if ($result){
+                                foreach($result as $row){
                         ?>
                                     <tr>
                                         <td><?= $row->id;?></td>
@@ -38,9 +40,9 @@
                                         <td><?= $row->address;?></td>
                                         <td><?= $row->phone;?></td>
                                         <td>
-                                            <a class="add" title="<?php echo $lang["Add"];?>" data-toggle="tooltip"><i class="material-icons">&#xE03B;</i></a>
-                                            <a href="edit_customers.php?edit=<?php echo $row->id;?>" class="edit" title="<?php echo $lang["Edit"];?>" data-toggle="tooltip"><i class="material-icons">&#xE254;</i></a>
-                                            <a href="view_customers.php?delete=<?php echo $row->id;?>" class="delete" title="<?php echo $lang["Delete"];?>" data-toggle="tooltip"><i class="material-icons">&#xE872;</i></a>
+                                            <a class="add" title="<?= $lang["Add"];?>" data-toggle="tooltip"><i class="material-icons">&#xE03B;</i></a>
+                                            <a href="customers_edit.php?edit=<?= $row->id;?>" class="edit" title="<?= $lang["Edit"];?>" data-toggle="tooltip"><i class="material-icons">&#xE254;</i></a>
+                                            <a href="customers_view.php?delete=<?= $row->id;?>" class="delete" title="<?= $lang["Delete"];?>" data-toggle="tooltip"><i class="material-icons">&#xE872;</i></a>
                                         </td>
                                     </tr>
                         <?php
@@ -49,18 +51,15 @@
                             else {
                         ?>
                                 <tr>
-                                    <td colspan="6">No Records Found</td>
+                                    <td colspan="6"><?= $lang["No Records Found"];?></td>
                                 </tr>
                         <?php
                             }
                             // To delete from the Database
-                            if (isset($_GET['delete'])) {
+                            if (isset($_GET['delete'])){
                                 include_once "../includes/php/header.php";
                                 $delete = "DELETE FROM customers WHERE id =" . $_GET['delete'];
                                 $conn->exec($delete);
-                                // header('Location: dashboard.php');
-                                // header('Refresh: 0');
-                                // exit();
                             }
                         ?>
                     </tbody>
@@ -72,8 +71,6 @@
         // Delete row on delete button click
         $(document).on("click", ".delete", function(){
             $(this).parents("tr").remove();
-            // console.log("DELETED");
-            // $(".add-new").removeAttr("disabled");
         });
         // Calling live search function
         $(document).ready(function() {

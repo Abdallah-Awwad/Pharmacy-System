@@ -16,22 +16,22 @@
           <div class="collapse" id="Invoices-collapse" style="">
             <ul class="btn-toggle-nav fw-normal pb-1 small">
               <li>
-                <a href="create_invoice.php" class="link-light rounded">
+                <a href="invoice_create.php" class="link-light rounded">
                   <?php echo $lang["Create invoice"];?>
                 </a>
               </li>
               <li>
-                <a href="all_invoices.php" class="link-light rounded">
+                <a href="invoices_all.php" class="link-light rounded">
                   <?php echo $lang["All Invoices"];?>
                 </a>
               </li>
               <li>
-                <a href="selling_invoices.php" class="link-light rounded">
+                <a href="invoices_selling.php" class="link-light rounded">
                   <?php echo $lang["Selling"];?>
                 </a>
               </li>
               <li>
-                <a href="return_invoices.php" class="link-light rounded">
+                <a href="invoices_return.php" class="link-light rounded">
                   <?php echo $lang["Return"];?>
                 </a>
               </li>
@@ -45,22 +45,24 @@
           <div class="collapse" id="Medicines-collapse">
             <ul class="btn-toggle-nav fw-normal pb-1 small">
               <li>
-                <a href="#" class="link-light rounded">
+                <a href="medicine_add.php" class="link-light rounded">
                   <?php echo $lang["Add medicine"];?>
                 </a>
               </li>
               <li>
-                <a href="#" class="link-light rounded">
-                  <?php echo $lang["View medicine"];?>
+                <a href="medicines_view.php" class="link-light rounded">
+                  <?php echo $lang["View medicines"];?>
                 </a>
               </li>
             </ul>
           </div>
         </li>
         <li>
-          <button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse" data-bs-target="#Inventory-collapse" aria-expanded="false">
-          <?php echo $lang["Inventory"];?>  
-          </button>
+          <a href="inventory.php" class="link-light rounded">
+            <button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse" data-bs-target="#Inventory-collapse" aria-expanded="false">
+              <?php echo $lang["Inventory"];?>  
+            </button>
+          </a>
         </li>
         <li>
           <button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse" data-bs-target="#Purchases-collapse" aria-expanded="false">
@@ -107,12 +109,12 @@
           <div class="collapse" id="Customers-collapse">
             <ul class="btn-toggle-nav fw-normal pb-1 small">
               <li>
-                <a href="add_customers.php" class="link-light rounded">
+                <a href="customers_add.php" class="link-light rounded">
                   <?php echo $lang["Add customer"];?>
                 </a>
               </li>
               <li>
-                <a href="view_customers.php" class="link-light rounded">
+                <a href="customers_view.php" class="link-light rounded">
                   <?php echo $lang["View customers"];?>
                 </a>
               </li>

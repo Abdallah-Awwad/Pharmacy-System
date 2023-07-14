@@ -1,5 +1,10 @@
 <?php
 $lang = array(
+    // global 
+    'Add New' => "Add New",
+    'No Records Found' => "No Records Found",
+    'Name' => "Name",
+    'Submit' => "Submit",
     // sidebar
     'Dashboard' => "Dashboard",
     'Invoices' => "Invoices",
@@ -10,7 +15,7 @@ $lang = array(
     'Inventory' => "Inventory",
     'Medicines' => "Medicines",
     'Add medicine' => "Add medicine",
-    'View medicine' => "View medicine",
+    'View medicines' => "View medicines",
     'Customers' => "Customers",
     'Add customer' => "Add customer",
     'View customers' => "View customers",
@@ -56,7 +61,6 @@ $lang = array(
     'Female' => "Female",
     'Address' => "Address",
     'Customer phone' => "Customer phone",
-    'Name' => "Name",
     'Phone' => "Phone",
     'Edit customer' => "Edit customer",
     // tables 
@@ -99,5 +103,21 @@ $lang = array(
     'Expiration Date' => "Expiration Date",
     'Total' => "Total",
     'Amount' => "Amount",
-    'Submit' => "Submit",
+    // Inventory
+    'inv inv ID' => "ID",
+    'inv med ID' => "Med ID",
+    'inv name' => "Name",
+    'inv purchase price' => "Purchase price",
+    'inv selling price' => "Selling price",
+    'inv expiration date' => "Expiration date",
+    'inv quantity' => "Quantity",
+    'inv sold' => "Sold",
+    'inv returned' => "Returned",
+    'inv stock' => "Stock",
+    // Medicines
+    'Edit medicine' => "Edit medicine",
+    'Med name' => "Name",
+    'Manufacture' => "Manufacture name",
+    'Medicine' => "Medicine name",
+
 );

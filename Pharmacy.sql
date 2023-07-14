@@ -83,7 +83,7 @@ CREATE TABLE invoice_details (
 -- =========================================================================================================== -- 
 -- VIEWS --
 
--- AllInvoices View Creation 
+-- all_invoices View Creation 
 CREATE OR REPLACE VIEW all_invoices AS
 
 SELECT 
@@ -122,7 +122,7 @@ FROM
 WHERE 
     bill_type = 'Return';
 
--- Invoices_total View Creation 
+-- sales_invoices_total View Creation 
 CREATE OR REPLACE VIEW sales_invoices_total AS
 SELECT 
     id, 
@@ -133,7 +133,7 @@ FROM all_invoices
 WHERE bill_type = 'Sale'
 GROUP BY id;
 
--- Invoices_total View Creation 
+-- all_invoices_total View Creation 
 CREATE OR REPLACE VIEW all_invoices_total AS
 SELECT 
     all_invoices.id, 
@@ -146,7 +146,7 @@ LEFT JOIN invoice ON  all_invoices.id = invoice.id
 GROUP BY id;
 
 
--- Invoices_total View Creation 
+-- return_invoices_total View Creation 
 CREATE OR REPLACE VIEW return_invoices_total AS
 SELECT 
     id, 
@@ -222,6 +222,7 @@ select
 -- Inserting Data into the DB Tables
 INSERT INTO `customers` (`id`, `name`, `gender`, `address`, `phone`) 
 VALUES 
+    (0, 'Cash Customer', 'Male', NULL, ''),
     (NULL, 'Customer1', 'Male', NULL, '2123123'),
     (NULL, 'Customer2', 'Female', NULL, '0123'),
     (NULL, 'Customer3', 'Male', NULL, '5233'),

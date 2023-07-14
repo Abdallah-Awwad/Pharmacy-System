@@ -9,7 +9,6 @@
     <!-- Adding CSS Files -->
     <link rel="stylesheet" href="../includes/css/all.min.css">
     <link rel="stylesheet" href="../includes/css/bootstrap.min.css">
-    <link rel="stylesheet" href="../includes/css/bootstrap.css.map">
     <link rel="stylesheet" href="../includes/css/main.css">
     <!-- For sorting table -->
     <link rel="stylesheet" href="../includes/css/cdn.datatables.net_1.10.22_css_dataTables.bootstrap4.min.css">

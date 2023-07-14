@@ -4,7 +4,7 @@
         <div class="dasbhoard">
             <!-- Title -->
             <h1>
-                <span><?php echo $lang["Dashboard"];?></span>
+                <span><?= $lang["Dashboard"];?></span>
             </h1>
             <!-- Start First Row -->
             <div class="row statistics text-center">
@@ -13,12 +13,12 @@
                         1.00
                     </div>
                     <div class="description">
-                        <?php echo $lang["Today total sales"];?>
+                        <?= $lang["Today total sales"];?>
                     </div>
                     <div class="more-info">
                         <a href="#">
                             <span>
-                                <?php echo $lang["More info"];?> <i class="fa-solid <?php echo $lang["fa-circle-arrow-right"];?>"></i>
+                                <?= $lang["More info"];?> <i class="fa-solid <?= $lang["fa-circle-arrow-right"];?>"></i>
                             </span>
                         </a>
                     </div>
@@ -28,12 +28,12 @@
                         0.00
                     </div>
                     <div class="description">
-                        <?php echo $lang["Today total expenses"];?> 
+                        <?= $lang["Today total expenses"];?> 
                     </div>
                     <div class="more-info">
                         <a href="#">
                             <span>
-                                <?php echo $lang["More info"];?> <i class="fa-solid <?php echo $lang["fa-circle-arrow-right"];?>"></i>
+                                <?= $lang["More info"];?> <i class="fa-solid <?= $lang["fa-circle-arrow-right"];?>"></i>
                             </span>
                         </a>
                     </div>
@@ -43,12 +43,12 @@
                         0.00
                     </div>
                     <div class="description">
-                        <?php echo $lang["Today total returns"];?>
+                        <?= $lang["Today total returns"];?>
                     </div>
                     <div class="more-info"> 
                         <a href="#">
                             <span>
-                                <?php echo $lang["More info"];?> <i class="fa-solid <?php echo $lang["fa-circle-arrow-right"];?>"></i>
+                                <?= $lang["More info"];?> <i class="fa-solid <?= $lang["fa-circle-arrow-right"];?>"></i>
                             </span>
                         </a>
                     </div>
@@ -58,12 +58,12 @@
                         0.00
                     </div>
                     <div class="description">
-                        <?php echo $lang["Near expiry products"];?>
+                        <?= $lang["Near expiry products"];?>
                     </div>
                     <div class="more-info">
                         <a href="#">
                             <span>
-                                <?php echo $lang["More info"];?> <i class="fa-solid <?php echo $lang["fa-circle-arrow-right"];?>"></i>
+                                <?= $lang["More info"];?> <i class="fa-solid <?= $lang["fa-circle-arrow-right"];?>"></i>
                             </span>
                         </a>
                     </div>
@@ -73,20 +73,20 @@
             <!-- Start Second Row -->
             <div class="shortcuts row justify-content-around">
                 <div class="col-5">
-                    <h2><?php echo $lang["Quick Stats"];?></h2>
+                    <h2><?= $lang["Quick Stats"];?></h2>
                     <p>
-                        - <?php echo $lang["Number of products"];?> 
+                        - <?= $lang["Number of products"];?> 
                         <span>00</span>
                     </p>
                     <p>
-                        - <?php echo $lang["New customers this week"];?>
+                        - <?= $lang["New customers this week"];?>
                         <span>00</span>
                     </p>
                 </div>
                 <div class="col-5">
                     <div class="d-flex justify-content-start align-items-center">
                         <div class="col-6 text-center">
-                            <h2><?php echo $lang["Make invoice"];?></h2>
+                            <h2><?= $lang["Make invoice"];?></h2>
                         </div>
                         <div class="col">
                     </div>
@@ -96,7 +96,7 @@
                 <div class="col-5">
                     <div class="d-flex justify-content-start align-items-center">
                         <div class="col-6 text-center">
-                            <h2><?php echo $lang["Update the stock"];?></h2>
+                            <h2><?= $lang["Update the stock"];?></h2>
                         </div>
                         <div class="col">
                     </div>
@@ -106,7 +106,7 @@
                 <div class="col-5">
                     <div class="d-flex justify-content-start align-items-center">
                         <div class="col-6 text-center">
-                            <h2><?php echo $lang["Add a new medicine"];?></h2>
+                            <h2><?= $lang["Add a new medicine"];?></h2>
                         </div>
                         <div class="col">
                     </div>
