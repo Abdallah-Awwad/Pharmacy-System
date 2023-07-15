@@ -35,7 +35,6 @@
                                         echo "<td>$row->name</td>";
                                         echo "<td>$row->manufactory_name</td>";
                                         echo "<td>";
-                                            echo "<a class='add' title='".$lang["Add"]."' data-toggle='tooltip'><i class='material-icons'>&#xE03B;</i></a>";
                                             echo "<a href='medicine_edit.php?edit=".$row->id."' class='edit' title='".$lang["Edit"]."' data-toggle='tooltip'><i class='material-icons'>&#xE254;</i></a>";
                                             echo "<a href= '#' value='".$row->id."' class='delete' title='".$lang["Delete"]."' data-toggle='tooltip'><i class='material-icons'>&#xE872;</i></a>";
                                         echo "</td>";
@@ -57,12 +56,9 @@
         // Delete row on delete button click
         $(document).on("click", ".delete", function(){
             var medDelete = $(this).attr("value");
-            console.log(medDelete);
             $(this).parents("tr").remove();
-            
             var deleteMedicineForm = new FormData();
             var process = "deleteMedicine";
-
             deleteMedicineForm.append('process', process);
             deleteMedicineForm.append('medicineID', medDelete);
             // ajax code to send data to controller.php 
@@ -75,14 +71,11 @@
                     else {
                         var errorMessage = '<div class="alert alert-danger float-start p-2" id="remove" role="alert">' + result + '</div>'
                         $("table").append(errorMessage);
-
-
                     }
                 }
             };
             xmlhttp.open("POST", "controller.php", true);
             xmlhttp.send(deleteMedicineForm);
-
         });
         // Calling live search function
         $(document).ready(function() {

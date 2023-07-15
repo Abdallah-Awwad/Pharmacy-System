@@ -33,3 +33,4 @@
   </nav>
   <?php include "../includes/php/sidebar.php";?>
   <?php include "../includes/php/dbconnection.php";?>
+  <?php include "../includes/php/functions.php";?>

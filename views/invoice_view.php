@@ -57,11 +57,11 @@
                             $statement->setFetchMode(PDO::FETCH_OBJ); //PDO::FETCH_ASSOC
                             $result = $statement->fetchAll();
                             if ($result) {
-                                $x = 1;
+                                $serial = 1;
                                 foreach($result as $row) {
                         ?>
                                     <tr>
-                                        <td><?= $x;?></td>
+                                        <td><?= $serial;?></td>
                                         <td><?= $row->id;?></td>
                                         <td><?= $row->name;?></td>
                                         <td><?= $row->expiration_date;?></td>
@@ -70,7 +70,7 @@
                                         <td><?= $row->total;?></td>
                                     </tr>
                         <?php
-                                    $x++;
+                                    $serial++;
                                 }
                             }
                             else {

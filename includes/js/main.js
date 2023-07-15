@@ -31,3 +31,20 @@ function liveSearch(searchBoxID, tableID, columnOneIndex, columnTwoIndex) {
     })
 }
 // End of searching function 
+// Start of Ajax request function 
+function requestAjax(bindValues, callback) {
+    let Form = new FormData();
+    for (let key in bindValues) {
+        Form.append(key, bindValues[key]);
+    }
+    let xmlhttp = new XMLHttpRequest();
+    xmlhttp.onreadystatechange = function() {
+        if (xmlhttp.readyState === 4 && xmlhttp.status === 200) {
+            let result = xmlhttp.responseText;
+            callback(result);
+        }
+    };
+    xmlhttp.open("POST", "controller.php", true);
+    xmlhttp.send(Form);
+}
+// End of Ajax request function 

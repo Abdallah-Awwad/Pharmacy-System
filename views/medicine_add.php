@@ -5,11 +5,11 @@
             <h1>
                 <span><?= $lang["Add medicine"];?></span>
             </h1>
-            <div class="frame-box card-body p-3 ">
+            <div class="frame-box card-body p-3">
                 <form action="" method="post">
                     <div class="form-group mb-3">
                         <label for="medicineName"><?= $lang["Med name"];?></label>
-                        <input type="text" class="form-control mt-2" name="medicineName" placeholder="<?= $lang["Manufacture"];?>" required>
+                        <input type="text" class="form-control mt-2" name="medicineName" placeholder="<?= $lang["Med medicine name"];?>" required>
                     </div>
                     <div class="form-group mb-3">
                         <label for="manufactureName"><?= $lang["Manufacture"];?></label>

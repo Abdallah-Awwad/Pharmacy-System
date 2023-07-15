@@ -159,7 +159,6 @@
                     var result = xmlhttp.responseText;
                     result = JSON.parse(result);
                     $(document).ready(function(){
-                        // var index = $("table tbody tr:last-child").index();
                         var row = '<tr>' +
                             '<td>'                      + serial +                              '</td>' +
                             '<td>'                      + result.med_id +                       '</td>' +

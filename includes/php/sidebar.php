@@ -71,12 +71,12 @@
           <div class="collapse" id="Purchases-collapse">
             <ul class="btn-toggle-nav fw-normal pb-1 small">
               <li>
-                <a href="#" class="link-light rounded">
-                  <?php echo $lang["Create purchase invoice"];?>
+                <a href="purchases_create.php" class="link-light rounded">
+                  <?php echo $lang["Purchase create invoice"];?>
                 </a>
               </li>
               <li>
-                <a href="#" class="link-light rounded">
+                <a href="purchases_view.php" class="link-light rounded">
                   <?php echo $lang["View purchase invoices"];?>
                 </a>
               </li>
@@ -90,12 +90,12 @@
           <div class="collapse" id="Expenses-collapse">
             <ul class="btn-toggle-nav fw-normal pb-1 small">
               <li>
-                <a href="#" class="link-light rounded">
+                <a href="expenses_add.php" class="link-light rounded">
                   <?php echo $lang["Add expense"];?>
                 </a>
               </li>
               <li>
-                <a href="#" class="link-light rounded">
+                <a href="expenses_view.php" class="link-light rounded">
                   <?php echo $lang["View expenses"];?>
                 </a>
               </li>

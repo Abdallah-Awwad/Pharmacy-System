@@ -1,5 +1,6 @@
 <?php
     include "../includes/php/dbconnection.php";
+    include "../includes/php/functions.php";
     if(!isset($_POST["process"])) header("Location: dashboard.php");
     if($_POST["process"] == "addProduct") {
         $productQuery = "SELECT 
@@ -128,7 +129,6 @@
         $stmt->execute();
         if ($stmt) {
             echo "success";
-            // echo json_encode($result, 1);
         } else {
             echo "Something Went wrong";
         }
@@ -141,10 +141,73 @@
         $stmt->execute();
         if ($stmt) {
             echo "success";
-            // echo json_encode($result, 1);
         } else {
             echo "Something Went wrong";
         }
     }
-
     // End of Medicine control 
+    // Start of purchase 
+    if($_POST["process"] == "purchaseInvoice") {
+        $products = json_decode($_POST['products']);
+        foreach($products as $product) {
+            $productQuery = "INSERT INTO `inventory` (med_id, purchase_price, selling_price, expiration_date,  quantity)
+                                VALUES (:medID, :purchasePrice, :sellingPrice, :expiration, :quantity);";
+            $productStatement = $conn->prepare($productQuery);
+            $productStatement->bindValue(':medID', $product->medID);
+            $productStatement->bindValue(':purchasePrice', $product->purchasePrice);
+            $productStatement->bindValue(':sellingPrice', $product->sellingPrice);
+            $productStatement->bindValue(':expiration', $product->expirationDate);
+            $productStatement->bindValue(':quantity', $product->quantity);
+            $productStatement->execute();
+            $productResult = $productStatement->fetch();
+        }
+        if($productStatement) {
+            echo "success";
+        }
+        else {
+            echo "Something went wrong.";
+        }
+    }
+    // End of purchase 
+    // Start of expenses
+    if($_POST["process"] == "deleteExpense"){
+        $query = "DELETE FROM expenses WHERE id = :id";
+        $stmt = $conn->prepare($query);
+        $stmt->bindValue(':id', $_POST['expenseID']); 
+        $stmt->execute();
+        if ($stmt) {
+            echo "success";
+        } else {
+            echo "Something Went wrong";
+        }
+    }
+    if($_POST["process"] == "addExpense"){
+        $query = "INSERT INTO `expenses` (`name`, `description`, `amount`, `category`) VALUES (:name, :desc, :amount, :category)";
+        $queryInputs = [":name", ":desc", ":amount", ":category"];
+        foreach ($queryInputs as $key => $value){
+            $array[$value] = array_values($_POST)[$key+1];
+        }
+        dbHandlerAdd($query, $array);
+    }
+    if($_POST["process"] == "readExpense"){
+        $query = "SELECT * FROM `expenses` WHERE `id` = :id;";
+        $array[':id'] = $_POST['expenseID'];
+        dbHandler($query, PDO::FETCH_OBJ, $result, $array);
+        // echo gettype($result);
+        if ($result == "Something Went wrong") {echo $result;}
+        else {echo json_encode($result);}
+    }
+    if($_POST["process"] == "editExpense"){
+        $query="UPDATE `expenses` 
+                        SET `name`          = :expenseName, 
+                            `description`   = :descr,
+                            `amount`        = :amount,
+                            `category`      = :category
+                        WHERE `id`          = :id;";
+        $queryInputs = [":id", ":expenseName", ":descr", ":amount", ":category"];
+        foreach ($queryInputs as $key => $value){
+            $array[$value] = array_values($_POST)[$key+1];
+        }
+        dbHandlerAdd($query, $array);
+    }
+    // End of expenses

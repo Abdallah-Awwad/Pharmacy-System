@@ -1,6 +1,5 @@
     <?php include "../includes/php/header.php";?>
     <div class="main-page" id="mainPage">
-        <!-- Start of edit-medicine -->
         <div class="edit-medicine">
             <h1>
                 <span><?= $lang["Edit medicine"];?></span>
@@ -22,7 +21,6 @@
             </div>
         </div>
     </div>
-    <!-- End of edit-medicine -->
     <!-- Start of Retrieving the data from database -->
     <script> 
     var editValue = "";

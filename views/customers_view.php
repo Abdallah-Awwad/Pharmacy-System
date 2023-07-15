@@ -40,7 +40,6 @@
                                         <td><?= $row->address;?></td>
                                         <td><?= $row->phone;?></td>
                                         <td>
-                                            <a class="add" title="<?= $lang["Add"];?>" data-toggle="tooltip"><i class="material-icons">&#xE03B;</i></a>
                                             <a href="customers_edit.php?edit=<?= $row->id;?>" class="edit" title="<?= $lang["Edit"];?>" data-toggle="tooltip"><i class="material-icons">&#xE254;</i></a>
                                             <a href="customers_view.php?delete=<?= $row->id;?>" class="delete" title="<?= $lang["Delete"];?>" data-toggle="tooltip"><i class="material-icons">&#xE872;</i></a>
                                         </td>
