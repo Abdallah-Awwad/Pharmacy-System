@@ -4,7 +4,7 @@
             <h1>
                 <span><?= $lang["Edit medicine"];?></span>
             </h1>
-            <div class="frame-box card-body p-3 ">
+            <div class="frame-box card-body p-3">
                 <form action="" method="post">
                     <div class="form-group mb-3">
                         <label for="medicineName"><?= $lang["Med name"];?></label>

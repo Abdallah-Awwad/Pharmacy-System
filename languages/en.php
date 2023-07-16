@@ -13,6 +13,11 @@ $lang = array(
     'inv selling price' => "Selling price",
     'inv expiration date' => "Expiration date",
     'inv quantity' => "Quantity",
+    'Phone' => "Phone",
+    'Gender' => "Gender",
+    'Address' => "Address",
+
+
     // sidebar
     'Dashboard' => "Dashboard",
     'Invoices' => "Invoices",
@@ -29,7 +34,7 @@ $lang = array(
     'View customers' => "View customers",
     'Employees' => "Employees",
     'Add Employee' => "Add Employee",
-    'View Employee' => "View Employee",
+    'View Employee' => "View Employees",
     'Suppliers' => "Suppliers",
     'Add supplier' => "Add supplier",
     'View suppliers' => "View suppliers",
@@ -64,12 +69,9 @@ $lang = array(
     // Customers (add - view - edit)
     'ID' => "ID",
     'Customer name' => "Customer name",
-    'Gender' => "Gender",
     'Male' => "Male",
     'Female' => "Female",
-    'Address' => "Address",
     'Customer phone' => "Customer phone",
-    'Phone' => "Phone",
     'Edit customer' => "Edit customer",
     // tables 
     'Actions' => "Actions",
@@ -133,4 +135,8 @@ $lang = array(
     'Expense amount' => "Expense amount",
     'Other' => "Other",
     'Expense Edit Expense' => "Expense Edit Expense",
+    // Employees
+    'Age' => "Age",
+    'Salary' => "Salary",
+
 );

@@ -1,41 +1,45 @@
     <?php include "../includes/php/header.php";?>
     <div class="main-page" id="mainPage">
-        <div class="expenses-view">
+        <div class="employees-view">
             <h1>
-                <span><?= $lang["View expenses"];?></span>
+                <span><?= $lang["View Employee"];?></span>
             </h1>
             <div class="d-flex justify-content-between align-items-start">
-                <input type="text" class="search form-control" id="searchExpenses" placeholder="What you looking for? (search by name or category)">
-                <a href="expenses_add.php">
+                <input type="text" class="search form-control" id="searchEmployees" placeholder="What you looking for? (search by name or phone)">
+                <a href="employees_add.php">
                     <button type="button" class="add-btn btn btn-info add-new "><i class="fa fa-plus"></i> <?= $lang["Add New"];?></button>
                 </a>
             </div>
             <div class="frame-box card-body table-responsive">
-                <table class="table table-bordered table-striped table-hover sort" id="tableExpenses">
+                <table class="table table-bordered table-striped table-hover sort" id="tableEmployees">
                     <thead>
                         <tr>
                             <th><?= $lang["ID"];?></th>
                             <th><?= $lang["Name"];?></th>
-                            <th><?= $lang["Description"];?></th>
-                            <th><?= $lang["Amount"];?></th>
-                            <th><?= $lang["Category"];?></th>
+                            <th><?= $lang["Phone"];?></th>
+                            <th><?= $lang["Gender"];?></th>
+                            <th><?= $lang["Age"];?></th>
+                            <th><?= $lang["Address"];?></th>
+                            <th><?= $lang["Salary"];?></th>
                             <th><?= $lang["Actions"];?></th>
                         </tr>
                     </thead>
                     <tbody>
                         <?php
-                            $query = "SELECT * FROM `expenses`";
+                            $query = "SELECT * FROM `employees`";
                             dbHandler($query, PDO::FETCH_OBJ, $result);
                             if ($result){
                                 foreach($result as $row){
                                     echo "<tr>";
                                         echo "<td>$row->id</td>";
                                         echo "<td>$row->name</td>";
-                                        echo "<td>$row->description</td>";
-                                        echo "<td>$row->amount</td>";
-                                        echo "<td>$row->category</td>";
+                                        echo "<td>$row->phone</td>";
+                                        echo "<td>$row->gender</td>";
+                                        echo "<td>$row->age</td>";
+                                        echo "<td>$row->address</td>";
+                                        echo "<td>$row->salary</td>";
                                         echo "<td>";
-                                            echo "<a href='expenses_edit.php?edit=".$row->id."' class='edit' title='".$lang["Edit"]."' data-toggle='tooltip'><i class='material-icons'>&#xE254;</i></a>";
+                                            echo "<a href='employees_edit.php?edit=".$row->id."' class='edit' title='".$lang["Edit"]."' data-toggle='tooltip'><i class='material-icons'>&#xE254;</i></a>";
                                             echo "<a href= '#' value='".$row->id."' class='delete' title='".$lang["Delete"]."' data-toggle='tooltip'><i class='material-icons'>&#xE872;</i></a>";
                                         echo "</td>";
                                     echo "</tr>";
@@ -69,8 +73,8 @@
             });
         });
         $(document).ready(function() {
-            liveSearch("searchExpenses", "tableExpenses", 1, 4);
+            liveSearch("searchEmployees", "tableEmployees", 1, 2);
         });
     </script>
-    <!-- End of expenses-view -->
+    <!-- End of employees-view -->
     <?php include "../includes/php/footer.php";?>

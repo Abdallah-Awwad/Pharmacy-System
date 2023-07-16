@@ -128,12 +128,12 @@
           <div class="collapse" id="Employees-collapse">
             <ul class="btn-toggle-nav fw-normal pb-1 small">
               <li>
-                <a href="#" class="link-light rounded">
+                <a href="employees_add.php" class="link-light rounded">
                   <?php echo $lang["Add Employee"];?>
                 </a>
               </li>
               <li>
-                <a href="#" class="link-light rounded">
+                <a href="employees_view.php" class="link-light rounded">
                   <?php echo $lang["View Employee"];?>
                 </a>
               </li>
