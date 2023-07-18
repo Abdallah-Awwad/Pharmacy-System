@@ -93,6 +93,10 @@
     <script>
         var serial = 1;
         function addProduct(){
+            if (! $('form')[0].checkValidity()) {
+                $('form')[0].reportValidity();
+                return;
+            }
             var itemID = $("#item").val();
             var itemName = $("#item").find(":selected").text();
             itemName = itemName.split('- ');
@@ -174,7 +178,7 @@
                         var success = '<div class="alert alert-success float-start p-2" id="remove" role="alert"> Invoice made successfully.</div>'
                         $("form").append(success);
                         setTimeout(function(){
-                            window.location.href = "purchases_create.php";
+                            window.location.href = "purchases_create";
                         }, 2000);
                     }
                     else {
@@ -183,7 +187,7 @@
                     }
                 }
             };
-            xmlhttp.open("POST", "controller.php", true);
+            xmlhttp.open("POST", "controller", true);
             xmlhttp.send(invoiceForm);
         }
     </script>

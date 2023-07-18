@@ -9,9 +9,9 @@
             <form action="" method="POST">
                 <div class="form-group mb-3 d-flex ">
                     <div class="d-flex col-5 align-items-center">
-                        <label class="" style="width: 15%;"><?= $lang["Customer"];?></label>
+                        <label class="" for="customerName" style="width: 15%;"><?= $lang["Customer"];?></label>
                         <select class="form-control col-2" style="width: 70%;" name="customerName">
-                            <option value="0"><?= $lang["Cash"];?></option>
+                            <!-- <option value="0"><?= $lang["Cash"];?></option> -->
                             <?php 
                                 $customerQuery = "SELECT `id`, `name` FROM `customers`";
                                 $customerStmt = $conn->prepare($customerQuery);
@@ -174,7 +174,7 @@
                     });
                 }
             };
-            xmlhttp.open("POST", "controller.php", true);
+            xmlhttp.open("POST", "controller", true);
             xmlhttp.send(formData);
             serial++;
         }
@@ -218,7 +218,7 @@
             invoiceForm.append('cashierID', cashierID);
             invoiceForm.append('billType', billType);
             invoiceForm.append('products', JSON.stringify(products));
-            // ajax code to send data to controller.php 
+            // ajax code to send data to controller 
             var xmlhttp = new XMLHttpRequest();
             xmlhttp.onreadystatechange = function(){
                 if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
@@ -228,7 +228,7 @@
                         var success = '<div class="alert alert-success float-start p-2" id="remove" role="alert"> Invoice made successfully.</div>'
                         $("form").append(success);
                         setTimeout(function(){
-                            window.location.href = "invoice_create.php";
+                            window.location.href = "invoice_create";
                         }, 2000);
                     }
                     else {
@@ -237,7 +237,7 @@
                     }
                 }
             };
-            xmlhttp.open("POST", "controller.php", true);
+            xmlhttp.open("POST", "controller", true);
             xmlhttp.send(invoiceForm);
         }
     </script>

@@ -27,10 +27,7 @@
                     <tbody>
                         <?php
                             $query = "SELECT * FROM `stock`";
-                            $statement = $conn->prepare($query);
-                            $statement->execute();
-                            $statement->setFetchMode(PDO::FETCH_OBJ); 
-                            $result = $statement->fetchAll();
+                            dbHandler($query, PDO::FETCH_OBJ, $result);
                             if ($result){
                                 foreach($result as $row){
                                     echo "<tr>";

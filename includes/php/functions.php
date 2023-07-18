@@ -11,9 +11,6 @@
         $stmt->execute();
         $stmt->setFetchMode($fetchMode);
         $result = $stmt->fetchAll();
-        if (!$result) {
-            echo "Something Went wrong";
-        }
         $conn = NULL;
     }
     function dbHandlerAdd($query, $array2D){
@@ -24,6 +21,5 @@
         }
         $stmt->execute();
         if ($stmt) {echo "Success";} 
-        else {echo "Something Went wrong";}
         $conn = NULL;
     }

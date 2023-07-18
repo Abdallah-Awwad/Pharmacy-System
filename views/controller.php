@@ -1,7 +1,7 @@
 <?php
     include "../includes/php/dbconnection.php";
     include "../includes/php/functions.php";
-    if(!isset($_POST["process"])) header("Location: dashboard.php");
+    if(!isset($_POST["process"])) header("Location: dashboard");
     if($_POST["process"] == "addProduct") {
         $productQuery = "SELECT 
                             stock.inv_id, stock.id AS med_id, medicines.name, stock.expiration_date, stock.selling_price
@@ -73,7 +73,7 @@
         }
         echo "Success!";
     }
-    // Start of Medicine control 
+    // Start of medicine 
     if($_POST["process"] == "readMedicine"){
         $query = "SELECT medicines.*, manufacturers.name AS manufacture_name 
                     FROM `medicines` 
@@ -145,7 +145,7 @@
             echo "Something Went wrong";
         }
     }
-    // End of Medicine control 
+    // End of medicine
     // Start of purchase 
     if($_POST["process"] == "purchaseInvoice") {
         $products = json_decode($_POST['products']);
@@ -193,7 +193,6 @@
         $query = "SELECT * FROM `expenses` WHERE `id` = :id;";
         $array[':id'] = $_POST['expenseID'];
         dbHandler($query, PDO::FETCH_OBJ, $result, $array);
-        // echo gettype($result);
         if ($result == "Something Went wrong") {echo $result;}
         else {echo json_encode($result);}
     }
@@ -211,3 +210,90 @@
         dbHandlerAdd($query, $array);
     }
     // End of expenses
+    // Start of customers 
+    if($_POST["process"] == "deleteCustomer"){
+        $query = "DELETE FROM customers WHERE id = :id";
+        $queryInputs = [":id"];
+        foreach ($queryInputs as $key => $value){
+            $array[$value] = array_values($_POST)[$key+1];
+        }
+        $x = dbHandlerAdd($query, $array);
+    }    
+    // End of customers 
+    // Start of employees
+    if($_POST["process"] == "deleteEmployee"){
+        $query = "DELETE FROM employees WHERE id = :id";
+        $queryInputs = [":id"];
+        foreach ($queryInputs as $key => $value){
+            $array[$value] = array_values($_POST)[$key+1];
+        }
+        $x = dbHandlerAdd($query, $array);
+    }
+    if($_POST["process"] == "addEmployee"){
+        $query = "INSERT INTO `employees` (`name`, `phone`, `gender`, `age`, `address`,`salary`) VALUES (:name, :phone, :gender, :age, :address ,:salary)";
+        $queryInputs = [":name", ":phone", ":gender", ":age", ":address", ":salary"];
+        foreach ($queryInputs as $key => $value){
+            $array[$value] = array_values($_POST)[$key+1];
+        }
+        dbHandlerAdd($query, $array);
+    }
+    if($_POST["process"] == "readEmployee"){
+        $query = "SELECT * FROM `employees` WHERE `id` = :id;";
+        $array[':id'] = $_POST['employeeID'];
+        dbHandler($query, PDO::FETCH_OBJ, $result, $array);
+        if ($result == "Something Went wrong") {echo $result;}
+        else {echo json_encode($result);}
+    }
+    if($_POST["process"] == "editEmployee"){
+        $query="UPDATE `employees` 
+                        SET `name`          = :name, 
+                            `phone`         = :phone,
+                            `gender`        = :gender,
+                            `age`           = :age,
+                            `address`       = :address,
+                            `salary`        = :salary
+                        WHERE `id`          = :id;";
+        $queryInputs = [":id", ":name", ":phone", ":gender", ":age", ":address", ":salary"];
+        foreach ($queryInputs as $key => $value){
+            $array[$value] = array_values($_POST)[$key+1];
+        }
+        dbHandlerAdd($query, $array);
+    }
+    // End of employees
+    // Start of manufacturer
+    if($_POST["process"] == "deleteManufacturer"){
+        $query = "DELETE FROM manufacturers WHERE id = :id";
+        $queryInputs = [":id"];
+        foreach ($queryInputs as $key => $value){
+            $array[$value] = array_values($_POST)[$key+1];
+        }
+        $x = dbHandlerAdd($query, $array);
+    }    
+    if($_POST["process"] == "addManufacturer"){
+        $query = "INSERT INTO `manufacturers` (`name`, `address`, `phone`) VALUES (:name, :address, :phone)";
+        $queryInputs = [":name", ":address", ":phone"];
+        foreach ($queryInputs as $key => $value){
+            $array[$value] = array_values($_POST)[$key+1];
+        }
+        dbHandlerAdd($query, $array);
+    }
+    if($_POST["process"] == "readManufacturer"){
+        $query = "SELECT * FROM `manufacturers` WHERE `id` = :id;";
+        $array[':id'] = $_POST['manufacturerID'];
+        dbHandler($query, PDO::FETCH_OBJ, $result, $array);
+        if ($result == "Something Went wrong") {echo $result;}
+        else {echo json_encode($result);}
+    }
+    if($_POST["process"] == "editManufacturer"){
+        $query="UPDATE `manufacturers` 
+                        SET `name`          = :name, 
+                            `address`       = :address,
+                            `phone`         = :phone
+                        WHERE `id`          = :id;";
+        $queryInputs = [":id", ":name", ":address", ":phone"];
+        foreach ($queryInputs as $key => $value){
+            $array[$value] = array_values($_POST)[$key+1];
+        }
+        dbHandlerAdd($query, $array);
+    }
+    // End of manufacturer

@@ -41,7 +41,7 @@
                 if (xmlhttp.readyState == 4 && xmlhttp.status == 200){
                     // if there is a response ... show error message .. 
                     var result = xmlhttp.responseText;
-                    if (result === "No record found"){window.location.href = "dashboard.php";}
+                    if (result === "No record found"){window.location.href = "dashboard";}
                     result = JSON. parse(result);
                     $('[name="medicineName"]').val(result["name"]);
                     var manuName = result["manufacture_name"];
@@ -50,7 +50,7 @@
                     $('[name="manufactureName"]').append(x);
                 }
             };
-            xmlhttp.open("POST", "controller.php", true);
+            xmlhttp.open("POST", "controller", true);
             xmlhttp.send(readMedicineForm);
             // Form to read all manufactures names 
             var readManufacturesForm = new FormData();
@@ -71,7 +71,7 @@
                     });
                 }
             };
-            xmlhttp2.open("POST", "controller.php", true);
+            xmlhttp2.open("POST", "controller", true);
             xmlhttp2.send(readManufacturesForm);
         });
     </script>
@@ -97,7 +97,7 @@
                         var success = '<div class="alert alert-success float-start p-2" id="remove" role="alert">' +result3+'</div>'
                         $("form").append(success);
                         setTimeout(function(){
-                            window.location.href = "medicines_view.php";
+                            window.location.href = "medicines_view";
                         }, 2000);
                     }
                     else {
@@ -106,7 +106,7 @@
                     }
                 }
             };
-            xmlhttp3.open("POST", "controller.php", true);
+            xmlhttp3.open("POST", "controller", true);
             xmlhttp3.send(editMedicineForm);
         }
     </script>

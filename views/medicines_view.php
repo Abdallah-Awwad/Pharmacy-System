@@ -7,7 +7,7 @@
             </h1>
             <div class="d-flex justify-content-between align-items-start">
                 <input type="text" class="search form-control" id="searchMedicines" placeholder="What you looking for? (search by name or manufactory)">
-                <a href="medicine_add.php">
+                <a href="medicine_add">
                     <button type="button" class="add-btn btn btn-info add-new "><i class="fa fa-plus"></i> <?= $lang["Add New"];?></button>
                 </a>
             </div>
@@ -35,7 +35,7 @@
                                         echo "<td>$row->name</td>";
                                         echo "<td>$row->manufactory_name</td>";
                                         echo "<td>";
-                                            echo "<a href='medicine_edit.php?edit=".$row->id."' class='edit' title='".$lang["Edit"]."' data-toggle='tooltip'><i class='material-icons'>&#xE254;</i></a>";
+                                            echo "<a href='medicine_edit?edit=".$row->id."' class='edit' title='".$lang["Edit"]."' data-toggle='tooltip'><i class='material-icons'>&#xE254;</i></a>";
                                             echo "<a href= '#' value='".$row->id."' class='delete' title='".$lang["Delete"]."' data-toggle='tooltip'><i class='material-icons'>&#xE872;</i></a>";
                                         echo "</td>";
                                     echo "</tr>";
@@ -74,13 +74,11 @@
                     }
                 }
             };
-            xmlhttp.open("POST", "controller.php", true);
+            xmlhttp.open("POST", "controller", true);
             xmlhttp.send(deleteMedicineForm);
         });
-        // Calling live search function
         $(document).ready(function() {
             liveSearch("searchMedicines", "tableMedicines", 1, 2);
         });
     </script>
-    <!-- End of view-medicines -->
     <?php include "../includes/php/footer.php";?>

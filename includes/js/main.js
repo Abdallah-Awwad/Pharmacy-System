@@ -44,7 +44,7 @@ function requestAjax(bindValues, callback) {
             callback(result);
         }
     };
-    xmlhttp.open("POST", "controller.php", true);
+    xmlhttp.open("POST", "controller", true);
     xmlhttp.send(Form);
 }
 // End of Ajax request function 

@@ -222,7 +222,7 @@ select
 -- Inserting Data into the DB Tables
 INSERT INTO `customers` (`id`, `name`, `gender`, `address`, `phone`) 
 VALUES 
-    (0, 'Cash customer', 'Male', NULL, ''),
+    (1, 'Cash customer', 'Male', NULL, ''),
     (NULL, 'Customer1', 'Male', NULL, '2123123'),
     (NULL, 'Customer2', 'Female', NULL, '0123'),
     (NULL, 'Customer3', 'Male', NULL, '5233'),

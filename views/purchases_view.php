@@ -7,7 +7,7 @@
             </h1>
             <div class="d-flex justify-content-between align-items-start">
                 <input type="text" class="search form-control w-50" id="searchInventory" placeholder="What you looking for? (search by name or expiration date)">
-                <a href="purchases_create.php">
+                <a href="purchases_create">
                     <button type="button" class="add-btn btn btn-info add-new "><i class="fa fa-plus"></i> <?= $lang["Add New"];?></button>
                 </a>
             </div>

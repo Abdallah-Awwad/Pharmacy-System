@@ -47,11 +47,11 @@
                     var success = '<div class="alert alert-success float-start p-2" id="remove" role="alert">' +result+'</div>'
                         $("form").append(success);
                         setTimeout(function(){
-                            window.location.href = "expenses_view.php";
+                            window.location.href = "expenses_view";
                         }, 2000);
                 } 
                 else {
-                    var errorMessage = '<div class="alert alert-danger float-start p-2" id="remove" role="alert">' + result + '</div>'
+                    var errorMessage = '<div class="alert alert-danger float-start p-2" id="remove" role="alert">' +result+ '</div>'
                     $("form").append(errorMessage);
                 }
             });

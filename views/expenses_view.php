@@ -6,7 +6,7 @@
             </h1>
             <div class="d-flex justify-content-between align-items-start">
                 <input type="text" class="search form-control" id="searchExpenses" placeholder="What you looking for? (search by name or category)">
-                <a href="expenses_add.php">
+                <a href="expenses_add">
                     <button type="button" class="add-btn btn btn-info add-new "><i class="fa fa-plus"></i> <?= $lang["Add New"];?></button>
                 </a>
             </div>
@@ -35,7 +35,7 @@
                                         echo "<td>$row->amount</td>";
                                         echo "<td>$row->category</td>";
                                         echo "<td>";
-                                            echo "<a href='expenses_edit.php?edit=".$row->id."' class='edit' title='".$lang["Edit"]."' data-toggle='tooltip'><i class='material-icons'>&#xE254;</i></a>";
+                                            echo "<a href='expenses_edit?edit=".$row->id."' class='edit' title='".$lang["Edit"]."' data-toggle='tooltip'><i class='material-icons'>&#xE254;</i></a>";
                                             echo "<a href= '#' value='".$row->id."' class='delete' title='".$lang["Delete"]."' data-toggle='tooltip'><i class='material-icons'>&#xE872;</i></a>";
                                         echo "</td>";
                                     echo "</tr>";
@@ -43,7 +43,7 @@
                             }
                             else {
                                 echo "<tr>";
-                                    echo "<td colspan='4'>" . $lang["No Records Found"] . "</td>";
+                                    echo "<td colspan='6'>" . $lang["No Records Found"] . "</td>";
                                 echo "</tr>";
                             }
                         ?>
@@ -58,10 +58,9 @@
                 'process': 'deleteExpense',
                 'expenseID': $(this).attr("value")
             }
+            let selectedRow = $(this).parents("tr");
             requestAjax(bindValues, function(result){
-                if (result === "success") {
-                    $(this).parents("tr").remove();
-                } 
+                if (result === "success") {selectedRow.remove();} 
                 else {
                     var errorMessage = '<div class="alert alert-danger float-start p-2" id="remove" role="alert">' + result + '</div>';
                     $("table").append(errorMessage);
@@ -72,5 +71,4 @@
             liveSearch("searchExpenses", "tableExpenses", 1, 4);
         });
     </script>
-    <!-- End of expenses-view -->
     <?php include "../includes/php/footer.php";?>

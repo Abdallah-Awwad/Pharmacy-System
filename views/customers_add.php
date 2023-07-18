@@ -1,6 +1,5 @@
     <?php include "../includes/php/header.php";?>
     <div class="main-page" id="mainPage">
-        <!-- Start of add-customers -->
         <div class="add-customers">
             <h1>
                 <span><?= $lang["Add customer"];?></span>
@@ -13,7 +12,7 @@
                     </div>
                     <div class="form-group mb-3">
                         <label for="customerGender"><?= $lang["Gender"];?></label>
-                        <select class="form-control mt-2" name="customerGender">
+                        <select class="form-control mt-2" name="customerGender" required>
                             <option><?= $lang["Male"];?></option>
                             <option><?= $lang["Female"];?></option>
                         </select>
@@ -28,17 +27,14 @@
                     </div>
                     <div class="form-group">
                     <?php 
-                        //check if form was submitted
                         if(isset($_POST['submitButton'])){ 
-                            $name =  $_REQUEST['customerName'];
-                            $gender = $_REQUEST['customerGender'];
-                            $phone = $_REQUEST['customerPhone'];
-                            $address = $_REQUEST['customerAddress'];
-
+                            $name =  $_POST['customerName'];
+                            $gender = $_POST['customerGender'];
+                            $phone = $_POST['customerPhone'];
+                            $address = $_POST['customerAddress'];
                             $sql="INSERT INTO customers (`name`, `gender`, `phone`, `address`)
                             VALUES
                             ('$name', '$gender', '$phone', '$address')";
-                        
                             $conn->exec($sql);
                             if ($conn && $sql) {
                                 echo '<div class="alert alert-success float-start p-2" id="remove" role="alert"> Record has been added.</div>';
@@ -47,15 +43,15 @@
                                 echo '<div class="alert alert-danger float-start p-2" id="remove" role="alert"> Something went wrong.</div>';
                             }
                     ?>
-                    <!-- To remove the message after specific time seconds -->
-                    <script>
-                        setTimeout(function(){
-                            document.getElementById("remove").style.display = "none";
-                        }, 3000);
-                    </script>
+                        <script>
+                            setTimeout(function(){
+                                document.getElementById("remove").style.display = "none";
+                            }, 3000);
+                        </script>
                     <?php
                         }
                         else {
+                            
                         }
                     ?>
                         <button type="submit" class="add-btn btn btn-primary float-end" name="submitButton"><?= $lang["Submit"]?></button>
@@ -64,5 +60,4 @@
             </div>
         </div>
     </div>
-    <!-- End of add-customers -->
     <?php include "../includes/php/footer.php";?>

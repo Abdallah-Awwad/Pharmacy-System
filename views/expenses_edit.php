@@ -37,7 +37,7 @@
                 'expenseID': expenseID
             }
             requestAjax(bindValues, function(result){
-                if (result == "Something Went wrong[]"){window.location.href = "dashboard.php";}
+                if (result == "[]"){window.location.href = "dashboard";}
                 else {
                     result = JSON.parse(result);
                     $('[name="expenseName"]').val(result[0]["name"]);
@@ -67,7 +67,7 @@
                     var success = '<div class="alert alert-success float-start p-2" id="remove" role="alert">' +result+'</div>'
                     $("form").append(success);
                     setTimeout(function(){
-                        window.location.href = "expenses_view.php";
+                        window.location.href = "expenses_view";
                     }, 2000);
                 }
                 else {
