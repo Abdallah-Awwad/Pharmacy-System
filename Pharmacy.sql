@@ -19,8 +19,8 @@ CREATE TABLE customers (
     id INT AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(150) NOT NULL, 
     gender ENUM ('Male', 'Female') NOT NULL DEFAULT 'Male', 
-    address VARCHAR (150), 
-    phone VARCHAR(50) NOT NULL 
+    phone VARCHAR(50) NOT NULL,
+    address VARCHAR (150)
 );
 
 -- Manufacturers Table Creation 

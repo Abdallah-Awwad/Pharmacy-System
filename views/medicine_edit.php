@@ -5,110 +5,85 @@
                 <span><?= $lang["Edit medicine"];?></span>
             </h1>
             <div class="frame-box card-body p-3">
-                <form action="" method="post">
+                <form action="" method="">
                     <div class="form-group mb-3">
+                        <input type="hidden" id="medicineID" required>
                         <label for="medicineName"><?= $lang["Med name"];?></label>
-                        <input type="text" class="form-control mt-2" name="medicineName" required>
+                        <input type="text" class="form-control mt-2" id="medicineName" required>
                     </div>
                     <div class="form-group mb-3">
-                        <label for="manufactureName"><?= $lang["Manufacture"];?></label>
-                        <select class="form-control mt-2" name="manufactureName"></select>
+                        <label for="manufacture"><?= $lang["Manufacture"];?></label>
+                        <select class="form-control mt-2" id="manufacture"></select>
                     </div>
                     <div class="form-group">
-                        <button type="submit" class="add-btn btn btn-primary float-end" name="submitButton" onclick="editMedicine(); return false;"><?= $lang["Submit"];?></button>
+                        <button type="submit" class="add-btn btn btn-primary float-end" id="submitButton" onclick="editMedicine(); return false;"><?= $lang["Submit"];?></button>
                     </div>
                 </form>
             </div>
         </div>
     </div>
-    <!-- Start of Retrieving the data from database -->
     <script> 
-    var editValue = "";
-        $(document).ready(function() {
-            // Form to read medicine data
-            var readMedicineForm = new FormData();
-            var process = "readMedicine";
-            // To retreive the GET value from the URL 
-            var url = new URL(window.location.href);
-            var searchParams = new URLSearchParams(url.search);
-            editValue = searchParams.get('edit');
-            // Setting $_POST
-            readMedicineForm.append('process', process);
-            readMedicineForm.append('medicineID', editValue);
-            // ajax code to send data to controller.php 
-            var xmlhttp = new XMLHttpRequest();
-            xmlhttp.onreadystatechange = function(){
-                if (xmlhttp.readyState == 4 && xmlhttp.status == 200){
-                    // if there is a response ... show error message .. 
-                    var result = xmlhttp.responseText;
-                    if (result === "No record found"){window.location.href = "dashboard";}
-                    result = JSON. parse(result);
-                    $('[name="medicineName"]').val(result["name"]);
-                    var manuName = result["manufacture_name"];
-                    var manuValue = result["manufacture_id"];
-                    var x = "<option Selected value='"+manuValue+"'>" + manuName + "</option>";
-                    $('[name="manufactureName"]').append(x);
+        let inputs = document.querySelectorAll("input, textarea, select");
+        $(document).ready(function(){
+            let bindValues ={
+                'process': 'readMedicine',
+                'medicineID': (new URLSearchParams((new URL(window.location.href)).search)).get('edit')
+            }
+            requestAjax(bindValues, function(result){
+                if (result == "[]"){
+                    window.location.href = "dashboard";
                 }
-            };
-            xmlhttp.open("POST", "controller", true);
-            xmlhttp.send(readMedicineForm);
-            // Form to read all manufactures names 
-            var readManufacturesForm = new FormData();
-            var process = "readManufactures";
-            readManufacturesForm.append('process', process);
-            var xmlhttp2 = new XMLHttpRequest();
-            xmlhttp2.onreadystatechange = function(){
-                if (xmlhttp2.readyState == 4 && xmlhttp2.status == 200) {
-                    var result2 = xmlhttp2.responseText;
-                    result2 = JSON.parse(result2);
-                    $.each(result2, function(index, manufacture){ 
-                        var key = manufacture.id;
-                        var value = manufacture.name;
-                        if ($('[name="manufactureName"] option:selected').text() !== value) {
-                            var x = "<option value='"+key+"'>"+value+"</option>";
-                            $('[name="manufactureName"]').append(x);
+                else {
+                    result = JSON.parse(result);
+                    $('#medicineID').val(result["id"]);
+                    $('#medicineName').val(result["name"]);
+                    $('#manufacture').append("<option Selected value='"+result["manufacture_id"]+"'>" +result["manufacture_name"]+ "</option>");
+                }
+            });            
+        });
+        $(document).ready(function(){
+            let bindValues ={
+                'process': 'readManufactures'
+            }
+            requestAjax(bindValues, function(result){
+                if (result == "[]"){
+                    window.location.href = "dashboard";
+                }
+                else {
+                    result = JSON.parse(result);
+                    $.each(result, function(index, manufacture){ 
+                        let key = manufacture.id;
+                        let value = manufacture.name;
+                        if ($('#manufacture option:selected').text() !== value){
+                            let x = "<option value='"+key+"'>"+value+"</option>";
+                            $('#manufacture').append(x);
                         }
                     });
                 }
-            };
-            xmlhttp2.open("POST", "controller", true);
-            xmlhttp2.send(readManufacturesForm);
+            });
         });
-    </script>
-    <!-- End of Retrieving the data from database -->
-    <!-- Start of updating data -->
-    <script>
         function editMedicine(){
-            var newName = $('[name="medicineName"]').val();
-            var newManufacture = $('[name="manufactureName"] option:selected').val();
-            console.log(newManufacture);
-            // Form to edit medicine 
-            var editMedicineForm = new FormData();
-            var process = "editMedicine";
-            editMedicineForm.append('process', process);
-            editMedicineForm.append('medName', newName);
-            editMedicineForm.append('medID', editValue);
-            editMedicineForm.append('manuID', newManufacture);
-            var xmlhttp3 = new XMLHttpRequest();
-            xmlhttp3.onreadystatechange = function(){
-                if (xmlhttp3.readyState == 4 && xmlhttp3.status == 200) {
-                    var result3 = xmlhttp3.responseText;
-                    if (result3 === "Success"){
-                        var success = '<div class="alert alert-success float-start p-2" id="remove" role="alert">' +result3+'</div>'
-                        $("form").append(success);
-                        setTimeout(function(){
-                            window.location.href = "medicines_view";
-                        }, 2000);
-                    }
-                    else {
-                        var errorMessage = '<div class="alert alert-danger float-start p-2" id="remove" role="alert">' + result3 + '</div>'
-                        $("form").append(errorMessage);
-                    }
+            if (!$('form')[0].checkValidity()){
+                $('form')[0].reportValidity();
+                return;
+            }
+            let bindValues = {
+                'process': 'editMedicine'
+            }
+            for (let i = 0; i < inputs.length; i++){
+                bindValues[inputs[i].id] = inputs[i].value;
+            }
+            requestAjax(bindValues, function(result){
+                if (result === "Success"){
+                    $("form").append('<div class="alert alert-success float-start p-2" id="remove" role="alert">'+result+'</div>');
+                    setTimeout(function(){
+                        window.location.href = "medicines_view";
+                    }, 2000);
                 }
-            };
-            xmlhttp3.open("POST", "controller", true);
-            xmlhttp3.send(editMedicineForm);
+                else {
+                    $("form").append('<div class="alert alert-danger float-start p-2" id="remove" role="alert">'+result+'</div>');
+                }
+            });
         }
     </script>
-    <!-- End of updating data -->
     <?php include "../includes/php/footer.php";?>

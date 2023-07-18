@@ -4,74 +4,75 @@
             <h1>
                 <span><?= $lang["Edit customer"];?></span>
             </h1>
-        <?php
-            $query = "SELECT * FROM `customers` WHERE `id` = :id;";
-            $array[':id'] = $_GET['edit'];
-            dbHandler($query, PDO::FETCH_OBJ, $result, $array);
-        ?>
             <div class="frame-box card-body p-3">
-                <form action="" method="post">
+                <form action="" method="">
                     <div class="form-group mb-3">
+                        <input type="hidden" id="customerID" required>
                         <label for="customerName"><?= $lang["Name"];?></label>
-                        <input type="text" class="form-control mt-2" name="customerName" value="<?= $result[0]->name;?>" required>
+                        <input type="text" class="form-control mt-2" id="customerName" required>
                     </div>
                     <div class="form-group mb-3">
                         <label for="customerGender"> <?= $lang["Gender"];?> </label>
-                        <select class="form-control mt-2" name="customerGender">
-                            <option 
-                                <?= $result[0]->gender == "Male" ? "Selected" : "";?>>Male
-                            </option>
-                            <option
-                                <?= $result[0]->gender == "Female" ? "Selected" : "";?>>Female
-                            </option>
+                        <select class="form-control mt-2" id="customerGender">
+                            <option>Male</option>
+                            <option>Female</option>
                         </select>
                     </div>
                     <div class="form-group mb-3">
                         <label for="customerPhone"><?= $lang["Phone"];?></label>
-                        <input type="text" class="form-control mt-2" name="customerPhone" value="<?= $result[0]->phone;?>" required>
+                        <input type="text" class="form-control mt-2" id="customerPhone" required>
                     </div>
                     <div class="form-group mb-3">
                         <label for="customerAddress"><?= $lang["Address"];?></label>
-                        <textarea class="form-control mt-2" name="customerAddress" rows="4"><?= $result[0]->address;?></textarea>
+                        <textarea class="form-control mt-2" id="customerAddress" rows="4"></textarea>
                     </div>
                     <div class="form-group">
-                    <?php 
-                        if(isset($_POST['submitButton'])){ 
-                            $name =  $_POST['customerName'];
-                            $gender = $_POST['customerGender'];
-                            $phone = $_POST['customerPhone'];
-                            $address = $_POST['customerAddress'];
-                            $id = $_GET['edit'];
-                            if (empty($address)) $address = NULL;
-                            $sql= "UPDATE customers SET `name` = :name , `gender` = :gender , `phone` = :phone, `address` = :address WHERE id = :id";
-                            $stmt = $conn->prepare($sql);
-                            $stmt->bindValue(':name', $name); 
-                            $stmt->bindValue(':gender', $gender); 
-                            $stmt->bindValue(':phone', $phone); 
-                            $stmt->bindValue(':address', $address); 
-                            $stmt->bindValue(':id', $id); 
-                            $stmt->execute();
-                            if ($conn && $stmt) {
-                                echo '<div class="alert alert-success float-start p-2" id="remove" role="alert"> Record has been updated.</div>';
-                            }
-                            else {
-                                echo '<div class="alert alert-danger float-start p-2" id="remove" role="alert"> Something went wrong.</div>';
-                            }
-                    ?>
-                        <script>
-                            setTimeout(function(){
-                                window.location.href = "customers_view";
-                            }, 2000);
-                        </script>
-                    <?php
-                        }
-                        else {
-                        }
-                    ?>
-                        <button type="submit" class="add-btn btn btn-primary float-end " name="submitButton">Submit</button>
+                        <button type="submit" class="add-btn btn btn-primary float-end" id="submitButton" onclick="editCustomer(); return false;"><?= $lang["Submit"];?></button>
                     </div>
                 </form>
             </div>
         </div>
     </div>
+    <script> 
+        let inputs = document.querySelectorAll("input, textarea, select");
+        $(document).ready(function(){
+            let bindValues = {
+                'process': 'readCustomer',
+                'customerID': (new URLSearchParams((new URL(window.location.href)).search)).get('edit')
+            }
+            requestAjax(bindValues, function(result){
+                if (result == "[]"){window.location.href = "dashboard";}
+                else {
+                    result = JSON.parse(result);
+                    for (let i = 0; i < Object.values(result[0]).length; i++){
+                        inputs[i].value = Object.values(result[0])[i];
+                    }
+                    console.log(result);
+                }
+            });            
+        });
+        function editCustomer(){
+            if (!$('form')[0].checkValidity()){
+                $('form')[0].reportValidity();
+                return;
+            }
+            let bindValues = {
+                'process': 'editCustomer'
+            }
+            for (let i = 0; i < inputs.length; i++) {
+                bindValues[inputs[i].id] = inputs[i].value;
+            }
+            requestAjax(bindValues, function(result){
+                if (result === "Success"){
+                    $("form").append('<div class="alert alert-success float-start p-2" id="remove" role="alert">'+result+'</div>');
+                    setTimeout(function(){
+                        window.location.href = "customers_view";
+                    }, 2000);
+                }
+                else {
+                    $("form").append('<div class="alert alert-danger float-start p-2" id="remove" role="alert">'+result+'</div>');
+                }
+            });                            
+        }
+    </script>
     <?php include "../includes/php/footer.php";?>
