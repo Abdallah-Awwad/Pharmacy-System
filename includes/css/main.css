@@ -16,6 +16,9 @@ body {
     font-family: 'Merriweather', serif !important;
     overflow: hidden;
 }
+a {
+    text-decoration: none;
+}
 h1 {
     font-size: 25px;
     font-weight: 600;
@@ -181,7 +184,6 @@ table.table td .add {
     list-style-type: none;
 }
 .sidebar a {
-    text-decoration: none;
     color: var(--white) !important;
 }
 /* End of sidebar */
@@ -237,7 +239,6 @@ table.table td .add {
     padding-bottom: 5px;
 }
 .main-page .dasbhoard .statistics a {
-    text-decoration: none;
     color: inherit;
 }
 .main-page .dasbhoard .statistics span::before {
@@ -255,9 +256,10 @@ table.table td .add {
     padding: 10px 50px;
     align-content: space-between;
 }
-.main-page .dasbhoard .shortcuts > div {
+.main-page .dasbhoard .shortcuts > a > div {
     background-color: white;
     border-radius: 20px;
+    color: black;
     padding: 20px;
     margin-bottom: 30px;
     border: 2px solid var(--grey);
