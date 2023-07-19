@@ -222,34 +222,34 @@ select
 -- Inserting Data into the DB Tables
 INSERT INTO `customers` (`id`, `name`, `gender`, `address`, `phone`) 
 VALUES 
-    (1, 'Cash customer', 'Male', NULL, ''),
-    (NULL, 'Customer1', 'Male', NULL, '2123123'),
-    (NULL, 'Customer2', 'Female', NULL, '0123'),
-    (NULL, 'Customer3', 'Male', NULL, '5233'),
-    (NULL, 'Customer4', 'Male', NULL, '54645646'),
-    (NULL, 'Customer5', 'Male', NULL, '8718923987'),
-    (NULL, 'Customer6', 'Female', NULL, '123123'),
-    (NULL, 'Customer7', 'Male', NULL, '123123123'),
-    (NULL, 'Customer8', 'Male', NULL, '45654654645'),
-    (NULL, 'Customer9', 'Female', NULL, '1546'),
-    (NULL, 'Customer10', 'Male', NULL, '7897894563456'),
-    (NULL, 'Customer11', 'Male', NULL, '123123123123'),
-    (NULL, 'Customer12', 'Male', NULL, '45645645'),
-    (NULL, 'Customer13', 'Female', NULL, '78546564456'),
-    (NULL, 'Customer14', 'Female', NULL, '548978912'),
-    (NULL, 'Customer15', 'Female', NULL, '7845564569'),
-    (NULL, 'Customer16', 'Male', NULL, '544546'),
-    (NULL, 'Customer17', 'Female', NULL, '123658879');
+    (1, 'Cash customer', 'Male', '', ''),
+    (NULL, 'Customer1', 'Male', '', '2123123'),
+    (NULL, 'Customer2', 'Female', '', '0123'),
+    (NULL, 'Customer3', 'Male', '', '5233'),
+    (NULL, 'Customer4', 'Male', '', '54645646'),
+    (NULL, 'Customer5', 'Male', '', '8718923987'),
+    (NULL, 'Customer6', 'Female', '', '123123'),
+    (NULL, 'Customer7', 'Male', '', '123123123'),
+    (NULL, 'Customer8', 'Male', '', '45654654645'),
+    (NULL, 'Customer9', 'Female', '', '1546'),
+    (NULL, 'Customer10', 'Male', '', '7897894563456'),
+    (NULL, 'Customer11', 'Male', '', '123123123123'),
+    (NULL, 'Customer12', 'Male', '', '45645645'),
+    (NULL, 'Customer13', 'Female', '', '78546564456'),
+    (NULL, 'Customer14', 'Female', '', '548978912'),
+    (NULL, 'Customer15', 'Female', '', '7845564569'),
+    (NULL, 'Customer16', 'Male', '', '544546'),
+    (NULL, 'Customer17', 'Female', '', '123658879');
 
 
 INSERT INTO `employees` (`id`, `name`, `phone`, `gender`, `age`, `address`, `salary`) 
 VALUES
-    (NULL, 'Employee1', '01235123', 'Male', NULL, NULL, '20'),
-    (NULL, 'Employee2', '546456', 'Male', '19', NULL, '15'),
-    (NULL, 'Employee3', '456', 'Male', '32', NULL, '10'),
-    (NULL, 'Employee4', '0123123', 'Female', '22', NULL, '12'),
-    (NULL, 'Employee5', '423145', 'Male', '26', NULL, '30'),
-    (NULL, 'Employee6', '1236', 'Female', NULL, NULL, '40');
+    (NULL, 'Employee1', '01235123', 'Male', '', '', '20'),
+    (NULL, 'Employee2', '546456', 'Male', '19', '', '15'),
+    (NULL, 'Employee3', '456', 'Male', '32', '', '10'),
+    (NULL, 'Employee4', '0123123', 'Female', '22', '', '12'),
+    (NULL, 'Employee5', '423145', 'Male', '26', '', '30'),
+    (NULL, 'Employee6', '1236', 'Female', '', '', '40');
 
 
 INSERT INTO `invoice` (`id`, `issued_date`, `cus_id`, `emp_id`, `bill_type`) 

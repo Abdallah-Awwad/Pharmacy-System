@@ -1,10 +1,13 @@
 // Start of sorting in Jquery 
-$(document).ready(function() {
+function sorting(){
     $('.sort').DataTable({
         paging: false,
         info: false,
         filter: false,
     });
+}
+$(document).ready(function() {
+    sorting();
 });
 // End of sorting in Jquery
 // Start of searching function 

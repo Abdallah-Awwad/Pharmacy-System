@@ -49,7 +49,7 @@
                 if (result === "Success"){
                         $("form").append('<div class="alert alert-success float-start p-2" id="remove" role="alert">'+result+'</div>');
                         setTimeout(function(){
-                            window.location.href = "manufacturers_view";
+                            window.location.href = "customers_view";
                         }, 2000);
                 } 
                 else{

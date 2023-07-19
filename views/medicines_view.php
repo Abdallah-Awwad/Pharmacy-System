@@ -35,8 +35,8 @@
                                         echo "<td>$row->name</td>";
                                         echo "<td>$row->manufactory_name</td>";
                                         echo "<td>";
-                                            echo "<a href='medicine_edit?edit=".$row->id."' class='edit' title='".$lang["Edit"]."' data-toggle='tooltip'><i class='material-icons'>&#xE254;</i></a>";
-                                            echo "<a href= '#' value='".$row->id."' class='delete' title='".$lang["Delete"]."' data-toggle='tooltip'><i class='material-icons'>&#xE872;</i></a>";
+                                            echo "<a href='medicine_edit?edit=".$row->id."' class='edit' title='".$lang["Edit"]."' data-toggle='tooltip'><i class='fa-solid fa-pen'></i></a>";
+                                            echo "<a href= '#' value='".$row->id."' class='delete' title='".$lang["Delete"]."' data-toggle='tooltip'><i class='fa-solid fa-trash'></i></a>";
                                         echo "</td>";
                                     echo "</tr>";
                                 }

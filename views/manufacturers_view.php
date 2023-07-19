@@ -11,7 +11,7 @@
                 </a>
             </div>
             <div class="frame-box card-body table-responsive">
-                <table class="table table-bordered table-striped table-hover sort" id="tableManufacturers">
+                <table class="table table-bordered table-striped table-hover" id="tableManufacturers">
                     <thead>
                         <tr>
                             <th><?= $lang["ID"];?></th>
@@ -22,34 +22,41 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <?php
-                            $query = "SELECT * FROM `manufacturers`";
-                            dbHandler($query, PDO::FETCH_OBJ, $result);
-                            if ($result){
-                                foreach($result as $row){
-                                    echo "<tr>";
-                                        echo "<td>$row->id</td>";
-                                        echo "<td>$row->name</td>";
-                                        echo "<td>$row->address</td>";
-                                        echo "<td>$row->phone</td>";
-                                        echo "<td>";
-                                            echo "<a href='manufacturers_edit?edit=".$row->id."' class='edit' title='".$lang["Edit"]."' data-toggle='tooltip'><i class='material-icons'>&#xE254;</i></a>";
-                                            echo "<a href= '#' value='".$row->id."' class='delete' title='".$lang["Delete"]."' data-toggle='tooltip'><i class='material-icons'>&#xE872;</i></a>";                                        echo "</td>";
-                                    echo "</tr>";
-                                }
-                            }
-                            else {
-                                echo "<tr>";
-                                    echo "<td colspan='5'>" . $lang["No Records Found"] . "</td>";
-                                echo "</tr>";
-                            }
-                        ?>
                     </tbody>
                 </table>
             </div>
         </div>
     </div>
     <script>
+        $(document).ready(function(){
+            let bindValues = {
+                'process': 'readAllManufacturers'
+            }
+            requestAjax(bindValues, function(result){
+                if (result == "[]"){
+                    $("tbody").append('<tr> <td colspan="6"> <?= $lang["No Records Found"]?> </td> </tr>');
+                }
+                else{
+                    result = JSON.parse(result);
+                    $.each(result, function(serial, value){ 
+                        let td = '';
+                        for(i = 0; i < Object.values(value).length; i++){
+                            td += '<td>' + Object.values(value)[i] + '</td>';
+                            tr = '<tr>' + '</td>' + td + 
+                                    '<td>' +
+                                        "<a href='manufacturers_edit?edit="+value['id']+"' class='edit' title='<?=$lang['Edit']?>' data-toggle='tooltip'><i class='fa-solid fa-pen'></i></a>" + 
+                                        "<a href= '#' value='"+value['id']+"' class='delete' title='<?= $lang['Delete']?>' data-toggle='tooltip'><i class='fa-solid fa-trash'></i></a>" + 
+                                    '</td>' +
+                                '</tr>';
+                        }
+                        $("tbody").append(tr);
+                    });
+                    $("table").addClass("sort");
+                    sorting();
+                }
+            });
+            liveSearch("searchManufacturers", "tableManufacturers", 1, 2);
+        });
         $(document).on("click", ".delete", function(){
             let bindValues = {
                 'process': 'deleteManufacturer',
@@ -57,15 +64,13 @@
             }
             let selectedRow = $(this).parents("tr");
             requestAjax(bindValues, function(result){
-                if (result === "Success") {selectedRow.remove();} 
-                else {
-                    var errorMessage = '<div class="alert alert-danger float-start p-2" id="remove" role="alert">' + result + '</div>';
-                    $("table").append(errorMessage);
+                if (result === "Success"){
+                    selectedRow.remove();
+                } 
+                else{
+                    $("table").append('<div class="alert alert-danger float-start p-2" id="remove" role="alert">' +result+ '</div>');
                 }
             });
-        });
-        $(document).ready(function(){
-            liveSearch("searchManufacturers", "tableManufacturers", 1, 2);
         });
     </script>
     <?php include "../includes/php/footer.php";?>

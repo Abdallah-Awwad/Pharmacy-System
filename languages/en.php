@@ -49,7 +49,7 @@ $lang = array(
     'Change theme' => "Change theme",
     'Reset system' => "Reset system",
     'Profile' => "Profile",
-    'Profile informations' => "Profile informations",
+    'Profile information' => "Profile information",
     'Logout' => "Logout",
     // Dashboard 
     'Today total sales' => "Today's total sales",
@@ -93,7 +93,7 @@ $lang = array(
     'Invoice date' => "Invoice date",
     'Cashier' => "Cashier",
     'Customer name' => "Customer name",
-    'Invoice Type' => "Invoice Type",
+    'Invoice type' => "Invoice type",
     'Exipiration date' => "Exipiration date",
     'Total items' => "Total items",
     'Item' => "Item",

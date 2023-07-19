@@ -2,6 +2,7 @@
     include "../includes/php/dbconnection.php";
     include "../includes/php/functions.php";
     if(!isset($_POST["process"])) header("Location: dashboard");
+    // Start of invoice
     if($_POST["process"] == "addProduct") {
         $productQuery = "SELECT 
                             stock.inv_id, stock.id AS med_id, medicines.name, stock.expiration_date, stock.selling_price
@@ -73,6 +74,31 @@
         }
         echo "Success!";
     }
+    if($_POST["process"] == "readInvoiceDetails"){
+        $query = "SELECT medicines.id, medicines.name, inventory.expiration_date, all_invoices.price, all_invoices.quantity, all_invoices.total
+                FROM all_invoices 
+                JOIN inventory ON all_invoices.inventory_id = inventory.id
+                JOIN medicines ON inventory.med_id = medicines.id
+                WHERE all_invoices.id = :id;";
+        $array[':id'] = $_POST['invoiceID'];
+        dbHandler($query, PDO::FETCH_OBJ, $result, $array);
+        if ($result == "Something Went wrong") {echo $result;}
+        else {echo json_encode($result);}
+    }
+    if($_POST["process"] == "readInvoice"){
+        $query = 'SELECT invoice.id, invoice.issued_date, invoice.bill_type , customers.name AS "customer", employees.name AS "cashier", all_invoices_total.items AS "items", all_invoices_total.total AS "total"
+                    FROM `invoice`
+                    JOIN customers ON invoice.cus_id = customers.id
+                    JOIN employees ON invoice.emp_id = employees.id
+                    JOIN all_invoices_total ON invoice.id = all_invoices_total.id
+                    WHERE invoice.id = :id
+                    LIMIT 1;';
+        $array[':id'] = $_POST['invoiceID'];
+        dbHandler($query, PDO::FETCH_OBJ, $result, $array);
+        if ($result == "Something Went wrong") {echo $result;}
+        else {echo json_encode($result);}
+    }
+    // End of invoice
     // Start of medicine 
     if($_POST["process"] == "readMedicine"){
         $query = "SELECT medicines.*, manufacturers.name AS manufacture_name 
@@ -179,8 +205,22 @@
         $query = "SELECT * FROM `expenses` WHERE `id` = :id;";
         $array[':id'] = $_POST['expenseID'];
         dbHandler($query, PDO::FETCH_OBJ, $result, $array);
-        if ($result == "Something Went wrong") {echo $result;}
-        else {echo json_encode($result);}
+        if ($result == "Something Went wrong"){
+            echo $result;
+        }
+        else{
+            echo json_encode($result);
+        }
+    }
+    if($_POST["process"] == "readAllExpense"){
+        $query = "SELECT * FROM `expenses`";
+        dbHandler($query, PDO::FETCH_OBJ, $result);
+        if ($result == "Something Went wrong"){
+            echo $result;
+        }
+        else{
+            echo json_encode($result);
+        }
     }
     if($_POST["process"] == "editExpense"){
         $query="UPDATE `expenses` 
@@ -221,6 +261,16 @@
         if ($result == "Something Went wrong") {echo $result;}
         else {echo json_encode($result);}
     }
+    if($_POST["process"] == "readAllCustomers"){
+        $query = "SELECT * FROM `customers`";
+        dbHandler($query, PDO::FETCH_OBJ, $result);
+        if ($result == "Something Went wrong"){
+            echo $result;
+        }
+        else{
+            echo json_encode($result);
+        }
+    }
     if($_POST["process"] == "editCustomer"){
         $query="UPDATE customers SET `name` = :name , `gender` = :gender , `phone` = :phone, `address` = :address WHERE id = :id";
         $queryInputs = [":id", ":name", ":gender", ":phone", ":address"];
@@ -253,6 +303,16 @@
         dbHandler($query, PDO::FETCH_OBJ, $result, $array);
         if ($result == "Something Went wrong") {echo $result;}
         else {echo json_encode($result);}
+    }
+    if($_POST["process"] == "readAllEmployees"){
+        $query = "SELECT * FROM `employees`";
+        dbHandler($query, PDO::FETCH_OBJ, $result);
+        if ($result == "Something Went wrong"){
+            echo $result;
+        }
+        else{
+            echo json_encode($result);
+        }
     }
     if($_POST["process"] == "editEmployee"){
         $query="UPDATE `employees` 
@@ -293,6 +353,16 @@
         dbHandler($query, PDO::FETCH_OBJ, $result, $array);
         if ($result == "Something Went wrong") {echo $result;}
         else {echo json_encode($result);}
+    }
+    if($_POST["process"] == "readAllManufacturers"){
+        $query = "SELECT * FROM `manufacturers`";
+        dbHandler($query, PDO::FETCH_OBJ, $result);
+        if ($result == "Something Went wrong"){
+            echo $result;
+        }
+        else{
+            echo json_encode($result);
+        }
     }
     if($_POST["process"] == "editManufacturer"){
         $query="UPDATE `manufacturers` 

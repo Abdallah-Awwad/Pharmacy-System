@@ -11,7 +11,7 @@
                 </a>
             </div>
             <div class="frame-box card-body table-responsive">
-                <table class="table table-bordered table-striped table-hover sort" id="tableCustomers">
+                <table class="table table-bordered table-striped table-hover" id="tableCustomers">
                     <thead>
                         <tr>
                             <th><?= $lang["ID"];?></th>
@@ -23,40 +23,41 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <?php
-                            $query = "SELECT * FROM `customers`";
-                            dbHandler($query, PDO::FETCH_OBJ, $result);
-                            if ($result){
-                                foreach($result as $row){
-                        ?>
-                                    <tr>
-                                        <td><?= $row->id;?></td>
-                                        <td><?= $row->name;?></td>
-                                        <td><?= $row->gender;?></td>
-                                        <td><?= $row->address;?></td>
-                                        <td><?= $row->phone;?></td>
-                                        <td>
-                                            <a href="customers_edit?edit=<?= $row->id;?>" class="edit" title="<?= $lang["Edit"];?>" data-toggle="tooltip"><i class="material-icons">&#xE254;</i></a>
-                                            <a href="#" class="delete" value='<?= $row->id;?>' title="<?= $lang["Delete"];?>" data-toggle="tooltip"><i class="material-icons">&#xE872;</i></a>
-                                        </td>
-                                    </tr>
-                        <?php
-                                }
-                            }
-                            else {
-                        ?>
-                                <tr>
-                                    <td colspan="6"><?= $lang["No Records Found"];?></td>
-                                </tr>
-                        <?php
-                            }
-                        ?>
                     </tbody>
                 </table>
             </div>
         </div>
     </div>
     <script>
+        $(document).ready(function() {
+            let bindValues = {
+                'process': 'readAllCustomers'
+            }
+            requestAjax(bindValues, function(result){
+                if (result == "[]"){
+                    $("tbody").append('<tr> <td colspan="6"> <?= $lang["No Records Found"]?> </td> </tr>');
+                }
+                else{
+                    result = JSON.parse(result);
+                    $.each(result, function(serial, value){ 
+                        let td = '';
+                        for(i = 0; i < Object.values(value).length; i++){
+                            td += '<td>' + Object.values(value)[i] + '</td>';
+                            tr = '<tr>' + '</td>' + td + 
+                                    '<td>' +
+                                        "<a href='customers_edit?edit="+value['id']+"' class='edit' title='<?=$lang['Edit']?>' data-toggle='tooltip'><i class='fa-solid fa-pen'></i></a>" + 
+                                        "<a href= '#' value='"+value['id']+"' class='delete' title='<?= $lang['Delete']?>' data-toggle='tooltip'><i class='fa-solid fa-trash'></i></a>" + 
+                                    '</td>' +
+                                '</tr>';
+                        }
+                        $("tbody").append(tr);
+                    });
+                    $("table").addClass("sort");
+                    sorting();
+                }
+            });
+            liveSearch("searchCustomers", "tableCustomers", 1, 4);
+        });
         $(document).on("click", ".delete", function(){
             let bindValues = {
                 'process': 'deleteCustomer',
@@ -64,15 +65,13 @@
             }
             let selectedRow = $(this).parents("tr");
             requestAjax(bindValues, function(result){
-                if (result === "Success") {selectedRow.remove();} 
-                else {
-                    var errorMessage = '<div class="alert alert-danger float-start p-2" id="remove" role="alert">' + result + '</div>';
-                    $("table").append(errorMessage);
+                if (result === "Success"){
+                    selectedRow.remove();
+                }
+                else{
+                    $("table").append('<div class="alert alert-danger float-start p-2" id="remove" role="alert">'+result+'</div>');
                 }
             });
-        });
-        $(document).ready(function() {
-            liveSearch("searchCustomers", "tableCustomers", 1, 4);
         });
     </script>
     <?php include "../includes/php/footer.php";?>
