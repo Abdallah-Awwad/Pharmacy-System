@@ -3,6 +3,47 @@
     include "../includes/php/functions.php";
     if(!isset($_POST["process"])) header("Location: dashboard");
     // Start of invoice
+    if($_POST["process"]=="readAllCustomersNames"){
+        dbHandler("SELECT `id`, `name` FROM `customers`",PDO::FETCH_OBJ,$result);
+        if ($result=="Something Went wrong"){
+            echo $result;
+        }else{
+            echo json_encode($result);
+        }
+    }
+    if($_POST["process"]=="readAllCashierNames"){
+        dbHandler("SELECT `id`, `name` FROM `employees`",PDO::FETCH_OBJ,$result);
+        if ($result=="Something Went wrong"){
+            echo $result;
+        }else{
+            echo json_encode($result);
+        }
+    }
+    if($_POST["process"]=="readAllItemsData"){
+        dbHandler("SELECT `inv_id`, `name`, `selling_price`, `expiration_date`, `stock` FROM `stock`ORDER BY `name`;",PDO::FETCH_OBJ,$result);
+        if ($result=="Something Went wrong"){
+            echo $result;
+        }else{
+            echo json_encode($result);
+        }
+    }
+    if($_POST["process"] == "addProduct2") {
+        $query="SELECT 
+                    stock.inv_id, stock.id AS med_id, medicines.name, stock.expiration_date, stock.selling_price
+                FROM 
+                    `stock` 
+                JOIN medicines ON stock.id = medicines.id
+                WHERE stock.inv_id = :id
+                LIMIT 1;";
+        $array[":id"] = $_POST["itemID"];
+        dbHandler($query,PDO::FETCH_OBJ,$result, $array);
+        if ($result=="Something Went wrong") {
+            echo $result;
+        } else {
+            echo json_encode($result);
+        }
+    }
+
     if($_POST["process"] == "addProduct") {
         $productQuery = "SELECT 
                             stock.inv_id, stock.id AS med_id, medicines.name, stock.expiration_date, stock.selling_price
@@ -67,8 +108,7 @@
             $addDetailsStmt->bindValue(':quantity', $quantity);
             $addDetailsStmt->execute();
             if ($addStmt && $addDetailsStmt) {
-            }
-            else {
+            } else {
                 echo 'Something wrong happend.';
             }
         }
@@ -97,6 +137,35 @@
         dbHandler($query, PDO::FETCH_OBJ, $result, $array);
         if ($result == "Something Went wrong") {echo $result;}
         else {echo json_encode($result);}
+    }
+    if($_POST["process"] == "readAllInvoices"){
+        $query = "SELECT * FROM `all_invoices_total`";
+        dbHandler($query, PDO::FETCH_OBJ, $result);
+        if ($result == "Something Went wrong"){
+            echo $result;
+        }
+        else{
+            echo json_encode($result);
+        }
+    }
+    if($_POST["process"] == "readReturnInvoices"){
+        $query = "SELECT * FROM `all_invoices_total` WHERE type = 'return'";
+        dbHandler($query, PDO::FETCH_OBJ, $result);
+        if ($result == "Something Went wrong"){
+            echo $result;
+        }
+        else{
+            echo json_encode($result);
+        }
+    }
+    if($_POST["process"]=="readSellingInvoices"){
+        $query= "SELECT * FROM `all_invoices_total` WHERE type = 'sale'";
+        dbHandler($query, PDO::FETCH_OBJ, $result);
+        if ($result=="Something Went wrong"){
+            echo $result;
+        }else{
+            echo json_encode($result);
+        }
     }
     // End of invoice
     // Start of medicine 
@@ -157,6 +226,16 @@
         }
         dbHandlerAdd($query, $array);
     }
+    if($_POST["process"] == "readAllMedicines"){
+        dbHandler("SELECT medicines.id, medicines.name, manufacturers.name AS manufactory_name 
+                    FROM `medicines` 
+                    JOIN `manufacturers` ON medicines.manufacture_id = manufacturers.id", PDO::FETCH_OBJ, $result);
+        if ($result == "Something Went wrong") {
+            echo $result;
+        } else {
+            echo json_encode($result);
+        }
+    }
     // End of medicine
     // Start of purchase 
     if($_POST["process"] == "purchaseInvoice") {
@@ -171,13 +250,30 @@
             $productStatement->bindValue(':expiration', $product->expirationDate);
             $productStatement->bindValue(':quantity', $product->quantity);
             $productStatement->execute();
-            $productResult = $productStatement->fetch();
+            // $productResult = $productStatement->fetch();
+            if($productStatement) {
+            } else {
+                echo "Something went wrong.";
+            }
         }
-        if($productStatement) {
-            echo "success";
+        echo "success";
+    }
+    if($_POST["process"] == "readPurchases"){
+        $query = "SELECT `inv_id`, `id`, `name`, `purchase_price`, `selling_price`, `expiration_date`, `quantity` FROM `stock`;";
+        dbHandler($query, PDO::FETCH_OBJ, $result);
+        if ($result == "Something Went wrong"){
+            echo $result;
         }
-        else {
-            echo "Something went wrong.";
+        else{
+            echo json_encode($result);
+        }
+    }
+    if($_POST["process"] == "readAllMedicinesNames"){
+        dbHandler("SELECT `id`, `name` FROM `medicines` ORDER BY id", PDO::FETCH_OBJ, $result);
+        if ($result == "Something Went wrong") {
+            echo $result;
+        } else {
+            echo json_encode($result);
         }
     }
     // End of purchase 
@@ -351,16 +447,17 @@
         $query = "SELECT * FROM `manufacturers` WHERE `id` = :id;";
         $array[':id'] = $_POST['manufacturerID'];
         dbHandler($query, PDO::FETCH_OBJ, $result, $array);
-        if ($result == "Something Went wrong") {echo $result;}
-        else {echo json_encode($result);}
+        if ($result == "Something Went wrong") {
+            echo $result;
+        } else {
+            echo json_encode($result);
+        }
     }
     if($_POST["process"] == "readAllManufacturers"){
-        $query = "SELECT * FROM `manufacturers`";
-        dbHandler($query, PDO::FETCH_OBJ, $result);
-        if ($result == "Something Went wrong"){
+        dbHandler("SELECT * FROM `manufacturers`", PDO::FETCH_OBJ, $result);
+        if ($result == "Something Went wrong") {
             echo $result;
-        }
-        else{
+        } else {
             echo json_encode($result);
         }
     }
@@ -371,9 +468,19 @@
                             `phone`         = :phone
                         WHERE `id`          = :id;";
         $queryInputs = [":id", ":name", ":address", ":phone"];
-        foreach ($queryInputs as $key => $value){
+        foreach ($queryInputs as $key => $value) {
             $array[$value] = array_values($_POST)[$key+1];
         }
         dbHandlerAdd($query, $array);
     }
     // End of manufacturer
+    // Start of Inventory
+    if($_POST["process"] == "inventory"){
+        dbHandler("SELECT * FROM `stock`", PDO::FETCH_OBJ, $result);
+        if ($result == "Something Went wrong") {
+            echo $result;
+        } else {
+            echo json_encode($result);
+        }
+    }
+    // End of Inventory

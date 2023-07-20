@@ -160,8 +160,8 @@ GROUP BY id;
 -- purchases
 CREATE OR REPLACE VIEW purchases AS 
 Select 
-    i.med_id AS id, 
     i.id AS inv_id, 
+    i.med_id AS id, 
     medicines.name,
     i.purchase_price,
     i.selling_price, 

@@ -7,7 +7,7 @@
             <div class="d-flex justify-content-between align-items-start">
                 <input type="text" class="search form-control" id="searchManufacturers" placeholder="What you looking for? (search by name or phone)">
                 <a href="manufacturers_add">
-                    <button type="button" class="add-btn btn btn-info add-new "><i class="fa fa-plus"></i> <?= $lang["Add New"];?></button>
+                    <button type="button" class="add-btn btn btn-info add-new"><i class="fa fa-plus"></i> <?= $lang["Add New"];?></button>
                 </a>
             </div>
             <div class="frame-box card-body table-responsive">
@@ -28,24 +28,20 @@
         </div>
     </div>
     <script>
-        $(document).ready(function(){
-            let bindValues = {
-                'process': 'readAllManufacturers'
-            }
-            requestAjax(bindValues, function(result){
-                if (result == "[]"){
+        $(document).ready(function() {
+            requestAjax({'process' : 'readAllManufacturers'}, function (result) {
+                if (result == "[]") {
                     $("tbody").append('<tr> <td colspan="6"> <?= $lang["No Records Found"]?> </td> </tr>');
-                }
-                else{
+                } else {
                     result = JSON.parse(result);
-                    $.each(result, function(serial, value){ 
+                    $.each(result, function(serial, value) {
                         let td = '';
-                        for(i = 0; i < Object.values(value).length; i++){
+                        for (i = 0; i < Object.values(value).length; i++) {
                             td += '<td>' + Object.values(value)[i] + '</td>';
                             tr = '<tr>' + '</td>' + td + 
                                     '<td>' +
-                                        "<a href='manufacturers_edit?edit="+value['id']+"' class='edit' title='<?=$lang['Edit']?>' data-toggle='tooltip'><i class='fa-solid fa-pen'></i></a>" + 
-                                        "<a href= '#' value='"+value['id']+"' class='delete' title='<?= $lang['Delete']?>' data-toggle='tooltip'><i class='fa-solid fa-trash'></i></a>" + 
+                                        "<a href='manufacturers_edit?edit=" + value['id'] + "' class='edit' title='<?=$lang['Edit']?>' data-toggle='tooltip'><i class='fa-solid fa-pen'></i></a>" + 
+                                        "<a href= '#' value='" + value['id'] + "' class='delete' title='<?= $lang['Delete']?>' data-toggle='tooltip'><i class='fa-solid fa-trash'></i></a>" + 
                                     '</td>' +
                                 '</tr>';
                         }
@@ -63,12 +59,11 @@
                 'manufacturerID': $(this).attr("value")
             }
             let selectedRow = $(this).parents("tr");
-            requestAjax(bindValues, function(result){
-                if (result === "Success"){
+            requestAjax(bindValues, function(result) {
+                if (result === "Success") {
                     selectedRow.remove();
-                } 
-                else{
-                    $("table").append('<div class="alert alert-danger float-start p-2" id="remove" role="alert">' +result+ '</div>');
+                } else {
+                    $("table").append('<div class="alert alert-danger float-start p-2" id="remove" role="alert">' + result + '</div>');
                 }
             });
         });
