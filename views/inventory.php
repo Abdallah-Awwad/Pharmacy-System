@@ -1,4 +1,4 @@
-    <?php include "../includes/php/header.php"?>
+    <?php include "../includes/php/header.php" ?>
     <div class="main-page" id="mainPage">
         <div class="inventory">
             <h1>
@@ -40,9 +40,8 @@
                         let td = '';
                         for (i = 0; i < Object.values(value).length; i++) {
                             td += '<td>' + Object.values(value)[i] + '</td>';
-                            tr = '<tr>' + td + '</tr>';
                         }
-                        $("tbody").append(tr);
+                        $("tbody").append('<tr>' + td + '</tr>');
                     });
                     $("table").addClass("sort");
                     sorting();
@@ -51,4 +50,4 @@
             liveSearch("searchInventory", "tableInventory", 2, 5);
         });
     </script>
-    <?php include "../includes/php/footer.php";?>
+    <?php include "../includes/php/footer.php" ?>

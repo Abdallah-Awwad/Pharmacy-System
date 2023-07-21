@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <?php include "../languages/en.php";?>
-    <?php include "title.php";?>
+    <?php include "../languages/en.php" ?>
+    <?php include "title.php" ?>
     <meta charset="UTF-8">
     <link rel="icon" href="../imgs/drugs.png" type="image/x-icon">
     <meta name="description" content="Pharmacy system using native PHP">
@@ -31,6 +31,6 @@
             </div>
         </div>
     </nav>
-  <?php include "../includes/php/sidebar.php";?>
-  <?php include "../includes/php/dbconnection.php";?>
-  <?php include "../includes/php/functions.php";?>
+  <?php include "../includes/php/sidebar.php" ?>
+  <?php include "../includes/php/dbConnection.php" ?>
+  <?php include "../includes/php/functions.php" ?>

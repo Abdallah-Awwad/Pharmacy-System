@@ -1,6 +1,5 @@
-// Start of sorting in Jquery 
-function sorting(){
-    $('.sort').DataTable({
+function sorting() {
+    $('.sort').DataTable( {
         paging: false,
         info: false,
         filter: false,
@@ -9,36 +8,27 @@ function sorting(){
 $(document).ready(function() {
     sorting();
 });
-// End of sorting in Jquery
-// Start of searching function 
 function liveSearch(searchBoxID, tableID, columnOneIndex, columnTwoIndex) {
-    var searchBox = document.getElementById(searchBoxID);
-    searchBox.addEventListener("keyup",function() {
-        var keyword = this.value.toUpperCase();
-        var table = document.getElementById(tableID);
-        var all_tr = table.getElementsByTagName("tr");
-        for(var i=0; i<all_tr.length; i++) {
-            var firstColumn = all_tr[i].getElementsByTagName("td")[columnOneIndex];
-            var secondColumn = all_tr[i].getElementsByTagName("td")[columnTwoIndex];
-            if(firstColumn && secondColumn) {
-                var firstColumnValue = firstColumn.textContent.toUpperCase() || firstColumn.innerText.toUpperCase();
-                var secondColumnValue = secondColumn.textContent.toUpperCase() || secondColumn.innerText.toUpperCase();
-                if((firstColumnValue.indexOf(keyword) > -1) || (secondColumnValue.indexOf(keyword) > -1)) {
-                    all_tr[i].style.display = ""; // show
-                }
-                else {
-                    all_tr[i].style.display = "none"; // hide
+    (document.getElementById(searchBoxID)).addEventListener("keyup", function() {
+        let keyword = this.value.toUpperCase();
+        let all_tr = (document.getElementById(tableID)).getElementsByTagName("tr");
+        for (let i = 0; i < all_tr.length; i++) {
+            let firstColumn = all_tr[i].getElementsByTagName("td")[columnOneIndex];
+            let secondColumn = all_tr[i].getElementsByTagName("td")[columnTwoIndex];
+            if (firstColumn && secondColumn) {
+                if ((((firstColumn.textContent || firstColumn.innerText).toUpperCase()).indexOf(keyword) > -1) || (((secondColumn.textContent || secondColumn.innerText).toUpperCase()).indexOf(keyword) > -1)) {
+                    all_tr[i].style.display = "";
+                } else {
+                    all_tr[i].style.display = "none";
                 }
             }
         }
     })
 }
-// End of searching function 
-// Start of Ajax request function 
 function requestAjax(bindValues, callback) {
-    let Form = new FormData();
+    let form = new FormData();
     for (let key in bindValues) {
-        Form.append(key, bindValues[key]);
+        form.append(key, bindValues[key]);
     }
     let xmlhttp = new XMLHttpRequest();
     xmlhttp.onreadystatechange = function() {
@@ -48,6 +38,5 @@ function requestAjax(bindValues, callback) {
         }
     };
     xmlhttp.open("POST", "controller", true);
-    xmlhttp.send(Form);
+    xmlhttp.send(form);
 }
-// End of Ajax request function 

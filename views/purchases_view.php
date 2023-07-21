@@ -1,4 +1,4 @@
-    <?php include "../includes/php/header.php"?>
+    <?php include "../includes/php/header.php" ?>
     <div class="main-page" id="mainPage">
         <div class="purchases-view">
             <h1>
@@ -7,7 +7,9 @@
             <div class="d-flex justify-content-between align-items-start">
                 <input type="text"class="search form-control w-50"id="searchInventory"placeholder="What you looking for? (search by name or expiration date)">
                 <a href="purchases_create">
-                    <button type="button"class="add-btn btn btn-info add-new"><i class="fa fa-plus"></i> <?= $lang["Add New"] ?></button>
+                    <button type="button"class="add-btn btn btn-info add-new">
+                        <i class="fa fa-plus"></i> <?= $lang["Add New"] ?>
+                    </button>
                 </a>
             </div>
             <div class="frame-box card-body table-responsive">
@@ -40,9 +42,8 @@
                         let td = '';
                         for (i = 0; i < Object.values(value).length; i++) {
                             td += '<td>' + Object.values(value)[i] + '</td>';
-                            tr = '<tr>' + td + '</tr>';
                         }
-                        $("tbody").append(tr);
+                        $("tbody").append('<tr>' + td + '</tr>');
                     });
                     $("table").addClass("sort");
                     sorting();
@@ -51,4 +52,4 @@
             liveSearch("searchInventory", "tableInventory", 2, 5);
         });
     </script>
-    <?php include "../includes/php/footer.php"?>
+    <?php include "../includes/php/footer.php" ?>

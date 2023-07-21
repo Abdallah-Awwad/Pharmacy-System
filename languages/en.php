@@ -94,7 +94,7 @@ $lang = array(
     'Cashier' => "Cashier",
     'Customer name' => "Customer name",
     'Invoice type' => "Invoice type",
-    'Exipiration date' => "Exipiration date",
+    'Expiration date' => "Expiration date",
     'Total items' => "Total items",
     'Item' => "Item",
     // Create invoice

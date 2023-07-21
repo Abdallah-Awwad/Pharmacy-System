@@ -1,8 +1,8 @@
-    <?php include "../includes/php/header.php";?>
+    <?php include "../includes/php/header.php" ?>
     <div class="main-page" id="mainPage">
-        <div class="dasbhoard">
+        <div class="dashboard">
             <h1>
-                <span><?= $lang["Dashboard"];?></span>
+                <span><?= $lang["Dashboard"] ?></span>
             </h1>
             <div class="statistics row text-center">
                 <div class="col sales">
@@ -10,12 +10,12 @@
                         1.00
                     </div>
                     <div class="description">
-                        <?= $lang["Today total sales"];?>
+                        <?= $lang["Today total sales"] ?>
                     </div>
                     <div class="more-info">
                         <a href="invoices_selling">
                             <span>
-                                <?= $lang["More info"];?> <i class="fa-solid <?= $lang["fa-circle-arrow-right"];?>"></i>
+                                <?= $lang["More info"] ?> <i class="fa-solid <?= $lang["fa-circle-arrow-right"] ?>"></i>
                             </span>
                         </a>
                     </div>
@@ -25,12 +25,12 @@
                         0.00
                     </div>
                     <div class="description">
-                        <?= $lang["Today total expenses"];?> 
+                        <?= $lang["Today total expenses"] ?> 
                     </div>
                     <div class="more-info">
                         <a href="expenses_view">
                             <span>
-                                <?= $lang["More info"];?> <i class="fa-solid <?= $lang["fa-circle-arrow-right"];?>"></i>
+                                <?= $lang["More info"] ?> <i class="fa-solid <?= $lang["fa-circle-arrow-right"] ?>"></i>
                             </span>
                         </a>
                     </div>
@@ -40,12 +40,12 @@
                         0.00
                     </div>
                     <div class="description">
-                        <?= $lang["Today total returns"];?>
+                        <?= $lang["Today total returns"] ?>
                     </div>
                     <div class="more-info"> 
                         <a href="invoices_return">
                             <span>
-                                <?= $lang["More info"];?> <i class="fa-solid <?= $lang["fa-circle-arrow-right"];?>"></i>
+                                <?= $lang["More info"] ?> <i class="fa-solid <?= $lang["fa-circle-arrow-right"] ?>"></i>
                             </span>
                         </a>
                     </div>
@@ -55,12 +55,12 @@
                         0.00
                     </div>
                     <div class="description">
-                        <?= $lang["Near expiry products"];?>
+                        <?= $lang["Near expiry products"] ?>
                     </div>
                     <div class="more-info">
                         <a href="inventory">
                             <span>
-                                <?= $lang["More info"];?> <i class="fa-solid <?= $lang["fa-circle-arrow-right"];?>"></i>
+                                <?= $lang["More info"] ?> <i class="fa-solid <?= $lang["fa-circle-arrow-right"] ?>"></i>
                             </span>
                         </a>
                     </div>
@@ -69,13 +69,13 @@
             <div class="shortcuts row justify-content-around">
                 <a href="" style="pointer-events: none;" class="col-5">
                     <div>
-                        <h2><?= $lang["Quick Stats"];?></h2>
+                        <h2><?= $lang["Quick Stats"] ?></h2>
                         <p>
-                            - <?= $lang["Number of products"];?> 
+                            - <?= $lang["Number of products"] ?> 
                             <span>00</span>
                         </p>
                         <p>
-                            - <?= $lang["New customers this week"];?>
+                            - <?= $lang["New customers this week"] ?>
                             <span>00</span>
                         </p>
                     </div>
@@ -88,7 +88,7 @@
                             </div>
                             <div class="col">
                         </div>
-                        <img src="../imgs/invoice.svg" class="img-fluid rounded mx-auto d-block" alt="..." width="200">    
+                        <img src="../imgs/invoice.svg" class="img-fluid rounded mx-auto d-block" alt="payment image" width="200">
                         </div>
                     </div>
 
@@ -101,7 +101,7 @@
                             </div>
                             <div class="col">
                         </div>
-                        <img src="../imgs/barcode.svg" class="img-fluid rounded mx-auto d-block" alt="..." width="150">    
+                        <img src="../imgs/barcode.svg" class="img-fluid rounded mx-auto d-block" alt="barcode image" width="150">
                         </div>
                     </div>
                 </a>
@@ -113,11 +113,11 @@
                             </div>
                             <div class="col">
                         </div>
-                        <img src="../imgs/medicine.svg" class="img-fluid rounded mx-auto d-block" alt="..." width="150">    
+                        <img src="../imgs/medicine.svg" class="img-fluid rounded mx-auto d-block" alt="medicine image" width="150">
                         </div>
                     </div>
                 </a>
             </div>
-        </div>    
+        </div>
     </div> 
-    <?php include "../includes/php/footer.php";?>
+    <?php include "../includes/php/footer.php" ?>

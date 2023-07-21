@@ -1,4 +1,4 @@
-    <?php include "../includes/php/header.php"?>
+    <?php include "../includes/php/header.php" ?>
     <div class="main-page" id="mainPage">
         <div class="add-customers">
             <h1>
@@ -18,7 +18,7 @@
                         </select>
                     </div>
                     <div class="d-flex col-4 align-items-center">
-                        <label class="col-2"><?= $lang["Type"] ?></label>
+                        <label class="col-2" for="billType"><?= $lang["Type"] ?></label>
                         <select class="form-control w-50" id="billType">
                             <option><?= $lang["Sale"] ?></option>
                             <option><?= $lang["Return"] ?></option>
@@ -37,7 +37,9 @@
                         <input type="number" class="form-control w-25 col-2" id="quantity" value="1" required>
                     </div>
                     <div class="col-3 d-flex justify-content-end">
-                        <button type="button" onclick="addProduct();" class="add-btn btn btn-primary" style="margin-right:38px;" id="addItem"><?= $lang["Add item"] ?></button>
+                        <button type="button" onclick="addProduct();" class="add-btn btn btn-primary" style="margin-right:38px;" id="addItem">
+                            <?= $lang["Add item"] ?>
+                        </button>
                     </div>
                 </div>
                 <div class="frame-box bg-white table-responsive" style="height:400px;">
@@ -71,7 +73,9 @@
                         </b>
                     </div>
                     <div class="col-2">
-                        <button type="submit" class="add-btn btn btn-primary float-end" id="submitButton" onclick="createInvoice(); return false;"><?= $lang["Submit"] ?></button>
+                        <button type="submit" class="add-btn btn btn-primary float-end" id="submitButton" onclick="createInvoice(); return false;">
+                            <?= $lang["Submit"] ?>
+                        </button>
                     </div>
                 </div>
             </form>
@@ -82,7 +86,7 @@
             requestAjax({'process' : 'readAllCustomersNames'}, function (result) {
                 if (result != "[]") {
                     result = JSON.parse(result);
-                    $.each(result, function (serial) { 
+                    $.each(result, function (serial) {
                         $("#customer").append('<option value="' + result[serial]["id"] + '">' + result[serial]["name"] + '</option>');
                     });
                 }
@@ -90,7 +94,7 @@
             requestAjax({'process' : 'readAllCashierNames'}, function (result) {
                 if (result != "[]") {
                     result = JSON.parse(result);
-                    $.each(result,function (serial) { 
+                    $.each(result,function (serial) {
                         $("#cashier").append('<option value="' + result[serial]["id"] + '">' + result[serial]["name"] + '</option>');
                     });
                 }
@@ -118,20 +122,20 @@
             if (existBefore.length>0) {
                 for (let i = 0; i < existBefore.length; i++) {
                     if (existBefore[i].innerHTML == itemID) {
-                        let quntatity = document.querySelectorAll(".rowItemsCount");
+                        let quantity = document.querySelectorAll(".rowItemsCount");
                         let rowTotal = document.querySelectorAll(".rowTotal");
                         let rowPrice = document.querySelectorAll(".rowPrice");
-                        quntatity[i].innerHTML = parseInt(quntatity[i].innerHTML) + parseInt(itemQuantity);
-                        rowTotal[i].innerHTML = parseInt(quntatity[i].innerHTML) * parseInt(rowPrice[i].innerHTML);
+                        quantity[i].innerHTML = parseInt(quantity[i].innerHTML) + parseInt(itemQuantity);
+                        rowTotal[i].innerHTML = parseInt(quantity[i].innerHTML) * parseInt(rowPrice[i].innerHTML);
                         updateTotals();
                         return;
                     }
                 }
             }
-            if (itemID == "--"||itemQuantity<1) {
+            if (itemID == "--"|| itemQuantity < 1) {
                 return;
             }
-            requestAjax({'process' : 'addProduct2', 'itemID' : itemID} , function (result) {
+            requestAjax({'process' : 'addProduct2', 'itemID' : itemID}, function (result) {
                 if (result != "[]") {
                     result = JSON.parse(result);
                     let row = '<tr>' +
@@ -150,20 +154,24 @@
                 }
             });
         }
+        
         function updateTotals() {
-            let x = document.querySelectorAll(".rowItemsCount");
-            let itemsTotal = 0; 
-            let amountTotal = 0; 
-            for (i = 0; i < x.length; i++) {
-                itemsTotal += parseInt(x[i].innerHTML);
+            let itemsCount = document.querySelectorAll(".rowItemsCount");
+            let invoiceTotalQuantity = 0; 
+            let invoiceTotalAmount = 0; 
+
+            for (i = 0; i < itemsCount.length; i++) {
+                invoiceTotalQuantity += parseInt(itemsCount[i].innerHTML);
             }
-            document.querySelector(".count").innerHTML = itemsTotal;
-            let y = document.querySelectorAll(".rowTotal");
-            for (i = 0; i < y.length; i++) {
-                amountTotal += parseInt(y[i].innerHTML);
+            document.querySelector(".count").innerHTML = invoiceTotalQuantity;
+
+            let rowTotalAmount = document.querySelectorAll(".rowTotal");
+            for (i = 0; i < rowTotalAmount.length; i++) {
+                invoiceTotalAmount += parseInt(rowTotalAmount[i].innerHTML);
             }
-            document.querySelector(".amount").innerHTML = amountTotal;
+            document.querySelector(".amount").innerHTML = invoiceTotalAmount;
         }
+
         function createInvoice() {
             if ($('#tableInvoice tr').length < 2) {
                 return console.log("No products added");
@@ -179,15 +187,15 @@
                         'cashierID' : $('#cashier').val(),
                         'billType'  : $('#billType').val(),
                         'products'  : JSON.stringify(products)}, function (result) {
-                if (result === "Success!") {
-                    $("form").append('<div class="alert alert-success float-start p-2"id="remove" role="alert"> Invoice made successfully.</div>');
-                    setTimeout(function() {
-                        window.location.href = "invoice_create";
-                    }, 2000);
-                } else {
-                    $("form").append('<div class="alert alert-danger float-start p-2"id="remove"role="alert">' + result + '</div>');
-                }
+                            if (result === "Success!") {
+                                $("form").append('<div class="alert alert-success float-start p-2"id="remove" role="alert"> Invoice made successfully.</div>');
+                                setTimeout(function() {
+                                    window.location.href = "invoice_create";
+                                }, 2000);
+                            } else {
+                                $("form").append('<div class="alert alert-danger float-start p-2"id="remove"role="alert">' + result + '</div>');
+                            }
             });
         }
     </script>
-    <?php include "../includes/php/footer.php"?>
+    <?php include "../includes/php/footer.php" ?>

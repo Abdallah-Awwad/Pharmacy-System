@@ -202,47 +202,47 @@ table.table td .add {
 }
 /* End of main-page */
 /* Start of dashboard */
-.main-page .dasbhoard .statistics {
+.main-page .dashboard .statistics {
     padding: 10px 30px 20px;
     gap: 40px;
 }
-.main-page .dasbhoard .statistics .col {
+.main-page .dashboard .statistics .col {
     border-radius: 20px;
     color: var(--background);
     position: relative;
 }
-.main-page .dasbhoard .statistics .col.sales {
+.main-page .dashboard .statistics .col.sales {
     background-color: var(--green);
 }
-.main-page .dasbhoard .statistics .col.returns {
+.main-page .dashboard .statistics .col.returns {
     background-color: var(--bittersweet);
 }
-.main-page .dasbhoard .statistics .col.expenses {
+.main-page .dashboard .statistics .col.expenses {
     background-color: var(--orange);
 }
-.main-page .dasbhoard .statistics .col.expiry {
+.main-page .dashboard .statistics .col.expiry {
     background-color: var(--red);
 }
-.main-page .dasbhoard .statistics .number {
+.main-page .dashboard .statistics .number {
     padding-top: 10px;
     font-size: 30px;
     font-weight: 700;
 }
-.main-page .dasbhoard .statistics .description {
+.main-page .dashboard .statistics .description {
     font-size: 15px;
     font-weight: 400;
     padding-top: 20px;
     padding-bottom: 20px;
 }
-.main-page .dasbhoard .statistics .more-info {
+.main-page .dashboard .statistics .more-info {
     font-size: 12px;
     font-weight: 600;
     padding-bottom: 5px;
 }
-.main-page .dasbhoard .statistics a {
+.main-page .dashboard .statistics a {
     color: inherit;
 }
-.main-page .dasbhoard .statistics span::before {
+.main-page .dashboard .statistics span::before {
     content: "";
     position: absolute;
     background-color: rgba(0, 0, 0, 0.25);
@@ -253,11 +253,11 @@ table.table td .add {
     border-bottom-left-radius: 20px;
     border-bottom-right-radius: 20px;
 }
-.main-page .dasbhoard .shortcuts {
+.main-page .dashboard .shortcuts {
     padding: 10px 50px;
     align-content: space-between;
 }
-.main-page .dasbhoard .shortcuts > a > div {
+.main-page .dashboard .shortcuts > a > div {
     background-color: white;
     border-radius: 20px;
     color: black;
