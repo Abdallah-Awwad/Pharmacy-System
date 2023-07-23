@@ -439,7 +439,7 @@
             $array[$value] = array_values($_POST)[$key + 1];
         }
         dbHandlerAdd($query, $array);
-    }    
+    }
     if ($_POST["process"] == "addManufacturer") {
         $query = "INSERT INTO `manufacturers` (`name`, `address`, `phone`) VALUES (:name, :address, :phone)";
         $queryInputs = [":name", ":address", ":phone"];
@@ -490,3 +490,77 @@
         }
     }
     // End of Inventory
+    // Start of Profile
+    if ($_POST["process"] == "addProfile") {
+        $_POST['password'] = password_hash($_POST['password'], PASSWORD_BCRYPT);
+        $query = "INSERT INTO members (`name`, `phone`, `username`, `password`, `role`) 
+                VALUES (:name, :phone, :username, :password, :role)";
+        $queryInputs = [":name", ":phone", ":username", ":password", ":role"];
+        foreach ($queryInputs as $key => $value) {
+            $array[$value] = array_values($_POST)[$key + 1];
+        }
+        dbHandlerAdd($query, $array);
+    }
+    if ($_POST["process"] == "editProfile") {
+        // Checking if it's the last Admin
+        if ($_POST["role"] != "Administrator") {
+            dbHandler("SELECT COUNT(*) FROM members WHERE `role` = 'Administrator';", PDO::FETCH_ASSOC, $result);
+            if ($result[0]['COUNT(*)'] == 1) {
+                dbHandler("SELECT `role` FROM members WHERE `id` = :id;", PDO::FETCH_ASSOC, $result, [':id' => $_POST['profileID']]);
+                if ($result[0]["role"] == "Administrator") {
+                    echo "You can't delete the last Admin!";
+                    return;
+                }
+            }
+        }
+        if (isset($_POST['newPassword'])) {
+            unset($_POST['oldPassword']);
+            $_POST['newPassword'] = password_hash($_POST['newPassword'], PASSWORD_BCRYPT);
+        } else {
+            unset($_POST['newPassword']);
+        }
+        $query = "UPDATE `members` 
+                SET `name`= :name, 
+                    `phone` = :phone, 
+                    `phone` = :phone, 
+                    `username` = :username, 
+                    `password` = :password, 
+                    `role` = :role
+                WHERE `id` = :id;";
+        $queryInputs = [":id", ":name", ":phone", ":username", ":password", ":role"];
+        foreach ($queryInputs as $key => $value) {
+            $array[$value] = array_values($_POST)[$key + 1];
+        }
+        dbHandlerAdd($query, $array);
+    }
+    if ($_POST["process"] == "readProfile") {
+        $query = "SELECT * FROM `members` WHERE `id` = :id;";
+        $array[':id'] = $_POST['profileID'];
+        dbHandler($query, PDO::FETCH_OBJ, $result, $array);
+        if ($result == "Something Went wrong") {
+            echo $result;
+        } else {
+            echo json_encode($result);
+        }
+    }
+    if ($_POST["process"] == "readAllProfiles") {
+        dbHandler("SELECT `id`, `name`, `phone`, `username`, `role`, `created_at`, `updated_at`  FROM `members`", PDO::FETCH_OBJ, $result);
+        if ($result == "Something Went wrong") {
+            echo $result;
+        } else {
+            echo json_encode($result);
+        }
+    }
+    if ($_POST["process"] == "deleteProfile") {
+        // Checking if it's the last Admin
+        dbHandler("SELECT COUNT(*) FROM members WHERE `role` = 'Administrator';", PDO::FETCH_ASSOC, $result);
+        if ($result[0]['COUNT(*)'] == 1) {
+            dbHandler("SELECT `role` FROM members WHERE `id` = :id;", PDO::FETCH_ASSOC, $result, [':id' => $_POST['profileID']]);
+            if ($result[0]["role"] == "Administrator") {
+                echo "You can't delete the last Admin!";
+                return;
+            }
+        }
+        dbHandlerAdd("DELETE FROM members WHERE id = :id", [':id' => $_POST['profileID']]);
+    }
+    // End of Profile

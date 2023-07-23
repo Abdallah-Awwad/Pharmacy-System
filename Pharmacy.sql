@@ -3,6 +3,18 @@ CREATE DATABASE pharmacy
 COLLATE utf8_unicode_ci;
 USE pharmacy;
 
+-- Members Table Creation 
+CREATE TABLE members (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(150) NOT NULL UNIQUE,
+    phone VARCHAR(11) NOT NULL,
+    username VARCHAR(255) NOT NULL UNIQUE COLLATE utf8_bin,
+	password VARCHAR(255) NOT NULL COLLATE utf8_bin,
+    role VARCHAR(50),
+	created_at DATETIME DEFAULT current_timestamp(),
+	updated_at DATETIME DEFAULT current_timestamp()
+);
+
 -- Employee Table Creation 
 CREATE TABLE employees (
     id INT AUTO_INCREMENT PRIMARY KEY,
@@ -352,3 +364,10 @@ VALUES
     (NULL, 'Taxes', '', '20', 'Bills'),
     (NULL, 'New Air Conditioner', '', '200', 'Others'),
     (NULL, 'Cleaning Tools2', '', '5', 'Cleaning');
+
+
+INSERT INTO `members` (`id`, `name`, `phone`, `username`, `password`, `role`)
+VALUES 
+    (NULL, 'Adminstartor', '01000000000', 'Admin', '$2y$10$kqStedpDjUQn1Od7Mvs6ouM2HuEjnR.LRcf/R0ndZOn33WLwa2n/.', 'Adminstartor'),
+    (NULL, 'Staff', '01000000001', 'Staff', '$2y$10$kqStedpDjUQn1Od7Mvs6ouM2HuEjnR.LRcf/R0ndZOn33WLwa2n/.', 'Pharmacy Staff'),
+    (NULL, 'Cashier', '01000000002', 'Cashier', '$2y$10$kqStedpDjUQn1Od7Mvs6ouM2HuEjnR.LRcf/R0ndZOn33WLwa2n/.', 'Cashier');

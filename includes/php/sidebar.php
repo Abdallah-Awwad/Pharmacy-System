@@ -182,13 +182,18 @@
                 </button>
                 <div class="collapse" id="Profile-collapse">
                     <ul class="btn-toggle-nav fw-normal pb-1 small">
-                        <li>
-                            <a href="#" class="link-light rounded">
-                                <?= $lang["Profile information"] ?>
-                            </a>
+                        <li>       
+                            <a href="profile_register" class="link-light rounded">
+                                <?= $lang["Create new profile"] ?>
+                            </a>                     
                         </li>
-                        <li>
-                            <a href="#" class="link-light rounded">
+                        <li>       
+                            <a href="profile_view" class="link-light rounded">
+                                <?= $lang["View all profiles"] ?>
+                            </a>                     
+                        </li>
+                        <li>                            
+                            <a href="profile_logout" class="link-light rounded">
                                 <?= $lang["Logout"] ?>
                             </a>
                         </li>
