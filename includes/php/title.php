@@ -80,6 +80,14 @@
             $pageTitle = "View Manufacturer";
             break;
 
+        case "profile_view":
+            $pageTitle = "View Profiles";
+            break;
+
+        case "profile_register":
+            $pageTitle = "Register Profile";
+            break;
+
         default: 
             $pageTitle = "Pharmacy System";
             break;

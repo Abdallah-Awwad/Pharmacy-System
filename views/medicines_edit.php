@@ -12,8 +12,8 @@
                         <input type="text" class="form-control mt-2" id="medicineName" required>
                     </div>
                     <div class="form-group mb-3">
-                        <label for="manufacture"><?= $lang["Manufacture"] ?></label>
-                        <select class="form-control mt-2" id="manufacture"></select>
+                        <label for="manufacturer"><?= $lang["Manufacturer"] ?></label>
+                        <select class="form-control mt-2" id="manufacturer"></select>
                     </div>
                     <div class="form-group">
                         <button type="submit" class="add-btn btn btn-primary float-end" id="submitButton" onclick="editMedicine(); return false;">
@@ -27,28 +27,30 @@
     <script> 
         let inputs = document.querySelectorAll("input, textarea, select");
         $(document).ready(function() {
-            requestAjax({'process' : 'readMedicine', 'medicineID': (new URLSearchParams((new URL(window.location.href)).search)).get('edit')}, function (result) {
-                if (result == "[]") {
-                    window.location.href = "dashboard";
-                } else {
-                    result = JSON.parse(result);
+            bindValues = {'process' : 'readMedicine', 
+                            'medicineID': (new URLSearchParams((new URL(window.location.href)).search)).get('edit')};
+            requestAjaxV2(bindValues, medicineControllerURL, function (result) {
+                result = JSON.parse(result);
+                if (result.length) {
                     $('#medicineID').val(result[0]["id"]);
                     $('#medicineName').val(result[0]["name"]);
-                    $('#manufacture').append("<option Selected value='" + result[0]["manufacture_id"] + "'>" + result[0]["manufacture_name"] + "</option>");
+                    $('#manufacturer').append("<option Selected value='" + result[0]["manufacture_id"] + "'>" + result[0]["manufacture_name"] + "</option>");
+                } else {
+                    window.location.href = "dashboard";
                 }
             });
         });
         $(document).ready(function() {
-            requestAjax({'process': 'readManufactures'}, function (result) {
-                if (result == "[]") {
-                    window.location.href = "dashboard";
-                } else {
-                    result = JSON.parse(result);
-                    $.each(result, function (index, manufacture) { 
-                        if ($('#manufacture option:selected').text() !== manufacture.name) {
-                            $('#manufacture').append("<option value='" + manufacture.id + "'>" + manufacture.name + "</option>");
+            requestAjaxV2({'process': 'readManufacturers'}, medicineControllerURL, function (result) {
+                result = JSON.parse(result);
+                if (result.length) {
+                    $.each(result, function (index, manufacturer) { 
+                        if ($('#manufacturer option:selected').text() !== manufacturer.name) {
+                            $('#manufacturer').append("<option value='" + manufacturer.id + "'>" + manufacturer.name + "</option>");
                         }
                     });
+                } else {
+                    window.location.href = "dashboard";
                 }
             });
         });
@@ -63,7 +65,7 @@
             for (let i = 0; i < inputs.length; i++) {
                 bindValues[inputs[i].id] = inputs[i].value;
             }
-            requestAjax(bindValues, function (result) {
+            requestAjaxV2(bindValues, medicineControllerURL, function (result) {
                 if (result === "Success") {
                     $("form").append('<div class="alert alert-success float-start p-2" id="remove" role="alert">' + result + '</div>');
                     setTimeout(function() {

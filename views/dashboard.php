@@ -105,7 +105,7 @@
                         </div>
                     </div>
                 </a>
-                <a href="medicine_add" class="col-5">
+                <a href="medicines_add" class="col-5">
                     <div>
                         <div class="d-flex justify-content-start align-items-center">
                             <div class="col-6 text-center">

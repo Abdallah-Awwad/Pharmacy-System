@@ -175,67 +175,67 @@
     // End of invoice
 
     // Start of medicine 
-    if ($_POST["process"] == "readMedicine") {
-        $query = "SELECT medicines.*, manufacturers.name AS manufacture_name 
-                    FROM `medicines` 
-                    JOIN `manufacturers` ON medicines.manufacture_id = manufacturers.id
-                    WHERE medicines.id = :id
-                    LIMIT 1";
-        dbHandler($query, PDO::FETCH_OBJ, $result, [':id' => $_POST['medicineID']]);
-        if ($result == "Something Went wrong") {
-            echo $result;
-        } else {
-            echo json_encode($result);
-        }
-    }
-    if ($_POST["process"] == "readManufactures") {
-        dbHandler("SELECT `id`, `name` FROM `manufacturers`", PDO::FETCH_OBJ, $result);
-        if ($result == "Something Went wrong") {
-            echo $result;
-        } else {
-            echo json_encode($result);
-        }
-    }
-    if ($_POST["process"] == "editMedicine") {
-        $query = "UPDATE `medicines` 
-                SET `name`= :medName, 
-                    `manufacture_id` = :manuID 
-                WHERE `id` = :id;";
-        $queryInputs = [":id", ":medName", ":manuID"];
-        foreach ($queryInputs as $key => $value) {
-            $array[$value] = array_values($_POST)[$key + 1];
-        }
-        dbHandlerAdd($query, $array);
-    }
-    if ($_POST["process"] == "deleteMedicine") {
-        $query = "DELETE FROM medicines WHERE id = :id";
-        $stmt = $conn->prepare($query);
-        $stmt->bindValue(':id', $_POST['medicineID']); 
-        $stmt->execute();
-        if ($stmt) {
-            echo "success";
-        } else {
-            echo "Something Went wrong";
-        }
-    }
-    if ($_POST["process"] == "addMedicine") {
-        $query = "INSERT INTO medicines (`name`, `manufacture_id`) VALUES (:name, :manuID)";
-        $queryInputs = [":name", ":manuID"];
-        foreach ($queryInputs as $key => $value) {
-            $array[$value] = array_values($_POST)[$key + 1];
-        }
-        dbHandlerAdd($query, $array);
-    }
-    if ($_POST["process"] == "readAllMedicines") {
-        dbHandler("SELECT medicines.id, medicines.name, manufacturers.name AS manufactory_name 
-                    FROM `medicines` 
-                    JOIN `manufacturers` ON medicines.manufacture_id = manufacturers.id", PDO::FETCH_OBJ, $result);
-        if ($result == "Something Went wrong") {
-            echo $result;
-        } else {
-            echo json_encode($result);
-        }
-    }
+    // if ($_POST["process"] == "readMedicine") {
+    //     $query = "SELECT medicines.*, manufacturers.name AS manufacture_name 
+    //                 FROM `medicines` 
+    //                 JOIN `manufacturers` ON medicines.manufacture_id = manufacturers.id
+    //                 WHERE medicines.id = :id
+    //                 LIMIT 1";
+    //     dbHandler($query, PDO::FETCH_OBJ, $result, [':id' => $_POST['medicineID']]);
+    //     if ($result == "Something Went wrong") {
+    //         echo $result;
+    //     } else {
+    //         echo json_encode($result);
+    //     }
+    // }
+    // if ($_POST["process"] == "readManufactures") {
+    //     dbHandler("SELECT `id`, `name` FROM `manufacturers`", PDO::FETCH_OBJ, $result);
+    //     if ($result == "Something Went wrong") {
+    //         echo $result;
+    //     } else {
+    //         echo json_encode($result);
+    //     }
+    // }
+    // if ($_POST["process"] == "editMedicine") {
+    //     $query = "UPDATE `medicines` 
+    //             SET `name`= :medName, 
+    //                 `manufacture_id` = :manuID 
+    //             WHERE `id` = :id;";
+    //     $queryInputs = [":id", ":medName", ":manuID"];
+    //     foreach ($queryInputs as $key => $value) {
+    //         $array[$value] = array_values($_POST)[$key + 1];
+    //     }
+    //     dbHandlerAdd($query, $array);
+    // }
+    // if ($_POST["process"] == "deleteMedicine") {
+    //     $query = "DELETE FROM medicines WHERE id = :id";
+    //     $stmt = $conn->prepare($query);
+    //     $stmt->bindValue(':id', $_POST['medicineID']); 
+    //     $stmt->execute();
+    //     if ($stmt) {
+    //         echo "success";
+    //     } else {
+    //         echo "Something Went wrong";
+    //     }
+    // }
+    // if ($_POST["process"] == "addMedicine") {
+    //     $query = "INSERT INTO medicines (`name`, `manufacture_id`) VALUES (:name, :manuID)";
+    //     $queryInputs = [":name", ":manuID"];
+    //     foreach ($queryInputs as $key => $value) {
+    //         $array[$value] = array_values($_POST)[$key + 1];
+    //     }
+    //     dbHandlerAdd($query, $array);
+    // }
+    // if ($_POST["process"] == "readAllMedicines") {
+    //     dbHandler("SELECT medicines.id, medicines.name, manufacturers.name AS manufactory_name 
+    //                 FROM `medicines` 
+    //                 JOIN `manufacturers` ON medicines.manufacture_id = manufacturers.id", PDO::FETCH_OBJ, $result);
+    //     if ($result == "Something Went wrong") {
+    //         echo $result;
+    //     } else {
+    //         echo json_encode($result);
+    //     }
+    // }
     // End of medicine
 
     // Start of purchase 

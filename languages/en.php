@@ -136,7 +136,7 @@
         'Edit medicine' => "Edit medicine",
         'Med name' => "Name",
         'Med medicine name' => "Medicine name",
-        'Manufacture' => "Manufacture name",
+        'Manufacturer' => "Manufacturer name",
         'Medicine' => "Medicine name",
         // Purchases
         'Medicine' => "Medicine name",
@@ -166,5 +166,6 @@
         'Manufacturer name' => 'Manufacturer\'s name ',
         'Manufacturer address' => 'Manufacturer\'s address ',
         'Manufacturer phone' => 'Manufacturer\'s phone ',
-        'Manufacturer add' => 'Add Manufacturer'
+        'Manufacturer add' => 'Add Manufacturer',
+        'Enter manufacturer' => 'Please enter manufacturer name'
     );

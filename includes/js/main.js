@@ -1,3 +1,5 @@
+let medicineControllerURL = "../controllers/controller_medicines";
+
 function sorting() {
     $('.sort').DataTable( {
         paging: false,
@@ -38,5 +40,20 @@ function requestAjax(bindValues, callback) {
         }
     };
     xmlhttp.open("POST", "controller", true);
+    xmlhttp.send(form);
+}
+function requestAjaxV2(bindValues, path, callback) {
+    let form = new FormData();
+    for (let key in bindValues) {
+        form.append(key, bindValues[key]);
+    }
+    let xmlhttp = new XMLHttpRequest();
+    xmlhttp.onreadystatechange = function() {
+        if (xmlhttp.readyState === 4 && xmlhttp.status === 200) {
+            let result = xmlhttp.responseText;
+            callback(result);
+        }
+    };
+    xmlhttp.open("POST", path, true);
     xmlhttp.send(form);
 }

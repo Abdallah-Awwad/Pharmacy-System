@@ -11,9 +11,9 @@
                         <input type="text" class="form-control mt-2" id="medicineName" placeholder="<?= $lang["Med medicine name"] ?>" required>
                     </div>
                     <div class="form-group mb-3">
-                        <label for="manufacture"><?= $lang["Manufacture"] ?></label>
-                        <select class="form-control mt-2" id="manufacture" required>
-                            <option value="0" disabled Selected>--</option>
+                        <label for="manufacturer"><?= $lang["Manufacturer"] ?></label>
+                        <select class="form-control mt-2" id="manufacturer" required>
+                            <option disabled selected hidden value="">--</option>
                         </select>
                     </div>
                     <div class="form-group">
@@ -27,11 +27,11 @@
     </div>
     <script> 
         $(document).ready(function() {
-            requestAjax({'process' : 'readManufactures'}, function (result) {
+            requestAjaxV2({'process' : 'readManufacturers'}, medicineControllerURL, function (result) {
                 result = JSON.parse(result);
-                $.each(result, function (index, manufacture) {
-                    if ($('#manufacture option:selected').text() !== manufacture.name) {
-                        $('#manufacture').append("<option value='" + manufacture.id + "'>" + manufacture.name + "</option>");
+                $.each(result, function (index, manufacturer) {
+                    if ($('#manufacturer option:selected').text() !== manufacturer.name) {
+                        $('#manufacturer').append("<option value='" + manufacturer.id + "'>" + manufacturer.name + "</option>");
                     }
                 });
             });
@@ -48,14 +48,17 @@
             for (let i = 0; i < inputs.length; i++) {
                 bindValues[inputs[i].id] = inputs[i].value;
             }
-            requestAjax(bindValues, function (result) {
+            requestAjaxV2(bindValues, medicineControllerURL, function (result) {
                 if (result === "Success") {
                     $("form").append('<div class="alert alert-success float-start p-2" id="remove" role="alert">' + result + '</div>');
                     setTimeout(function() {
                         window.location.href = "medicines_view";
                     }, 2000);
                 } else {
-                    $("form").append('<div class="alert alert-danger float-start p-2" id="remove" role="alert">' + result + '</div>');
+                    result = JSON.parse(result);
+                    result.forEach(function (error) {
+                        $("form").append('<div class="alert alert-danger float-start p-2" id="remove" role="alert">' + error + '</div>');
+                    });
                 }
             });
         }

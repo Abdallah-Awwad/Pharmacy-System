@@ -1,5 +1,6 @@
 <?php
     include "../includes/php/dbConnection.php";
+    include "../includes/php/functions.php";
     include "../languages/en.php";
     include "../includes/php/title.php";
     session_start();
@@ -8,25 +9,21 @@
     }
     if (isset($_POST['submit'])) {
         if (isset($_POST['username'],$_POST['password']) && !empty($_POST['username']) && !empty($_POST['password'])) {
-            $username = trim($_POST['username']);
-            $password = trim($_POST['password']);
-                $query = "SELECT * FROM members WHERE username = :username";
-                $stmt = $conn->prepare($query);
-                $params = ['username'=>$username];
-                $stmt->execute($params);
-                if ($stmt->rowCount() > 0) {
-                    $result = $stmt->fetch(PDO::FETCH_ASSOC);
-                    if (password_verify($password, $result['password'])) {
-                        unset($result['password']);
-                        $_SESSION = $result;
-                        header('location:dashboard');
-                        exit();
-                    } else {
-                        $errors[] = "Wrong Username or Password";
-                    }
+            $_POST['username'] = trim($_POST['username']);
+            $_POST['password'] = trim($_POST['password']);
+            dbHandler("SELECT * FROM members WHERE username = :username", PDO::FETCH_OBJ, $result, [':username' => $_POST['username']]);
+            if ($result) {
+                if (password_verify($_POST['password'], $result[0]->password)) {
+                    unset($result[0]->password);
+                    $_SESSION = (array) $result[0];
+                    header('location:dashboard');
+                    exit();
                 } else {
                     $errors[] = "Wrong Username or Password";
                 }
+            } else {
+                $errors[] = "Wrong Username or Password";
+            }
         } else {
             $errors[] = "Username and Password are required";	
         }
@@ -52,7 +49,7 @@
                         <div class="card border-0 shadow rounded-3 my-5">
                             <div class="p-4 p-sm-5">
                                 <h1 class="title card-title text-center mb-5"><?= $lang["Login"] ?></h1>
-                                <form method="POST" action="<?= $_SERVER['PHP_SELF'];?>" autocomplete="off">
+                                <form method="POST" action="" autocomplete="off">
                                     <div class="form-floating mb-3">
                                         <input type="text" class="form-control" name="username" id="username" placeholder="Admin">
                                         <label for="username"><?= $lang["Username"] ?></label>

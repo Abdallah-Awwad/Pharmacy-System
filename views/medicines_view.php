@@ -12,13 +12,13 @@
                     </button>
                 </a>
             </div>
-            <div class="frame-box card-body table-responsive">
+            <div class="frame-div frame-box card-body table-responsive">
                 <table class="table table-bordered table-striped table-hover" id="tableMedicines">
                     <thead>
                         <tr>
                             <th><?= $lang["ID"] ?></th>
                             <th><?= $lang["Name"] ?></th>
-                            <th><?= $lang["Manufacture"] ?></th>
+                            <th><?= $lang["Manufacturer"] ?></th>
                             <th><?= $lang["Actions"] ?></th>
                         </tr>
                     </thead>
@@ -30,11 +30,9 @@
     </div>
     <script>
         $(document).ready(function() {
-            requestAjax({'process' : 'readAllMedicines'}, function (result) {
-                if (result == "[]") {
-                    $("tbody").append('<tr> <td colspan="4"> <?= $lang["No Records Found"]?> </td> </tr>');
-                } else {
-                    result = JSON.parse(result);
+            requestAjaxV2({'process' : 'readAllMedicines'}, medicineControllerURL, function (result) {
+                result = JSON.parse(result);
+                if (result.length) {
                     $.each(result, function (serial, value) {
                         let td = '';
                         for (i = 0; i < Object.values(value).length; i++) {
@@ -50,17 +48,19 @@
                     });
                     $("table").addClass("sort");
                     sorting();
+                } else {
+                    $("tbody").append('<tr> <td colspan="4"> <?= $lang["No Records Found"]?> </td> </tr>');
                 }
             });
             liveSearch("searchMedicines", "tableMedicines", 1, 2);
         });
         $(document).on("click", ".delete", function() {
             let selectedRow = $(this).parents("tr");
-            requestAjax({'process' : 'deleteMedicine', 'medicineID' : $(this).attr("value")}, function (result) {
-                if (result === "success") {
+            requestAjaxV2({'process' : 'deleteMedicine', 'medicineID' : $(this).attr("value")}, medicineControllerURL, function (result) {
+                if (result === "Success") {
                     selectedRow.remove();
                 } else {
-                    $("table").append('<div class="alert alert-danger float-start p-2" id="remove" role="alert">' + result + '</div>');
+                    $(".frame-div").append('<div class="alert alert-danger float-start p-2" id="remove" role="alert">' + result + '</div>');
                 }
             });
         });
