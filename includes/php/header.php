@@ -22,6 +22,9 @@
     <!-- For sorting table -->
     <link rel="stylesheet" href="../includes/css/cdn.datatables.net_1.10.22_css_dataTables.bootstrap4.min.css">
     <script src="../includes/js/jquery-3.5.1.min.js"></script>
+    <!-- SweetAlert -->
+    <link rel="stylesheet" href="../includes/css/sweet-alert.css">
+    <script src="../includes/js/sweet-alert.min.js"></script>
 </head>
 <body>
     <nav class="navbar">

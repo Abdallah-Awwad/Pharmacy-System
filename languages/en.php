@@ -62,7 +62,7 @@
         'View purchase invoices' => "View invoices",
         'Settings' => "Settings",
         'Change theme' => "Change theme",
-        'Reset system' => "Reset system",
+        'Reset database' => "Reset database",
         'Profile' => "Profile",
         'Profile information' => "Profile information",
         'Create new profile' => "Create new profile",

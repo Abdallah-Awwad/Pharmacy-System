@@ -1,4 +1,5 @@
 let medicineControllerURL = "../controllers/controller_medicines";
+let settingsControllerURL = "../controllers/controller_settings";
 
 function sorting() {
     $('.sort').DataTable( {

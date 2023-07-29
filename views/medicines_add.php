@@ -29,11 +29,15 @@
         $(document).ready(function() {
             requestAjaxV2({'process' : 'readManufacturers'}, medicineControllerURL, function (result) {
                 result = JSON.parse(result);
-                $.each(result, function (index, manufacturer) {
-                    if ($('#manufacturer option:selected').text() !== manufacturer.name) {
-                        $('#manufacturer').append("<option value='" + manufacturer.id + "'>" + manufacturer.name + "</option>");
-                    }
-                });
+                if (result.length) {
+                    $.each(result, function (index, manufacturer) {
+                        if ($('#manufacturer option:selected').text() !== manufacturer.name) {
+                            $('#manufacturer').append("<option value='" + manufacturer.id + "'>" + manufacturer.name + "</option>");
+                        }
+                    });
+                } else {
+                    $('#manufacturer').append("<option disabled value=''>Please add manufacturers first</option>");
+                }
             });
         });
         function addMedicine() {
@@ -55,10 +59,7 @@
                         window.location.href = "medicines_view";
                     }, 2000);
                 } else {
-                    result = JSON.parse(result);
-                    result.forEach(function (error) {
-                        $("form").append('<div class="alert alert-danger float-start p-2" id="remove" role="alert">' + error + '</div>');
-                    });
+                    $("form").append('<div class="alert alert-danger float-start p-2" id="remove" role="alert">' + result + '</div>');
                 }
             });
         }

@@ -33,41 +33,28 @@
                 $stmt->bindValue($bind, $value); 
             }
         }
-
-        try {
-            $stmt->execute();
-            $stmt->setFetchMode(PDO::FETCH_ASSOC);
-            $result = $stmt->fetchAll();
-            $conn = NULL;
-            if ($stmt->rowCount() > 0) {
-                return $result;
-            } else {
-                return "No records changed";
-            }
-         } catch (PDOException $e) {
-            if ($e->errorInfo[1] == 1062) {
-                return "Duplicated entry";
-            } else {
-                return "Something wrong happened";
-            }
-         }
+        $stmt->execute();
+        $stmt->setFetchMode(PDO::FETCH_ASSOC);
+        $result = $stmt->fetchAll();
+        $conn = NULL;
+        $rowCount = $stmt->rowCount();
+        return [$result, $rowCount];
     }
 
-    function createObject($className, $methodName, $encode = FALSE) {
+    function createObject($className, $methodName) {
         $obj = new $className();
         $obj = $obj->$methodName();
+        return $obj;
+    }
 
-        if ($encode == FALSE) {
-            if ($obj == "Duplicated entry") {
-                echo $obj;
-            } elseif ($obj == "No records changed") {
-                echo $obj;
-            } elseif ($obj) {
-                echo "Something wrong happened";
-            } else {
-                echo "Success";
-            }
+    function errorMsgHandler($errorCode, $e) {
+        if ($e->errorInfo[1] == 1062) {
+            echo "Duplicated entry";
+        } elseif ($e->errorInfo[1] == 1452) {
+            echo "Unknown inputs value";            
         } else {
-            echo json_encode($obj);
+            echo "Unfortunately an issue happened! Error code: $errorCode";
+            error_log($e->getMessage());
+            error_log("_________________________________________________________________");
         }
     }

@@ -169,8 +169,8 @@
                             </a>
                         </li>
                         <li>
-                            <a href="#" class="link-light rounded">
-                                <?= $lang["Reset system"] ?>
+                            <a id="databaseSwal" href="#" class="link-light rounded">
+                                <?= $lang["Reset database"] ?>
                             </a>
                         </li>
                     </ul>
@@ -202,3 +202,36 @@
             </li>
         </ul>
     </div>
+    <script>
+        $(document).ready(function () {
+            $('#databaseSwal').on("click", function () {
+                swal({
+                    title: "Are you sure?",
+                    text: "You will not be able to recover the data!",
+                    type: "warning",
+                    showCancelButton: true,
+                    confirmButtonColor: "#DD6B55",
+                    confirmButtonText: 'Yes, delete it!',
+                    cancelButtonText: "No, cancel please!",
+                    closeOnConfirm: false,
+                    },
+                    function (isConfirm) {
+                        if (isConfirm) {
+                            requestAjaxV2({'process' : 'truncateDB'}, settingsControllerURL, function (result) {
+                                if (result === "Success") {
+                                    swal("Deleted!", "Your database sucessfully deleted", "success");
+                                    setTimeout(function() {
+                                        window.location.href = "dashboard";
+                                    }, 2000);
+
+                                } else {
+                                    swal("Error", "Something wrong happened", "error");
+                                }
+                            });
+                            
+                        } 
+                    }
+                );
+            });
+        });
+    </script>

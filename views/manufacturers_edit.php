@@ -31,7 +31,7 @@
     <script> 
         let inputs = document.querySelectorAll("input, textarea, select");
         $(document).ready(function() {
-            requestAjax('process' : 'readManufacturer', 'manufacturerID' : (new URLSearchParams((new URL(window.location.href)).search)).get('edit'), function (result) {
+            requestAjax({'process' : 'readManufacturer', 'manufacturerID' : (new URLSearchParams((new URL(window.location.href)).search)).get('edit')}, function (result) {
                 if (result == "[]") {
                     window.location.href = "dashboard";
                 } else {
