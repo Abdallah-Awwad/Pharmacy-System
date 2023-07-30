@@ -35,14 +35,14 @@
     <script> 
         let inputs = document.querySelectorAll("input, textarea, select");
         $(document).ready(function() {
-            requestAjax({'process' : 'readExpense', 'expenseID' : (new URLSearchParams((new URL(window.location.href)).search)).get('edit')}, function (result) {
-                if (result == "[]") {
-                    window.location.href = "dashboard";
-                } else {
-                    result = JSON.parse(result);
+            requestAjaxV2({'process' : 'readExpense', 'expenseID' : (new URLSearchParams((new URL(window.location.href)).search)).get('edit')}, expensesControllerURL, function (result) {
+                result = JSON.parse(result);
+                if (result.length) {
                     for (let i = 0; i < Object.values(result[0]).length; i++) {
                         inputs[i].value = Object.values(result[0])[i];
                     }
+                } else {
+                    window.location.href = "dashboard";
                 }
             });
         });
@@ -59,14 +59,14 @@
             for (let i = 0; i < inputs.length; i++) {
                 bindValues[inputs[i].id] = inputs[i].value;
             }
-            requestAjax(bindValues, function (result) {
+            requestAjaxV2(bindValues, expensesControllerURL, function (result) {
                 if (result === "Success") {
                     $("form").append('<div class="alert alert-success float-start p-2" id="remove" role="alert">' + result + '</div>');
                     setTimeout(function() {
                         window.location.href = "expenses_view";
                     }, 2000);
                 } else {
-                    $("form").append('<div class="alert alert-danger float-start p-2" id="remove" role="alert">' + result + '</div>');
+                        $("form").append('<div class="alert alert-danger float-start p-2" id="remove" role="alert">' + result + '</div>');
                 }
             });
         }

@@ -12,43 +12,46 @@
         }
     }
 
+    if ($_POST["process"] == "readMedicine") {
+        try {
+            echo json_encode((createObject("Medicines", "show")[0]));
+        } catch (Exception $e) {
+            errorMsgHandler("MEC-1", $e);
+        }        
+    }
+
     if ($_POST["process"] == "readManufacturers") {
         print_r(json_encode((createObject("Medicines", "getManufacturesInfo"))[0]));
     }
     
     if ($_POST["process"] == "addMedicine") {
-        $error = [];
         if (empty($_POST["medicineName"])) {
-            $error[] = "Medicine name can't be empty";
+            echo "Medicine name can't be empty";
+            return;
         }
         if (! isset($_POST["manufacturer"])) {
-            $error[] = "No manufacturer selected";
+            echo "No manufacturer selected";
+            return;
         }
         if (isset($_POST["manufacturer"]) && ! is_numeric($_POST["manufacturer"])) {
-            $error[] = "Please enter manufacturer name";
-        }
-        if (! empty($error)) {
-            return print_r(json_encode($error));
+            echo "Please enter manufacturer name";
+            return;
         }
         try {
             createObject("Medicines", "add");
             echo "Success";
         } catch (Exception $e) {
-            errorMsgHandler("MEC-1", $e);
-        }
-    }
-
-    if ($_POST["process"] == "readMedicine") {
-        try {
-            echo json_encode((createObject("Medicines", "show")[0]));
-        } catch (Exception $e) {
             errorMsgHandler("MEC-2", $e);
-        }        
+        }
     }
 
     if ($_POST["process"] == "editMedicine") {
         if (empty($_POST["medicineName"])) {
             echo "Medicine name can't be empty";
+            return;
+        }
+        if (empty($_POST["manufacturer"])) {
+            echo "Manufacturer can't be empty";
             return;
         }
         try {

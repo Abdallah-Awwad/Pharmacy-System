@@ -149,7 +149,7 @@
         'Expense name' => "Expense name",
         'Expense description' => "Expense description",
         'Expense amount' => "Expense amount",
-        'Other' => "Other",
+        'Expense category' => "Expense category",
         'Expense Edit Expense' => "Edit Expense",
         // Employees
         'Age' => "Age",

@@ -74,7 +74,7 @@
                     window.location.href = "dashboard";
                 } else {
                     result = JSON.parse(result);
-                    $.each(result, function (serial, value) {
+                    $.each(result, function (key, value) {
                         let td = '';
                         for (i = 0; i < Object.values(value).length; i++) {
                             td += '<td>' + Object.values(value)[i] + '</td>';

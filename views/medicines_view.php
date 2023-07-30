@@ -30,10 +30,10 @@
     </div>
     <script>
         $(document).ready(function() {
-            requestAjaxV2({'process' : 'readAllMedicines'}, medicineControllerURL, function (result) {
+            requestAjaxV2({'process' : 'readAllMedicines'}, medicinesControllerURL, function (result) {
                 result = JSON.parse(result);
                 if (result.length) {
-                    $.each(result, function (serial, value) {
+                    $.each(result, function (key, value) {
                         let td = '';
                         for (i = 0; i < Object.values(value).length; i++) {
                             td += '<td>' + Object.values(value)[i] + '</td>';
@@ -56,7 +56,7 @@
         });
         $(document).on("click", ".delete", function() {
             let selectedRow = $(this).parents("tr");
-            requestAjaxV2({'process' : 'deleteMedicine', 'medicineID' : $(this).attr("value")}, medicineControllerURL, function (result) {
+            requestAjaxV2({'process' : 'deleteMedicine', 'medicineID' : $(this).attr("value")}, medicinesControllerURL, function (result) {
                 if (result === "Success") {
                     selectedRow.remove();
                 } else {

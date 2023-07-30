@@ -34,12 +34,10 @@
     </div>
     <script>
         $(document).ready(function() {
-            requestAjax({'process' : 'readAllEmployees'}, function (result) {
-                if (result == "[]") {
-                    $("tbody").append('<tr> <td colspan="6"> <?= $lang["No Records Found"]?> </td> </tr>');
-                } else {
-                    result = JSON.parse(result);
-                    $.each(result, function (serial, value) {
+            requestAjaxV2({'process' : 'readAllEmployees'}, employeesControllerURL, function (result) {
+                result = JSON.parse(result);
+                if (result.length) {
+                    $.each(result, function (key, value) {
                         let td = '';
                         for (i = 0; i < Object.values(value).length; i++) {
                             td += '<td>' + Object.values(value)[i] + '</td>';
@@ -54,13 +52,15 @@
                     });
                     $("table").addClass("sort");
                     sorting();
+                } else {
+                    $("tbody").append('<tr> <td colspan="6"> <?= $lang["No Records Found"]?> </td> </tr>');
                 }
             });
             liveSearch("searchEmployees", "tableEmployees", 1, 2);
         });
         $(document).on("click", ".delete", function() {
             let selectedRow = $(this).parents("tr");
-            requestAjax({'process' : 'deleteEmployee', 'employeeID' : $(this).attr("value")}, function (result) {
+            requestAjaxV2({'process' : 'deleteEmployee', 'employeeID' : $(this).attr("value")}, employeesControllerURL, function (result) {
                 if (result === "Success") {
                     selectedRow.remove();
                 } else {

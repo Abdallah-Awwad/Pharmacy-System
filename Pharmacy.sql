@@ -29,16 +29,16 @@ CREATE TABLE employees (
 -- Customers Table Creation
 CREATE TABLE customers (
     id INT AUTO_INCREMENT PRIMARY KEY,
-    name VARCHAR(150) NOT NULL,
+    name VARCHAR(150) NOT NULL UNIQUE,
     gender ENUM ('Male', 'Female') NOT NULL DEFAULT 'Male',
-    phone VARCHAR(50) NOT NULL,
+    phone VARCHAR(50) NOT NULL UNIQUE,
     address VARCHAR (150)
 );
 
 -- Manufacturers Table Creation 
 CREATE TABLE manufacturers (
     id INT AUTO_INCREMENT PRIMARY KEY,
-    name VARCHAR(255) UNIQUE NOT NULL,
+    name VARCHAR(255) NOT NULL UNIQUE,
     address VARCHAR(255),
     phone VARCHAR(50) NOT NULL
 );
@@ -46,7 +46,7 @@ CREATE TABLE manufacturers (
 -- Medicines Table Creation 
 CREATE TABLE medicines (
     id INT AUTO_INCREMENT PRIMARY KEY,
-    name VARCHAR(255) UNIQUE NOT NULL,
+    name VARCHAR(255) NOT NULL UNIQUE,
     manufacture_id INT,
 	FOREIGN KEY (manufacture_id) REFERENCES manufacturers(id) ON UPDATE CASCADE ON DELETE CASCADE
 );
@@ -368,6 +368,6 @@ VALUES
 
 INSERT INTO `members` (`id`, `name`, `phone`, `username`, `password`, `role`)
 VALUES 
-    (NULL, 'Adminstartor', '01000000000', 'admin', '$2y$10$kqStedpDjUQn1Od7Mvs6ouM2HuEjnR.LRcf/R0ndZOn33WLwa2n/.', 'Adminstartor'),
+    (NULL, 'Adminstartor', '01000000000', 'admin', '$2y$10$kqStedpDjUQn1Od7Mvs6ouM2HuEjnR.LRcf/R0ndZOn33WLwa2n/.', 'Administrator'),
     (NULL, 'Staff', '01000000001', 'Staff', '$2y$10$kqStedpDjUQn1Od7Mvs6ouM2HuEjnR.LRcf/R0ndZOn33WLwa2n/.', 'Pharmacy Staff'),
     (NULL, 'Cashier', '01000000002', 'Cashier', '$2y$10$kqStedpDjUQn1Od7Mvs6ouM2HuEjnR.LRcf/R0ndZOn33WLwa2n/.', 'Cashier');

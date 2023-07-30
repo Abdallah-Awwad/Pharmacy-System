@@ -31,12 +31,10 @@
     </div>
     <script>
         $(document).ready(function() {
-            requestAjax({'process' : 'inventory'}, function (result) {
-                if (result == "[]") {
-                    $("tbody").append('<tr> <td colspan="11"><?= $lang["No Records Found"] ?></td> </tr>');
-                } else {
-                    result = JSON.parse(result);
-                    $.each(result, function (serial, value) { 
+            requestAjaxV2({'process' : 'inventory'}, inventoryControllerURL, function (result) {
+                result = JSON.parse(result);
+                if (result.length) {
+                    $.each(result, function (key, value) { 
                         let td = '';
                         for (i = 0; i < Object.values(value).length; i++) {
                             td += '<td>' + Object.values(value)[i] + '</td>';
@@ -45,9 +43,11 @@
                     });
                     $("table").addClass("sort");
                     sorting();
+                    liveSearch("searchInventory", "tableInventory", 2, 5);
+                } else {
+                    $("tbody").append('<tr> <td colspan="11"><?= $lang["No Records Found"] ?></td> </tr>');
                 }
             });
-            liveSearch("searchInventory", "tableInventory", 2, 5);
         });
     </script>
     <?php include "../includes/php/footer.php" ?>

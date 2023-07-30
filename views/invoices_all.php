@@ -36,7 +36,7 @@
                     $("tbody").append('<tr> <td colspan="6"><?= $lang["No Records Found"] ?></td> </tr>');
                 } else {
                     result = JSON.parse(result);
-                    $.each(result, function (serial, value) {
+                    $.each(result, function (key, value) {
                         let td = '';
                         for (i = 0; i < Object.values(value).length; i++) {
                             td += '<td>' + Object.values(value)[i] + '</td>';

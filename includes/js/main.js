@@ -1,4 +1,9 @@
-let medicineControllerURL = "../controllers/controller_medicines";
+let medicinesControllerURL = "../controllers/controller_medicines";
+let inventoryControllerURL = "../controllers/controller_inventory";
+let expensesControllerURL = "../controllers/controller_expenses";
+let customersControllerURL = "../controllers/controller_customers";
+let employeesControllerURL = "../controllers/controller_employees";
+let manufacturersControllerURL = "../controllers/controller_manufacturers";
 let settingsControllerURL = "../controllers/controller_settings";
 
 function sorting() {

@@ -20,7 +20,7 @@
                     </div>
                     <div class="form-group mb-3">
                         <label for="expenseCategory"><?= $lang["Category"] ?></label>
-                        <input type="text" class="form-control mt-2" id="expenseCategory" placeholder="<?= $lang["Other"] ?>" required>
+                        <input type="text" class="form-control mt-2" id="expenseCategory" placeholder="<?= $lang["Expense category"] ?>" required>
                     </div>
                     <div class="form-group">
                         <button type="submit" class="add-btn btn btn-primary float-end" id="submitButton" onclick="addExpense(); return false;">
@@ -44,8 +44,8 @@
             for (let i = 0; i < inputs.length; i++) {
                 bindValues[inputs[i].id] = inputs[i].value;
             }
-            requestAjax(bindValues, function (result) {
-                if (result === "success") {
+            requestAjaxV2(bindValues, expensesControllerURL, function (result) {
+                if (result === "Success") {
                         $("form").append('<div class="alert alert-success float-start p-2" id="remove" role="alert">' + result + '</div>');
                         setTimeout(function() {
                             window.location.href = "expenses_view";

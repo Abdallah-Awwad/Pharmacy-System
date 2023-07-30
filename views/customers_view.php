@@ -19,8 +19,8 @@
                             <th><?= $lang["ID"] ?></th>
                             <th><?= $lang["Customer name"] ?></th>
                             <th><?= $lang["Gender"] ?></th>
-                            <th><?= $lang["Address"] ?></th>
                             <th><?= $lang["Phone"] ?></th>
+                            <th><?= $lang["Address"] ?></th>
                             <th><?= $lang["Actions"] ?></th>
                         </tr>
                     </thead>
@@ -32,12 +32,10 @@
     </div>
     <script>
         $(document).ready(function() {
-            requestAjax({'process' : 'readAllCustomers'}, function (result) {
-                if (result == "[]") {
-                    $("tbody").append('<tr> <td colspan="6"> <?= $lang["No Records Found"]?> </td> </tr>');
-                } else {
-                    result = JSON.parse(result);
-                    $.each(result, function (serial, value) {
+            requestAjaxV2({'process' : 'readAllCustomers'}, customersControllerURL, function (result) {
+                result = JSON.parse(result);
+                if (result.length) {
+                    $.each(result, function (key, value) {
                         if (value['name'] == "Cash customer") {
                             return;
                         }
@@ -55,13 +53,15 @@
                     });
                     $("table").addClass("sort");
                     sorting();
+                } else {
+                    $("tbody").append('<tr> <td colspan="6"> <?= $lang["No Records Found"]?> </td> </tr>');
                 }
             });
             liveSearch("searchCustomers", "tableCustomers", 1, 4);
         });
         $(document).on("click", ".delete", function() {
             let selectedRow = $(this).parents("tr");
-            requestAjax({'process' : 'deleteCustomer', 'customerID' : $(this).attr("value")}, function (result) {
+            requestAjaxV2({'process' : 'deleteCustomer', 'customerID' : $(this).attr("value")}, customersControllerURL, function (result) {
                 if (result === "Success") {
                     selectedRow.remove();
                 } else {

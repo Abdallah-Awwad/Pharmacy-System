@@ -23,7 +23,7 @@
                 dbHandlerV2($query);
                 $query = "INSERT INTO `members` (`id`, `name`, `phone`, `username`, `password`, `role`)
                         VALUES 
-                            (NULL, 'Adminstartor', '01000000000', 'Admin', '$2y$10\$kqStedpDjUQn1Od7Mvs6ouM2HuEjnR.LRcf/R0ndZOn33WLwa2n/.', 'Adminstartor')";
+                            (NULL, 'Adminstartor', '01000000000', 'Admin', '$2y$10\$kqStedpDjUQn1Od7Mvs6ouM2HuEjnR.LRcf/R0ndZOn33WLwa2n/.', 'Administrator')";
                 dbHandlerV2($query);
 
                 $query = "-- Inserting Data into the DB Tables

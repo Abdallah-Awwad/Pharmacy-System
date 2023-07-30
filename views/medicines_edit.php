@@ -29,7 +29,7 @@
         $(document).ready(function() {
             bindValues = {'process' : 'readMedicine', 
                             'medicineID': (new URLSearchParams((new URL(window.location.href)).search)).get('edit')};
-            requestAjaxV2(bindValues, medicineControllerURL, function (result) {
+            requestAjaxV2(bindValues, medicinesControllerURL, function (result) {
                 result = JSON.parse(result);
                 if (result.length) {
                     $('#medicineID').val(result[0]["id"]);
@@ -41,10 +41,10 @@
             });
         });
         $(document).ready(function() {
-            requestAjaxV2({'process': 'readManufacturers'}, medicineControllerURL, function (result) {
+            requestAjaxV2({'process': 'readManufacturers'}, medicinesControllerURL, function (result) {
                 result = JSON.parse(result);
                 if (result.length) {
-                    $.each(result, function (index, manufacturer) { 
+                    $.each(result, function (key, manufacturer) { 
                         if ($('#manufacturer option:selected').text() !== manufacturer.name) {
                             $('#manufacturer').append("<option value='" + manufacturer.id + "'>" + manufacturer.name + "</option>");
                         }
@@ -65,7 +65,7 @@
             for (let i = 0; i < inputs.length; i++) {
                 bindValues[inputs[i].id] = inputs[i].value;
             }
-            requestAjaxV2(bindValues, medicineControllerURL, function (result) {
+            requestAjaxV2(bindValues, medicinesControllerURL, function (result) {
                 if (result === "Success") {
                     $("form").append('<div class="alert alert-success float-start p-2" id="remove" role="alert">' + result + '</div>');
                     setTimeout(function() {
