@@ -17,6 +17,7 @@
                     <thead>
                         <tr>
                             <th><?= $lang["ID"] ?></th>
+                            <th><?= $lang["Date"] ?></th>
                             <th><?= $lang["Name"] ?></th>
                             <th><?= $lang["Description"] ?></th>
                             <th><?= $lang["Amount"] ?></th>

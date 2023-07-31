@@ -78,7 +78,7 @@
         'Near expiry products' => "Near expiry products",
         'Quick Stats' => "Quick Stats",
         'Number of products' => "Number of products",
-        'New customers this week' => "New customers this week",
+        'Number of customers' => "Number of customers",
         'Make invoice' => "Make invoice",
         'Update the stock' => "Update the stock",
         'Add a new medicine' => "Add a new medicine",

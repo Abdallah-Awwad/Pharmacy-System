@@ -7,7 +7,7 @@
             <div class="statistics row text-center">
                 <div class="col sales">
                     <div class="number">
-                        1.00
+                        <span id="totalSales">0.00</span>
                     </div>
                     <div class="description">
                         <?= $lang["Today total sales"] ?>
@@ -22,10 +22,10 @@
                 </div>
                 <div class="col expenses">
                     <div class="number">
-                        0.00
+                        <span id="totalExpenses">0.00</span>
                     </div>
                     <div class="description">
-                        <?= $lang["Today total expenses"] ?> 
+                        <?= $lang["Today total expenses"] ?>
                     </div>
                     <div class="more-info">
                         <a href="expenses_view">
@@ -37,7 +37,7 @@
                 </div>
                 <div class="col returns">
                     <div class="number">
-                        0.00
+                        <span id="totalReturns">0.00</span>
                     </div>
                     <div class="description">
                         <?= $lang["Today total returns"] ?>
@@ -52,7 +52,7 @@
                 </div>
                 <div class="col expiry">
                     <div class="number">
-                        0.00
+                        <span id="nearExpiry">0</span>
                     </div>
                     <div class="description">
                         <?= $lang["Near expiry products"] ?>
@@ -72,11 +72,11 @@
                         <h2><?= $lang["Quick Stats"] ?></h2>
                         <p>
                             - <?= $lang["Number of products"] ?> 
-                            <span>00</span>
+                            <span id="products">0.00</span>
                         </p>
                         <p>
-                            - <?= $lang["New customers this week"] ?>
-                            <span>00</span>
+                            - <?= $lang["Number of customers"] ?>
+                            <span id="customers">0</span>
                         </p>
                     </div>
                 </a>
@@ -119,5 +119,40 @@
                 </a>
             </div>
         </div>
-    </div> 
-    <?php include "../includes/php/footer.php" ?>
+    </div>
+    <script>
+        $(document).ready(function() {
+            requestAjax({'process' : 'productsCount'}, dashboardControllerURL, function (result) {
+                if (result.length) {
+                    $("#products").text(result);
+                }
+            });
+            requestAjax({'process' : 'customersCount'}, dashboardControllerURL, function (result) {
+                if (result.length) {
+                    $("#customers").text(result);
+                }
+            });
+            requestAjax({'process' : 'totalSalesToday'}, dashboardControllerURL, function (result) {
+                if (result.length) {
+                    $("#totalSales").text(result);
+                }
+            });
+            requestAjax({'process' : 'totalExpensesToday'}, dashboardControllerURL, function (result) {
+                if (result.length) {
+                    $("#totalExpenses").text(result);
+                }
+            });
+            requestAjax({'process' : 'totalReturnsToday'}, dashboardControllerURL, function (result) {
+                if (result.length) {
+                    $("#totalReturns").text(result);
+                }
+            });
+            requestAjax({'process' : 'nearExpiry'}, dashboardControllerURL, function (result) {
+                if (result.length) {
+                    $("#nearExpiry").text(result);
+                }
+            });
+        });
+
+    </script>
+    <?php include "../includes/php/footer.php" ?>   

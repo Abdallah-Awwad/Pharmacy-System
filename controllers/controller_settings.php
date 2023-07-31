@@ -3,5 +3,10 @@
     include "../models/settings.php";
 
     if ($_POST["process"] == "truncateDB") {
-        echo $result = createObject("Settings", "truncate");
+        try {
+            $result = createObject("Settings", "truncate");
+            echo $result;
+        } catch (Exception $e) {
+            echo errorMsgHandler("SET-0", $e);
+        }
     }

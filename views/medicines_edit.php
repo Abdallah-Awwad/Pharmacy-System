@@ -39,8 +39,6 @@
                     window.location.href = "dashboard";
                 }
             });
-        });
-        $(document).ready(function() {
             requestAjax({'process': 'readManufacturers'}, medicinesControllerURL, function (result) {
                 result = JSON.parse(result);
                 if (result.length) {

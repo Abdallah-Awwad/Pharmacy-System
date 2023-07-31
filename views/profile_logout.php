@@ -2,9 +2,11 @@
 <script src="../includes/js/main.js"></script>
 <script src="../includes/js/jquery.dataTables.min.js"></script>
 <script>
-    requestAjax({'process': 'logout'}, profilesControllerURL, function (result) {
-        if (result === "Success") {
-            window.location.href = "..";
-        }
+    $(document).ready(function() {
+        requestAjax({'process': 'logout'}, profilesControllerURL, function (result) {
+            if (result === "Success") {
+                window.location.href = "..";
+            }
+        });
     });
 </script>

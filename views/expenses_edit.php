@@ -46,8 +46,6 @@
                 }
             });
         });
-    </script>
-    <script>
         function editExpense() {
             if (!$('form')[0].checkValidity()) {
                 $('form')[0].reportValidity();

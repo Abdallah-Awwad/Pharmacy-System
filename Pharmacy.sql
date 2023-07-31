@@ -65,10 +65,11 @@ CREATE TABLE inventory (
 -- Expenses Table Creation 
 CREATE TABLE expenses (
     id INT AUTO_INCREMENT PRIMARY KEY,
+    date DATE DEFAULT (CURRENT_DATE) NOT NULL,
     name VARCHAR(255) NOT NULL,
     description  VARCHAR(255),
     amount DECIMAL(10, 2) NOT NULL,
-	category VARCHAR(255)
+	category VARCHAR(255),
 );
 
 -- invoice Table Creation
@@ -270,14 +271,18 @@ VALUES
     (NULL, '2023-05-23 14:29:08', '1', '3', 'Sale'),
     (NULL, '2023-05-24 05:14:06', '2', '6', 'Sale'),
     (NULL, '2023-05-24 08:28:13', '2', '6', 'Sale'),
-    (NULL, '2023-05-24 14:28:13', '2', '6', 'Sale'),
     (NULL, '2023-05-25 00:28:13', '5', '1', 'Sale'),
     (NULL, '2023-05-26 01:18:30', '3', '2', 'Return'),
-    (NULL, '2023-05-27 20:45:44', '2', '4', 'Return'),
     (NULL, '2023-05-27 21:05:05', '2', '4', 'Sale'),
     (NULL, '2023-05-27 21:30:13', '4', '4', 'Sale'),
     (NULL, '2023-05-27 23:05:13', '2', '4', 'Sale'),
     (NULL, '2023-05-28 12:00:50', '4', '1', 'Sale');
+
+
+INSERT INTO `invoice` (`id`, `cus_id`, `emp_id`, `bill_type`)
+VALUES 
+    (NULL, '2', '6', 'Return'),
+    (NULL, '2', '4', 'Sale');
 
 
 INSERT INTO `manufacturers` (`id`, `name`, `address`, `phone`)
@@ -317,14 +322,14 @@ VALUES
     (NULL, '3', '12', '15', '2030-05-11', '4'),
     (NULL, '4', '15', '20', '2025-02-07', '3'),
     (NULL, '5', '20', '25', '2025-02-09', '20'),
-    (NULL, '6', '25', '30', '2029-02-09', '6'),
+    (NULL, '6', '25', '30', '2023-09-09', '6'),
     (NULL, '7', '30', '35', '2028-02-09', '5'),
     (NULL, '8', '30', '40', '2028-02-10', '15'),
     (NULL, '9', '25', '45', '2028-02-10', '30'),
     (NULL, '10', '40', '50', '2028-02-10', '14'),
     (NULL, '11', '50', '55', '2030-01-01', '16'),
     (NULL, '12', '50', '70', '2030-01-01', '7'),
-    (NULL, '1', '3', '5', '2050-01-01', '40'),
+    (NULL, '1', '3', '5', '2023-12-01', '40'),
     (NULL, '7', '30', '40', '2030-02-09', '15'),
     (NULL, '9', '25', '45', '2030-10-15', '60'),
     (NULL, '2', '8', '10', '2027-05-11', '50'),
@@ -356,18 +361,21 @@ VALUES
     ('11', '9', '1'),
     ('12', '5', '6');
 
-
+INSERT INTO `expenses` (`id`, `date`, `name`, `description`, `amount`, `category`) 
+VALUES 
+    (NULL, '2023-07-01', 'New Air Conditioner', '', '200', 'Others');
+    
+    
 INSERT INTO `expenses` (`id`, `name`, `description`, `amount`, `category`)
 VALUES 
     (NULL, 'Cleaning Tools', 'item1, item2, item3', '10', 'Cleaning'),
     (NULL, 'Electricity Bill', '', '100', 'Bills'),
     (NULL, 'Taxes', '', '20', 'Bills'),
-    (NULL, 'New Air Conditioner', '', '200', 'Others'),
     (NULL, 'Cleaning Tools2', '', '5', 'Cleaning');
 
 
 INSERT INTO `members` (`id`, `name`, `phone`, `username`, `password`, `role`)
 VALUES 
     (NULL, 'Adminstartor', '01000000000', 'admin', '$2y$10$kqStedpDjUQn1Od7Mvs6ouM2HuEjnR.LRcf/R0ndZOn33WLwa2n/.', 'Administrator'),
-    (NULL, 'Staff', '01000000001', 'Staff', '$2y$10$kqStedpDjUQn1Od7Mvs6ouM2HuEjnR.LRcf/R0ndZOn33WLwa2n/.', 'Pharmacy Staff'),
-    (NULL, 'Cashier', '01000000002', 'Cashier', '$2y$10$kqStedpDjUQn1Od7Mvs6ouM2HuEjnR.LRcf/R0ndZOn33WLwa2n/.', 'Cashier');
+    (NULL, 'Staff', '01000000001', 'staff', '$2y$10$kqStedpDjUQn1Od7Mvs6ouM2HuEjnR.LRcf/R0ndZOn33WLwa2n/.', 'Pharmacy Staff'),
+    (NULL, 'Cashier', '01000000002', 'cashier', '$2y$10$kqStedpDjUQn1Od7Mvs6ouM2HuEjnR.LRcf/R0ndZOn33WLwa2n/.', 'Cashier');

@@ -1,3 +1,4 @@
+let dashboardControllerURL = "../controllers/controller_dashboard";
 let invoicesControllerURL = "../controllers/controller_invoices";
 let medicinesControllerURL = "../controllers/controller_medicines";
 let inventoryControllerURL = "../controllers/controller_inventory";

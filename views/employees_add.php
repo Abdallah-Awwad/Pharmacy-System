@@ -45,28 +45,30 @@
         </div>
     </div>
     <script>
-        function addEmployee() {
-            if (!$('form')[0].checkValidity()) {
-                $('form')[0].reportValidity();
-                return;
-            }
-            let bindValues = {
-                'process': 'addEmployee'
-            }
-            let inputs = document.querySelectorAll("input, textarea, select");
-            for (let i = 0; i < inputs.length; i++) {
-                bindValues[inputs[i].id] = inputs[i].value;
-            }
-            requestAjax(bindValues, employeesControllerURL, function (result) {
-                if (result === "Success") {
-                        $("form").append('<div class="alert alert-success float-start p-2" id="remove" role="alert">' + result +'</div>');
-                        setTimeout(function() {
-                            window.location.href = "employees_view";
-                        }, 2000);
-                } else {
-                    $("form").append('<div class="alert alert-danger float-start p-2" id="remove" role="alert">' + result + '</div>');
+        $(document).ready(function() {
+            function addEmployee() {
+                if (!$('form')[0].checkValidity()) {
+                    $('form')[0].reportValidity();
+                    return;
                 }
-            });
-        }
+                let bindValues = {
+                    'process': 'addEmployee'
+                }
+                let inputs = document.querySelectorAll("input, textarea, select");
+                for (let i = 0; i < inputs.length; i++) {
+                    bindValues[inputs[i].id] = inputs[i].value;
+                }
+                requestAjax(bindValues, employeesControllerURL, function (result) {
+                    if (result === "Success") {
+                            $("form").append('<div class="alert alert-success float-start p-2" id="remove" role="alert">' + result +'</div>');
+                            setTimeout(function() {
+                                window.location.href = "employees_view";
+                            }, 2000);
+                    } else {
+                        $("form").append('<div class="alert alert-danger float-start p-2" id="remove" role="alert">' + result + '</div>');
+                    }
+                });
+            }
+        });
     </script>
     <?php include "../includes/php/footer.php" ?>

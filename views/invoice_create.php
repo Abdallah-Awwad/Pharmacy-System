@@ -202,7 +202,7 @@
                             if (result === "Success") {
                                 $("form").append('<div class="alert alert-success float-start p-2"id="remove" role="alert"> Invoice made successfully.</div>');
                                 setTimeout(function() {
-                                    // window.location.href = "";
+                                    window.location.href = "";
                                 }, 2000);
                             } else {
                                 $("form").append('<div class="alert alert-danger float-start p-2"id="remove"role="alert">' + result + '</div>');
