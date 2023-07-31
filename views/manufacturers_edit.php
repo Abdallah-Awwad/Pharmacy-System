@@ -31,7 +31,7 @@
     <script> 
         let inputs = document.querySelectorAll("input, textarea, select");
         $(document).ready(function() {
-            requestAjaxV2({'process' : 'readManufacturer', 'manufacturerID' : (new URLSearchParams((new URL(window.location.href)).search)).get('edit')}, manufacturersControllerURL, function (result) {
+            requestAjax({'process' : 'readManufacturer', 'manufacturerID' : (new URLSearchParams((new URL(window.location.href)).search)).get('edit')}, manufacturersControllerURL, function (result) {
                 result = JSON.parse(result);
                 if (result.length) {
                     for (let i = 0; i < Object.values(result[0]).length; i++) {
@@ -53,7 +53,7 @@
             for (let i = 0; i < inputs.length; i++) {
                 bindValues[inputs[i].id] = inputs[i].value;
             }
-            requestAjaxV2(bindValues, manufacturersControllerURL, function (result) {
+            requestAjax(bindValues, manufacturersControllerURL, function (result) {
                 if (result === "Success") {
                     $("form").append('<div class="alert alert-success float-start p-2" id="remove" role="alert">' + result + '</div>');
                     setTimeout(function() {

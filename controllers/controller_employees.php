@@ -1,8 +1,6 @@
 <?php 
     if (!isset($_POST["process"])) header("Location: ..");
     include "../models/employees.php";
-    ini_set("log_errors", TRUE);
-    ini_set("error_log", "errors.log");
 
     if ($_POST["process"] == "readAllEmployees") {
         try {

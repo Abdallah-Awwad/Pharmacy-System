@@ -1,10 +1,10 @@
 <?php 
     include "../includes/php/functions.php";
 
-    class Manufacturers {
+    class Purchases {
         
         function index() {
-            $query = "SELECT * FROM `manufacturers`";
+            $query = "SELECT `inv_id`, `id`, `name`, `purchase_price`, `selling_price`, `expiration_date`, `quantity` FROM `stock`;";
             return dbHandler($query);
         }
 
@@ -32,11 +32,21 @@
         }
 
         function add() {
-            $query = "INSERT INTO `manufacturers` (`name`, `address`, `phone`) VALUES (:name, :address, :phone)";
-            $queryInputs = [":name", ":address", ":phone"];
-            foreach ($queryInputs as $key => $value) {
-                $array[$value] = array_values($_POST)[$key + 1];
+            $products = json_decode($_POST['products']);
+            $query = "INSERT INTO `inventory` (med_id, purchase_price, selling_price, expiration_date,  quantity)
+                                VALUES (:medID, :purchasePrice, :sellingPrice, :expiration, :quantity);";
+            $queryInputs = [":medID", ":purchasePrice", ":sellingPrice", ":expiration", ":quantity"];
+            foreach($products as $product) {
+                foreach ($queryInputs as $key => $value) {
+                    $array[$value] = $product[$key];
+                }
+                dbHandler($query, $array);
             }
-            return dbHandler($query, $array);
         }
+
+        function getMedicinesInfo() {
+            $query = "SELECT `id`, `name` FROM `medicines` ORDER BY id";
+            return dbHandler($query);
+        }
+
     }

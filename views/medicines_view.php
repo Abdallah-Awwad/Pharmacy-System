@@ -30,7 +30,7 @@
     </div>
     <script>
         $(document).ready(function() {
-            requestAjaxV2({'process' : 'readAllMedicines'}, medicinesControllerURL, function (result) {
+            requestAjax({'process' : 'readAllMedicines'}, medicinesControllerURL, function (result) {
                 result = JSON.parse(result);
                 if (result.length) {
                     $.each(result, function (key, value) {
@@ -56,7 +56,7 @@
         });
         $(document).on("click", ".delete", function() {
             let selectedRow = $(this).parents("tr");
-            requestAjaxV2({'process' : 'deleteMedicine', 'medicineID' : $(this).attr("value")}, medicinesControllerURL, function (result) {
+            requestAjax({'process' : 'deleteMedicine', 'medicineID' : $(this).attr("value")}, medicinesControllerURL, function (result) {
                 if (result === "Success") {
                     selectedRow.remove();
                 } else {

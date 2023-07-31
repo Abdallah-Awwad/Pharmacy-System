@@ -11,7 +11,7 @@
                 <button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse" data-bs-target="#Invoices-collapse" aria-expanded="false">
                     <?= $lang["Invoices"] ?>  
                 </button>
-                <div class="collapse" id="Invoices-collapse" style="">
+                <div class="collapse" id="Invoices-collapse">
                     <ul class="btn-toggle-nav fw-normal pb-1 small">
                         <li>
                             <a href="invoice_create" class="link-light rounded">
@@ -217,13 +217,23 @@
                     },
                     function (isConfirm) {
                         if (isConfirm) {
-                            requestAjaxV2({'process' : 'truncateDB'}, settingsControllerURL, function (result) {
+                            swal({
+                                title: "Deleting...",
+                                text: "Please wait",
+                                showConfirmButton: false,
+                                allowOutsideClick: false,
+                            });
+                            requestAjax({'process' : 'truncateDB'}, settingsControllerURL, function (result) {
                                 if (result === "Success") {
-                                    swal("Deleted!", "Your database sucessfully deleted", "success");
-                                    setTimeout(function() {
-                                        window.location.href = "dashboard";
-                                    }, 2000);
-
+                                    swal({
+                                        title: "Deleted!",
+                                        text: "Your database successfully deleted",
+                                        type: "success",
+                                        closeOnConfirm: true, 
+                                    },
+                                    function () {
+                                        window.location.href = "dashboard"; 
+                                    });
                                 } else {
                                     swal("Error", "Something wrong happened", "error");
                                 }

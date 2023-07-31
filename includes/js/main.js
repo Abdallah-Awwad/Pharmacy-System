@@ -1,10 +1,13 @@
+let invoicesControllerURL = "../controllers/controller_invoices";
 let medicinesControllerURL = "../controllers/controller_medicines";
 let inventoryControllerURL = "../controllers/controller_inventory";
+let purchasesControllerURL = "../controllers/controller_purchases";
 let expensesControllerURL = "../controllers/controller_expenses";
 let customersControllerURL = "../controllers/controller_customers";
 let employeesControllerURL = "../controllers/controller_employees";
 let manufacturersControllerURL = "../controllers/controller_manufacturers";
 let settingsControllerURL = "../controllers/controller_settings";
+let profilesControllerURL = "../controllers/controller_profiles";
 
 function sorting() {
     $('.sort').DataTable( {
@@ -33,22 +36,7 @@ function liveSearch(searchBoxID, tableID, columnOneIndex, columnTwoIndex) {
         }
     })
 }
-function requestAjax(bindValues, callback) {
-    let form = new FormData();
-    for (let key in bindValues) {
-        form.append(key, bindValues[key]);
-    }
-    let xmlhttp = new XMLHttpRequest();
-    xmlhttp.onreadystatechange = function() {
-        if (xmlhttp.readyState === 4 && xmlhttp.status === 200) {
-            let result = xmlhttp.responseText;
-            callback(result);
-        }
-    };
-    xmlhttp.open("POST", "controller", true);
-    xmlhttp.send(form);
-}
-function requestAjaxV2(bindValues, path, callback) {
+function requestAjax(bindValues, path, callback) {
     let form = new FormData();
     for (let key in bindValues) {
         form.append(key, bindValues[key]);

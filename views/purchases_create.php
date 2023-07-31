@@ -80,12 +80,14 @@
     </div>
     <script>
         $(document).ready(function() {
-            requestAjax({'process' : 'readAllMedicinesNames'}, function (result) {
-                if (result != "[]") {
-                    result = JSON.parse(result);
+            requestAjax({'process' : 'readAllMedicinesNames'}, purchasesControllerURL, function (result) {
+                result = JSON.parse(result);
+                if (result.length) {
                     $.each(result, function (serial) { 
                         $("#item").append('<option value="' + result[serial]["id"] + '">' + result[serial]["id"] + "- " + result[serial]["name"] + '</option>');
                     });
+                } else {
+                    $('#item').append("<option disabled value=''>Please add medicines first</option>");
                 }
             });
         })
@@ -136,19 +138,19 @@
             let products = [];
             $('#tableInvoice tr').each(function() {
                 if ($(this).find(".medicineID").html()) {
-                    product = {
-                        "medID": parseInt($(this).find(".medicineID").html()),
-                        "purchasePrice": parseInt($(this).find(".purchasePrice").html()),
-                        "sellingPrice": parseInt($(this).find(".sellingPrice").html()),
-                        "expirationDate": $(this).find(".expiration").html(),
-                        "quantity": parseInt($(this).find(".rowItemsCount").html())
-                    };
+                    product = [
+                        parseInt($(this).find(".medicineID").html()),
+                        parseInt($(this).find(".purchasePrice").html()),
+                        parseInt($(this).find(".sellingPrice").html()),
+                        $(this).find(".expiration").html(),
+                        parseInt($(this).find(".rowItemsCount").html())
+                    ];
+                    products.push(product);
                 }
-            });            
-            products.push(product);
-            requestAjax({'process'  : 'purchaseInvoice',
-                        'products'  : JSON.stringify(products)}, function (result) {
-                if (result === "success") {
+            });
+            requestAjax({'process'  : 'createPurchaseInvoice',
+                        'products'  : JSON.stringify(products)}, purchasesControllerURL, function (result) {
+                if (result === "Success") {
                     $("form").append('<div class="alert alert-success float-start p-2"id="remove" role="alert"> Invoice made successfully.</div>');
                     setTimeout(function() {
                         window.location.href = "purchases_create";

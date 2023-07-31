@@ -1,8 +1,6 @@
 <?php 
     if (!isset($_POST["process"])) header("Location: ..");
     include "../models/expenses.php";
-    ini_set("log_errors", TRUE);
-    ini_set("error_log", "errors.log");
 
     if ($_POST["process"] == "readAllExpense") {
         try {
@@ -17,11 +15,15 @@
             echo json_encode((createObject("Expenses", "show")[0]));
         } catch (Exception $e) {
             errorMsgHandler("EX-1", $e);
-        }        
+        }
     }
 
     if ($_POST["process"] == "readManufacturers") {
-        print_r(json_encode((createObject("Expenses", "getManufacturesInfo"))[0]));
+        try {
+            echo json_encode((createObject("Expenses", "getManufacturesInfo")[0]));
+        } catch (Exception $e) {
+            errorMsgHandler("EX-5", $e);
+        }
     }
     
     if ($_POST["process"] == "addExpense") {

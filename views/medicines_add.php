@@ -27,7 +27,7 @@
     </div>
     <script> 
         $(document).ready(function() {
-            requestAjaxV2({'process' : 'readManufacturers'}, medicinesControllerURL, function (result) {
+            requestAjax({'process' : 'readManufacturers'}, medicinesControllerURL, function (result) {
                 result = JSON.parse(result);
                 if (result.length) {
                     $.each(result, function (key, manufacturer) {
@@ -52,7 +52,7 @@
             for (let i = 0; i < inputs.length; i++) {
                 bindValues[inputs[i].id] = inputs[i].value;
             }
-            requestAjaxV2(bindValues, medicinesControllerURL, function (result) {
+            requestAjax(bindValues, medicinesControllerURL, function (result) {
                 if (result === "Success") {
                     $("form").append('<div class="alert alert-success float-start p-2" id="remove" role="alert">' + result + '</div>');
                     setTimeout(function() {

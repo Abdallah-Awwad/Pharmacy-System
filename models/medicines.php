@@ -7,7 +7,7 @@
             $query = "SELECT medicines.id, medicines.name, manufacturers.name AS manufactory_name  -- fix name
                     FROM `medicines` 
                     JOIN `manufacturers` ON medicines.manufacture_id = manufacturers.id";
-            return dbHandlerV2($query);
+            return dbHandler($query);
         }
 
         function show() {
@@ -16,12 +16,12 @@
                     JOIN `manufacturers` ON medicines.manufacture_id = manufacturers.id
                     WHERE medicines.id = :id
                     LIMIT 1";
-            return dbHandlerV2($query, [':id' => $_POST['medicineID']]);
+            return dbHandler($query, [':id' => $_POST['medicineID']]);
         }
 
         function remove() {
             $query = "DELETE FROM medicines WHERE id = :id";
-            return dbHandlerV2($query, [':id' => $_POST['medicineID']]);
+            return dbHandler($query, [':id' => $_POST['medicineID']]);
         }
         
         function update() {
@@ -33,7 +33,7 @@
             foreach ($queryInputs as $key => $value) {
                 $array[$value] = array_values($_POST)[$key + 1];
             }
-            return dbHandlerV2($query, $array);
+            return dbHandler($query, $array);
         }
 
         function add() {
@@ -42,11 +42,11 @@
             foreach ($queryInputs as $key => $value) {
                 $array[$value] = array_values($_POST)[$key + 1];
             }
-            return dbHandlerV2($query, $array);
+            return dbHandler($query, $array);
         }
 
         function getManufacturesInfo() {
             $query = "SELECT `id`, `name` FROM `manufacturers`";
-            return dbHandlerV2($query);
+            return dbHandler($query);
         }
     }

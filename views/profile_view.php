@@ -12,7 +12,7 @@
                     </button>
                 </a>
             </div>
-            <div class="frame-box card-body table-responsive">
+            <div class="frame-div frame-box card-body table-responsive">
                 <table class="table table-bordered table-striped table-hover" id="tableProfile">
                     <thead>
                         <tr>
@@ -34,11 +34,9 @@
     </div>
     <script>
         $(document).ready(function() {
-            requestAjax({'process' : 'readAllProfiles'}, function (result) {
-                if (result == "[]") {
-                    $("tbody").append('<tr> <td colspan="8"> <?= $lang["No Records Found"]?> </td> </tr>');
-                } else {
-                    result = JSON.parse(result);
+            requestAjax({'process' : 'readAllProfiles'}, profilesControllerURL, function (result) {
+                result = JSON.parse(result);
+                if (result.length) {
                     $.each(result, function (key, value) {
                         let td = '';
                         for (i = 0; i < Object.values(value).length; i++) {
@@ -54,18 +52,19 @@
                     });
                     $("table").addClass("sort");
                     sorting();
+                    liveSearch("searchProfile", "tableProfile", 2, 3);
+                } else {
+                    $("tbody").append('<tr> <td colspan="8"> <?= $lang["No Records Found"]?> </td> </tr>');
                 }
             });
-            liveSearch("searchProfile", "tableProfile", 2, 3);
         });
         $(document).on("click", ".delete", function() {
             let selectedRow = $(this).parents("tr");
-            requestAjax({'process' : 'deleteProfile', 'profileID' : $(this).attr("value")}, function (result) {
-                console.log(result);
+            requestAjax({'process' : 'deleteProfile', 'profileID' : $(this).attr("value")}, profilesControllerURL,  function (result) {
                 if (result === "Success") {
                     selectedRow.remove();
                 } else {
-                    $("table").append('<div class="alert alert-danger float-start p-2" id="remove" role="alert">' + result + '</div>');
+                    $(".frame-div").append('<div class="alert alert-danger float-start p-2" id="remove" role="alert">' + result + '</div>');
                 }
             });
         });

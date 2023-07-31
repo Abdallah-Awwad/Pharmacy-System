@@ -31,7 +31,7 @@
     </div>
     <script>
         $(document).ready(function() {
-            requestAjaxV2({'process' : 'inventory'}, inventoryControllerURL, function (result) {
+            requestAjax({'process' : 'inventory'}, inventoryControllerURL, function (result) {
                 result = JSON.parse(result);
                 if (result.length) {
                     $.each(result, function (key, value) { 

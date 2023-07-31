@@ -55,10 +55,8 @@
     </div>
     <script> 
         $(document).ready(function() {
-            requestAjax({'process' : 'readInvoice', 'invoiceID' : (new URLSearchParams((new URL(window.location.href)).search)).get('id')}, function (result) {
-                if (result == "[]") {
-                    window.location.href = "dashboard";
-                } else {
+            requestAjax({'process' : 'readInvoice', 'invoiceID' : (new URLSearchParams((new URL(window.location.href)).search)).get('id')}, invoicesControllerURL, function (result) {
+                if (result.length) {
                     result = JSON.parse(result);
                     $('#invoiceID').text(result[0]['id']);
                     $('#invoiceDate').text(result[0]['issued_date']);
@@ -67,20 +65,22 @@
                     $('#invoiceType').text(result[0]['bill_type']);
                     $('#totalItems').text(result[0]['items']);
                     $('#totalAmount').text(result[0]['total']);
+                } else {
+                    window.location.href = "dashboard";
                 }
             });
-            requestAjax({'process' : 'readInvoiceDetails', 'invoiceID' : (new URLSearchParams((new URL(window.location.href)).search)).get('id')}, function (result) {
-                if (result == "[]") {
-                    window.location.href = "dashboard";
-                } else {
-                    result = JSON.parse(result);
+            requestAjax({'process' : 'readInvoiceDetails', 'invoiceID' : (new URLSearchParams((new URL(window.location.href)).search)).get('id')}, invoicesControllerURL, function (result) {
+                result = JSON.parse(result);
+                if (result.length) {
                     $.each(result, function (key, value) {
                         let td = '';
                         for (i = 0; i < Object.values(value).length; i++) {
                             td += '<td>' + Object.values(value)[i] + '</td>';
                         }
-                        $("table").append('<tr>' + '<td>' +(serial + 1)+ '</td>' + td + '</tr>');
+                        $("table").append('<tr>' + '<td>' + (key + 1) + '</td>' + td + '</tr>');
                     });
+                } else {
+                    window.location.href = "dashboard";
                 }
             });
         });

@@ -10,7 +10,7 @@ CREATE TABLE members (
     phone VARCHAR(11) NOT NULL,
     username VARCHAR(255) NOT NULL UNIQUE COLLATE utf8_bin,
 	password VARCHAR(255) NOT NULL COLLATE utf8_bin,
-    role VARCHAR(50),
+    role VARCHAR(50) NOT NULL,
 	created_at DATETIME DEFAULT current_timestamp(),
 	updated_at DATETIME DEFAULT current_timestamp()
 );

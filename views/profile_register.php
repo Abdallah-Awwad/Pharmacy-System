@@ -58,7 +58,7 @@
             for (let i = 0; i < inputs.length; i++) {
                 bindValues[inputs[i].id] = inputs[i].value;
             }
-            requestAjax(bindValues, function (result) {
+            requestAjax(bindValues, profilesControllerURL, function (result) {
                 if (result === "Success") {
                         $("form").append('<div class="alert alert-success float-start p-2" id="remove" role="alert">' + result + '</div>');
                         setTimeout(function() {

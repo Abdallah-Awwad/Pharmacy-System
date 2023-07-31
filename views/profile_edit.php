@@ -50,10 +50,8 @@
     <script> 
         let inputs = document.querySelectorAll("input, textarea, select");
         $(document).ready(function() {
-            requestAjax({'process' : 'readProfile', 'profileID': (new URLSearchParams((new URL(window.location.href)).search)).get('edit')}, function (result) {
-                if (result == "[]") {
-                    window.location.href = "dashboard";
-                } else {
+            requestAjax({'process' : 'readProfile', 'profileID': (new URLSearchParams((new URL(window.location.href)).search)).get('edit')}, profilesControllerURL, function (result) {
+                if (result.length) {
                     result = JSON.parse(result);
                     $('#profileID').val(result[0]["id"]);
                     $('#profileName').val(result[0]["name"]);
@@ -61,6 +59,8 @@
                     $('#username').val(result[0]["username"]);
                     $('#oldPassword').val(result[0]["password"]);
                     $('#role').val(result[0]["role"]);
+                } else {
+                    window.location.href = "dashboard";
                 }
             });
         });
@@ -76,7 +76,7 @@
                 bindValues[inputs[i].id] = inputs[i].value;
             }
             bindValues['newPassword'] == "" ? delete bindValues['newPassword'] : delete bindValues['oldPassword'];
-            requestAjax(bindValues, function (result) {
+            requestAjax(bindValues, profilesControllerURL, function (result) {
                 if (result === "Success") {
                     $("form").append('<div class="alert alert-success float-start p-2" id="remove" role="alert">' + result + '</div>');
                     setTimeout(function() {

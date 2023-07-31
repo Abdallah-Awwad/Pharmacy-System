@@ -8,7 +8,7 @@
             try {
                 $conn->beginTransaction();
                 $query = "SET GLOBAL FOREIGN_KEY_CHECKS=0;";
-                dbHandlerV2($query);
+                dbHandler($query);
                 $query = "TRUNCATE `invoice_details`;
                             TRUNCATE `invoice`;
                             TRUNCATE `customers`;
@@ -18,13 +18,13 @@
                             TRUNCATE `manufacturers`;
                             TRUNCATE `medicines`;
                             TRUNCATE `members`;";
-                dbHandlerV2($query);
+                dbHandler($query);
                 $query = "SET GLOBAL FOREIGN_KEY_CHECKS=1;";
-                dbHandlerV2($query);
+                dbHandler($query);
                 $query = "INSERT INTO `members` (`id`, `name`, `phone`, `username`, `password`, `role`)
                         VALUES 
                             (NULL, 'Adminstartor', '01000000000', 'Admin', '$2y$10\$kqStedpDjUQn1Od7Mvs6ouM2HuEjnR.LRcf/R0ndZOn33WLwa2n/.', 'Administrator')";
-                dbHandlerV2($query);
+                dbHandler($query);
 
                 $query = "-- Inserting Data into the DB Tables
                     INSERT INTO `customers` (`id`, `name`, `gender`, `address`, `phone`)
@@ -159,7 +159,7 @@
                         (NULL, 'Taxes', '', '20', 'Bills'),
                         (NULL, 'New Air Conditioner', '', '200', 'Others'),
                         (NULL, 'Cleaning Tools2', '', '5', 'Cleaning');";
-                dbHandlerV2($query);
+                dbHandler($query);
                 
                 $conn->commit();
                 return "Success";

@@ -5,6 +5,6 @@
         
         function index() {
             $query = "SELECT * FROM `stock`";
-            return dbHandlerV2($query);
+            return dbHandler($query);
         }
     }

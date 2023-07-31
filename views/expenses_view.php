@@ -32,7 +32,7 @@
     </div>
     <script>
         $(document).ready(function() {
-            requestAjaxV2({'process' : 'readAllExpense'}, expensesControllerURL, function (result) {
+            requestAjax({'process' : 'readAllExpense'}, expensesControllerURL, function (result) {
                 result = JSON.parse(result);
                 if (result.length) {
                     $.each(result, function (key, value) {
@@ -58,7 +58,7 @@
         });
         $(document).on("click", ".delete", function() {
             let selectedRow = $(this).parents("tr");
-            requestAjaxV2({'process' : 'deleteExpense', 'expenseID' : $(this).attr("value")}, expensesControllerURL, function (result) {
+            requestAjax({'process' : 'deleteExpense', 'expenseID' : $(this).attr("value")}, expensesControllerURL, function (result) {
                 if (result === "Success") {
                     selectedRow.remove();
                 } else {

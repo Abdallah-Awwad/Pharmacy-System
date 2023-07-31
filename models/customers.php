@@ -5,17 +5,17 @@
         
         function index() {
             $query = "SELECT * FROM `customers`";
-            return dbHandlerV2($query);
+            return dbHandler($query);
         }
 
         function show() {
             $query = "SELECT * FROM `customers` WHERE `id` = :id;";
-            return dbHandlerV2($query, [':id' => $_POST['customerID']]);
+            return dbHandler($query, [':id' => $_POST['customerID']]);
         }
 
         function remove() {
             $query = "DELETE FROM customers WHERE id = :id";
-            return dbHandlerV2($query, [':id' => $_POST['customerID']]);
+            return dbHandler($query, [':id' => $_POST['customerID']]);
         }
         
         function update() {
@@ -24,7 +24,7 @@
             foreach ($queryInputs as $key => $value) {
                 $array[$value] = array_values($_POST)[$key + 1];
             }
-            return dbHandlerV2($query, $array);
+            return dbHandler($query, $array);
         }
 
         function add() {
@@ -34,6 +34,6 @@
             foreach ($queryInputs as $key => $value) {
                 $array[$value] = array_values($_POST)[$key + 1];
             }
-            return dbHandlerV2($query, $array);
+            return dbHandler($query, $array);
         }
     }

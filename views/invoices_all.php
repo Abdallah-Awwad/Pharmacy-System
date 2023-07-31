@@ -31,11 +31,9 @@
     </div>
     <script>
         $(document).ready(function() {
-            requestAjax({'process' : 'readAllInvoices'}, function (result) {
-                if (result == "[]") {
-                    $("tbody").append('<tr> <td colspan="6"><?= $lang["No Records Found"] ?></td> </tr>');
-                } else {
-                    result = JSON.parse(result);
+            requestAjax({'process' : 'readAllInvoices'}, invoicesControllerURL, function (result) {
+                result = JSON.parse(result);
+                if (result.length) {
                     $.each(result, function (key, value) {
                         let td = '';
                         for (i = 0; i < Object.values(value).length; i++) {
@@ -45,9 +43,11 @@
                     });
                     $("table").addClass("sort");
                     sorting();
+                    liveSearch("searchInvoice", "tableInvoices", 0, 2);
+                } else {
+                    $("tbody").append('<tr> <td colspan="6"><?= $lang["No Records Found"] ?></td> </tr>');
                 }
             });
-            liveSearch("searchInvoice", "tableInvoices", 0, 2);
         });
     </script>
     <?php include "../includes/php/footer.php" ?>

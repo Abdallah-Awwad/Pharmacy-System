@@ -8,18 +8,18 @@
                 <div class="form-group mb-3 d-flex">
                     <div class="d-flex col-5 align-items-center">
                         <label for="customer" style="width: 15%;"><?= $lang["Customer"] ?></label>
-                        <select class="form-control col-2" style="width: 70%;" id="customer">
+                        <select class="form-control col-2" style="width: 70%;" id="customer" required>
                         </select>
                     </div>
                     <div class="d-flex col-4 align-items-center">
                         <label class="col-2" for="cashier"><?= $lang["Cashier"] ?></label>
-                        <select class="form-control col-2 w-50" id="cashier">
-                            <option selected>--</option>
+                        <select class="form-control col-2 w-50" id="cashier" required>
+                            <option disabled selected hidden value="">--</option>
                         </select>
                     </div>
                     <div class="d-flex col-4 align-items-center">
                         <label class="col-2" for="billType"><?= $lang["Type"] ?></label>
-                        <select class="form-control w-50" id="billType">
+                        <select class="form-control w-50" id="billType" required>
                             <option><?= $lang["Sale"] ?></option>
                             <option><?= $lang["Return"] ?></option>
                         </select>
@@ -28,7 +28,7 @@
                 <div class="form-group mb-3 d-flex">
                     <div class="d-flex col-5 align-items-center">
                         <label class="" for="item" style="width: 15%;"><?= $lang["Item"] ?></label>
-                        <select class="form-control col-2" style="width:70%;" id="item">
+                        <select class="form-control col-2" style="width:70%;" id="item" required>
                             <option selected>--</option>
                         </select>
                     </div>
@@ -83,25 +83,30 @@
     </div>
     <script>
         $(document).ready(function() {
-            requestAjax({'process' : 'readAllCustomersNames'}, function (result) {
-                if (result != "[]") {
-                    result = JSON.parse(result);
+            requestAjax({'process' : 'readAllCustomersNames'}, invoicesControllerURL, function (result) {
+                result = JSON.parse(result);
+                if (result.length) {
                     $.each(result, function (serial) {
                         $("#customer").append('<option value="' + result[serial]["id"] + '">' + result[serial]["name"] + '</option>');
                     });
+                } else {
+                    $('#customer').append("<option disabled value=''>Please add customers first</option>");
                 }
             });
-            requestAjax({'process' : 'readAllCashierNames'}, function (result) {
-                if (result != "[]") {
-                    result = JSON.parse(result);
+            requestAjax({'process' : 'readAllCashierNames'}, invoicesControllerURL, function (result) {
+                result = JSON.parse(result);
+                if (result.length) {
                     $.each(result,function (serial) {
                         $("#cashier").append('<option value="' + result[serial]["id"] + '">' + result[serial]["name"] + '</option>');
                     });
+                } else {
+                    $('#cashier').append("<option disabled value=''>Please add cashier first</option>");
                 }
+
             });
-            requestAjax({'process' : 'readAllItemsData'}, function (result) {
-                if (result != "[]") {
-                    result = JSON.parse(result);
+            requestAjax({'process' : 'readAllItemsData'}, invoicesControllerURL, function (result) {
+                result = JSON.parse(result);
+                if (result.length) {
                     $.each(result, function (serial) { 
                         $("#item").append('<option value="' + result[serial]["inv_id"] + '">'
                             + result[serial]["inv_id"] + '- '
@@ -111,7 +116,10 @@
                             + result[serial]["selling_price"]
                         + '</option>');
                     });
+                } else {
+                    $('#item').append("<option disabled value=''>Please add items first</option>");
                 }
+
             });
         })
         let serial = 1;
@@ -135,9 +143,9 @@
             if (itemID == "--"|| itemQuantity < 1) {
                 return;
             }
-            requestAjax({'process' : 'addProduct2', 'itemID' : itemID}, function (result) {
-                if (result != "[]") {
-                    result = JSON.parse(result);
+            requestAjax({'process' : 'addProduct', 'itemID' : itemID}, invoicesControllerURL, function (result) {
+                result = JSON.parse(result);
+                if (result.length) {
                     let row = '<tr>' +
                         '<td>'                      + serial +                                      '</td>' +
                         '<td>'                      + result[0]["med_id"] +                         '</td>' +
@@ -173,24 +181,28 @@
         }
 
         function createInvoice() {
-            if ($('#tableInvoice tr').length < 2) {
-                return console.log("No products added");
+            if (!$('form')[0].checkValidity()) {
+                $('form')[0].reportValidity();
+                return;
             }
-            let products = {};
+            if ($('#tableInvoice tr').length < 2) {
+                return;
+            }
+            let products = [];
             $('#tableInvoice tr').each(function() {
                 if ($(this).find(".InventoryID").html()) {
-                    products[parseInt($(this).find(".InventoryID").html())] = parseInt($(this).find(".rowItemsCount").html());
+                    products.push([parseInt($(this).find(".InventoryID").html()), parseInt($(this).find(".rowItemsCount").html())]);
                 }
-            });            
+            });
             requestAjax({'process'  : 'createInvoice',
                         'customerID': $('#customer').val(),
                         'cashierID' : $('#cashier').val(),
                         'billType'  : $('#billType').val(),
-                        'products'  : JSON.stringify(products)}, function (result) {
-                            if (result === "Success!") {
+                        'products'  : JSON.stringify(products)}, invoicesControllerURL, function (result) {
+                            if (result === "Success") {
                                 $("form").append('<div class="alert alert-success float-start p-2"id="remove" role="alert"> Invoice made successfully.</div>');
                                 setTimeout(function() {
-                                    window.location.href = "invoice_create";
+                                    // window.location.href = "";
                                 }, 2000);
                             } else {
                                 $("form").append('<div class="alert alert-danger float-start p-2"id="remove"role="alert">' + result + '</div>');

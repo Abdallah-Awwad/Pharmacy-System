@@ -33,11 +33,9 @@
     </div>
     <script>
         $(document).ready(function() {
-            requestAjax({'process' : 'readPurchases'}, function (result) {
-                if (result == "[]") {
-                    $("tbody").append('<tr> <td colspan="11"><?= $lang["No Records Found"] ?></td> </tr>');
-                } else {
-                    result = JSON.parse(result);
+            requestAjax({'process' : 'readAllPurchases'}, purchasesControllerURL, function (result) {
+                result = JSON.parse(result);
+                if (result.length) {
                     $.each(result, function (key, value) { 
                         let td = '';
                         for (i = 0; i < Object.values(value).length; i++) {
@@ -47,9 +45,11 @@
                     });
                     $("table").addClass("sort");
                     sorting();
+                    liveSearch("searchInventory", "tableInventory", 2, 5);
+                } else {
+                    $("tbody").append('<tr> <td colspan="11"><?= $lang["No Records Found"] ?></td> </tr>');
                 }
             });
-            liveSearch("searchInventory", "tableInventory", 2, 5);
         });
     </script>
     <?php include "../includes/php/footer.php" ?>

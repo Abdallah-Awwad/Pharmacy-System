@@ -31,7 +31,7 @@
     </div>
     <script>
         $(document).ready(function() {
-            requestAjaxV2({'process' : 'readAllManufacturers'}, manufacturersControllerURL, function (result) {
+            requestAjax({'process' : 'readAllManufacturers'}, manufacturersControllerURL, function (result) {
                 result = JSON.parse(result);
                 if (result.length) {
                     $.each(result, function (key, value) {
@@ -57,7 +57,7 @@
         });
         $(document).on("click", ".delete", function() {
             let selectedRow = $(this).parents("tr");
-            requestAjaxV2({'process' : 'deleteManufacturer', 'manufacturerID': $(this).attr("value")}, manufacturersControllerURL, function (result) {
+            requestAjax({'process' : 'deleteManufacturer', 'manufacturerID': $(this).attr("value")}, manufacturersControllerURL, function (result) {
                 if (result === "Success") {
                     selectedRow.remove();
                 } else {
