@@ -14,17 +14,17 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?= $pageTitle ?></title>
-    <link rel="icon" href="../imgs/drugs.png" type="image/x-icon">
+    <link rel="icon" href="imgs/drugs.png" type="image/x-icon">
     <!-- CSS Files -->
-    <link rel="stylesheet" href="../includes/css/all.min.css">
-    <link rel="stylesheet" href="../includes/css/bootstrap.min.css">
-    <link rel="stylesheet" href="../includes/css/main.css">
+    <link rel="stylesheet" href="includes/css/all.min.css">
+    <link rel="stylesheet" href="includes/css/bootstrap.min.css">
+    <link rel="stylesheet" href="includes/css/main.css">
     <!-- For sorting table -->
-    <link rel="stylesheet" href="../includes/css/dataTables.bootstrap4.min.css">
-    <script src="../includes/js/jquery-3.5.1.min.js"></script>
+    <link rel="stylesheet" href="includes/css/dataTables.bootstrap4.min.css">
+    <script src="includes/js/jquery-3.5.1.min.js"></script>
     <!-- SweetAlert -->
-    <link rel="stylesheet" href="../includes/css/sweet-alert.min.css">
-    <script src="../includes/js/sweet-alert.min.js"></script>
+    <link rel="stylesheet" href="includes/css/sweet-alert.min.css">
+    <script src="includes/js/sweet-alert.min.js"></script>
 </head>
 <body>
     <nav class="navbar">
@@ -39,6 +39,6 @@
             </div>
         </div>
     </nav>
-  <?php include "../includes/php/sidebar.php" ?>
-  <?php include "../includes/php/dbConnection.php" ?>
-  <?php include "../includes/php/functions.php" ?>
+  <?php include "sidebar.php" ?>
+  <?php include "dbConnection.php" ?>
+  <?php include "functions.php" ?>

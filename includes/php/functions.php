@@ -1,6 +1,7 @@
 <?php
+    date_default_timezone_set('Europe/Athens'); // Africa/Cairo (not using it cause the summer time)
     ini_set("log_errors", TRUE);
-    ini_set("error_log", "errors.log");
+    ini_set("error_log", "../controllers/errors.log");
     
     function dbHandler($query, $array2D = NULL, $lastID = false) {
         include "dbConnection.php";

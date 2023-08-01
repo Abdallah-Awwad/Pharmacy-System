@@ -1,14 +1,14 @@
-let dashboardControllerURL = "../controllers/controller_dashboard";
-let invoicesControllerURL = "../controllers/controller_invoices";
-let medicinesControllerURL = "../controllers/controller_medicines";
-let inventoryControllerURL = "../controllers/controller_inventory";
-let purchasesControllerURL = "../controllers/controller_purchases";
-let expensesControllerURL = "../controllers/controller_expenses";
-let customersControllerURL = "../controllers/controller_customers";
-let employeesControllerURL = "../controllers/controller_employees";
-let manufacturersControllerURL = "../controllers/controller_manufacturers";
-let settingsControllerURL = "../controllers/controller_settings";
-let profilesControllerURL = "../controllers/controller_profiles";
+let dashboardControllerURL = "controllers/controller_dashboard";
+let invoicesControllerURL = "controllers/controller_invoices";
+let medicinesControllerURL = "controllers/controller_medicines";
+let inventoryControllerURL = "controllers/controller_inventory";
+let purchasesControllerURL = "controllers/controller_purchases";
+let expensesControllerURL = "controllers/controller_expenses";
+let customersControllerURL = "controllers/controller_customers";
+let employeesControllerURL = "controllers/controller_employees";
+let manufacturersControllerURL = "controllers/controller_manufacturers";
+let settingsControllerURL = "controllers/controller_settings";
+let profilesControllerURL = "controllers/controller_profiles";
 
 function sorting() {
     $('.sort').DataTable( {

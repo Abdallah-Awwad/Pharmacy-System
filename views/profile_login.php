@@ -14,9 +14,9 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title><?= $pageTitle ?></title>
-        <link rel="icon" href="../imgs/drugs.png" type="image/x-icon">
-        <link rel="stylesheet" href="../includes/css/bootstrap.min.css">
-        <link rel="stylesheet" href="../includes/css/main.css">
+        <link rel="icon" href="imgs/drugs.png" type="image/x-icon">
+        <link rel="stylesheet" href="includes/css/bootstrap.min.css">
+        <link rel="stylesheet" href="includes/css/main.css">
     </head>
     <body>
         <div class="login-page">
@@ -49,9 +49,9 @@
         </div>
     </body>
 </html>
-<script src="../includes/js/jquery-3.5.1.min.js"></script>
-<script src="../includes/js/main.js"></script>
-<script src="../includes/js/jquery.dataTables.min.js"></script>
+<script src="includes/js/jquery-3.5.1.min.js"></script>
+<script src="includes/js/main.js"></script>
+<script src="includes/js/jquery.dataTables.min.js"></script>
 <script>
     let inputs = document.querySelectorAll("input, textarea, select");
     function login() {
@@ -67,7 +67,7 @@
             }
         requestAjax(bindValues, profilesControllerURL, function (result) {
             if (result === "Success") {
-                window.location.href = "..";
+                window.location.href = " ";
             } else {
                 $("form").append('<div class="alert alert-danger float-start p-2" id="remove" role="alert">' + result + '</div>');
             }

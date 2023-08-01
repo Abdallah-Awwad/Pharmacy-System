@@ -88,7 +88,7 @@
                             </div>
                             <div class="col">
                         </div>
-                        <img src="../imgs/invoice.svg" class="img-fluid rounded mx-auto d-block" alt="payment image" width="200">
+                        <img src="imgs/invoice.svg" class="img-fluid rounded mx-auto d-block" alt="payment image" width="200">
                         </div>
                     </div>
 
@@ -101,7 +101,7 @@
                             </div>
                             <div class="col">
                         </div>
-                        <img src="../imgs/barcode.svg" class="img-fluid rounded mx-auto d-block" alt="barcode image" width="150">
+                        <img src="imgs/barcode.svg" class="img-fluid rounded mx-auto d-block" alt="barcode image" width="150">
                         </div>
                     </div>
                 </a>
@@ -113,7 +113,7 @@
                             </div>
                             <div class="col">
                         </div>
-                        <img src="../imgs/medicine.svg" class="img-fluid rounded mx-auto d-block" alt="medicine image" width="150">
+                        <img src="imgs/medicine.svg" class="img-fluid rounded mx-auto d-block" alt="medicine image" width="150">
                         </div>
                     </div>
                 </a>
